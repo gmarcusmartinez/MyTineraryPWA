@@ -1,4 +1,4 @@
-import { GET_CITIES } from '../actions/types'
+import { GET_CITIES, CREATE_CITY } from '../actions/types'
 
 const initialState = {
   cities: [],
@@ -12,6 +12,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cities: payload,
+        loading: false
+      }
+    case CREATE_CITY:
+      return {
+        ...state,
+        cities: [payload, ...state.cities],
         loading: false
       }
     default:

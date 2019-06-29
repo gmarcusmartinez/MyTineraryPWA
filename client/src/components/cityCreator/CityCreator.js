@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import { getCities } from '../../store/actions/cityActions'
+import { getCities, createCity } from '../../store/actions/cityActions'
 
 class CityCreator extends Component {
   constructor(props) {
@@ -25,7 +25,12 @@ class CityCreator extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    console.log(this.state)
+    const formData = {
+      img: this.state.img,
+      name: this.state.name,
+      country: this.state.country
+    }
+    this.props.createCity(formData)
     this.setState({
       img: '',
       name: '',
@@ -34,7 +39,6 @@ class CityCreator extends Component {
   }
   render() {
     let cityList
-    console.log(this.props)
     const { cities } = this.props
     if (cities) {
       cityList = cities.map(city => {
@@ -93,5 +97,5 @@ const mapStateToProps = state => ({
 })
 export default connect(
   mapStateToProps,
-  { getCities }
+  { getCities, createCity }
 )(CityCreator)
