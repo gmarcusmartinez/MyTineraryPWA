@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import Nav from './components/nav/Nav'
 import Cities from './components/cities/Cities'
 import Landing from './components/landing/Landing'
-import CityCreator from './components/cities/CityCreator'
+import CityCreator from './components/cityCreator/CityCreator'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 const App = () => {

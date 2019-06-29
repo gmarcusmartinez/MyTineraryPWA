@@ -1,13 +1,13 @@
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import React, { Component } from 'react'
-// import { getCities } from '../../actions/cityActions'
+import { getCities } from '../../store/actions/cityActions'
 
 class CityCreator extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      cityName: '',
+      name: '',
       country: '',
       img: ''
     }
@@ -16,7 +16,7 @@ class CityCreator extends Component {
   }
 
   componentDidMount() {
-    // this.props.getCities()
+    this.props.getCities()
   }
   onChange(e) {
     this.setState({
@@ -28,21 +28,25 @@ class CityCreator extends Component {
     console.log(this.state)
     this.setState({
       img: '',
-      cityName: '',
+      name: '',
       country: ''
     })
   }
   render() {
     let cityList
-    // const { cities } = this.props.cities
-    // if (cities === null) {
-    //   cityList = <p>Loading</p>
-    // } else {
-    //   console.log(cities)
-    //   cityList = cities.map(city => {
-    //     return <p key={city._id}>{city.cityName}</p>
-    //   })
-    // }
+    console.log(this.props)
+    const { cities } = this.props
+    if (cities) {
+      cityList = cities.map(city => {
+        return (
+          <div key={city._id}>
+            <p>{city.name}</p>
+          </div>
+        )
+      })
+    } else {
+      cityList = <p>Loading</p>
+    }
     return (
       <div className="container">
         <form onSubmit={this.onSubmit}>
@@ -51,7 +55,7 @@ class CityCreator extends Component {
             <input
               type="text"
               name="name"
-              value={this.state.cityName}
+              value={this.state.name}
               onChange={this.onChange}
             />
           </div>
@@ -85,10 +89,9 @@ class CityCreator extends Component {
 }
 
 const mapStateToProps = state => ({
-  // cities: state.cities
+  cities: state.cities.cities
 })
-// export default connect(
-//   mapStateToProps,
-//   {}
-// )(CityCreator)
-export default CityCreator
+export default connect(
+  mapStateToProps,
+  { getCities }
+)(CityCreator)
