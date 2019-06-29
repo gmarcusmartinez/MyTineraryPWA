@@ -1,3 +1,4 @@
 import { combineReducers } from 'redux'
-
-export default combineReducers({})
+import err from './err'
+import cities from './cities'
+export default combineReducers({ err, cities })

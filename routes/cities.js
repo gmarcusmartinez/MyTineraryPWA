@@ -2,12 +2,6 @@ const express = require('express')
 const router = express.Router()
 const City = require('../models/City')
 
-// GET
-// Test cities route.
-router.get('/test', async (req, res) => {
-  res.send({ msg: 'Cities test route.' })
-})
-
 // POST
 // Creates new city in database
 router.post('/', async (req, res) => {
