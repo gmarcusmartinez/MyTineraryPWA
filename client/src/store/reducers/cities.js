@@ -1,4 +1,9 @@
-import { GET_CITIES, CREATE_CITY, DELETE_CITY } from '../actions/types'
+import {
+  GET_CITIES,
+  CREATE_CITY,
+  DELETE_CITY,
+  GET_CITY
+} from '../actions/types'
 
 const initialState = {
   cities: [],
@@ -8,6 +13,12 @@ const initialState = {
 export default function(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case GET_CITY:
+      return {
+        ...state,
+        city: payload,
+        loading: false
+      }
     case GET_CITIES:
       return {
         ...state,

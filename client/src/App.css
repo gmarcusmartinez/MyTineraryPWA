@@ -13,3 +13,27 @@
   border-radius: 50%;
   padding: 8px;
 }
+
+.city-creator-card-title {
+  font-family: 'Caveat', cursive;
+}
+.city-edit-card {
+  padding: 25px;
+  background-color: #fafafa;
+}
+.modal .modal-content {
+  padding: 0px;
+}
+.modal {
+  width: 90%;
+}
+
+/* Common */
+.wide-btn {
+  width: 100%;
+  margin: 10px;
+}
+.form-card {
+  padding: 25px;
+  margin-top: 25px;
+}

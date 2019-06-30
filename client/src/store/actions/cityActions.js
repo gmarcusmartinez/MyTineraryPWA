@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { setError } from './errorActions'
 import {
+  GET_CITY,
   GET_CITIES,
   CREATE_CITY,
   DELETE_CITY,
@@ -34,6 +35,17 @@ export const getCities = () => async dispatch => {
     const res = await axios.get('/cities')
     dispatch({
       type: GET_CITIES,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+export const getCity = _id => async dispatch => {
+  try {
+    const res = await axios.get(`/cities/${_id}`)
+    dispatch({
+      type: GET_CITY,
       payload: res.data
     })
   } catch (err) {

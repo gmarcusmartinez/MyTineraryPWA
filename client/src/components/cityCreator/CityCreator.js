@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
+import CityEdit from './CityEdit'
 import React, { Component } from 'react'
 import ErrorMsg from '../common/ErrorMsg'
 import CityCreatorCard from './CityCreatorCard'
+
 import { setError } from '../../store/actions/errorActions'
 import { getCities, createCity } from '../../store/actions/cityActions'
 
@@ -52,41 +54,51 @@ class CityCreator extends Component {
     }
     return (
       <div className="container">
-        <form onSubmit={this.onSubmit}>
-          <ErrorMsg />
-          <div className="input-field">
-            <label>City Name</label>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.onChange}
-            />
-          </div>
+        <div className="row">
+          <div className="col s12">
+            <div className="card form-card">
+              <h4 className="red-text text-lighten-2 center city-creator-card-title">
+                City Creator
+              </h4>
+              <form onSubmit={this.onSubmit}>
+                <ErrorMsg />
+                <div className="input-field">
+                  <label>City Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                  />
+                </div>
 
-          <div className="input-field">
-            <label>Country Code</label>
-            <input
-              type="text"
-              name="country"
-              value={this.state.country}
-              onChange={this.onChange}
-            />
+                <div className="input-field">
+                  <label>Country Code</label>
+                  <input
+                    type="text"
+                    name="country"
+                    value={this.state.country}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="input-field">
+                  <label>Img</label>
+                  <input
+                    type="text"
+                    name="img"
+                    value={this.state.img}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <button className="waves-effect waves-light btn red lighten-2 wide-btn">
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
-          <div className="input-field">
-            <label>Img</label>
-            <input
-              type="text"
-              name="img"
-              value={this.state.img}
-              onChange={this.onChange}
-            />
-          </div>
-          <button className="waves-effect waves-light btn red lighten-2 signup-button">
-            Submit
-          </button>
-        </form>
+        </div>
         {cityList}
+        <CityEdit />
       </div>
     )
   }
