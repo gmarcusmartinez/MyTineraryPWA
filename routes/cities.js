@@ -24,7 +24,7 @@ router.post('/', cityValidation, async (req, res) => {
 // Fetch all cities from database
 router.get('/', async (req, res) => {
   try {
-    const cities = await City.find()
+    const cities = await City.find().sort({ name: 1 })
     if (!cities) {
       return res.send({ msg: 'No cities found.' })
     }
