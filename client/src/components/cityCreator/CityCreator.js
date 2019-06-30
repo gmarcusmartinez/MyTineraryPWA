@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import ErrorMsg from '../common/ErrorMsg'
+import CityCreatorCard from './CityCreatorCard'
 import { setError } from '../../store/actions/errorActions'
 import { getCities, createCity } from '../../store/actions/cityActions'
 
@@ -43,12 +44,8 @@ class CityCreator extends Component {
     let cityList
     const { cities } = this.props
     if (cities) {
-      cityList = cities.map(city => {
-        return (
-          <div key={city._id}>
-            <p>{city.name}</p>
-          </div>
-        )
+      cityList = cities.map(({ name, img, _id }) => {
+        return <CityCreatorCard key={_id} name={name} img={img} />
       })
     } else {
       cityList = <p>Loading</p>
@@ -56,7 +53,7 @@ class CityCreator extends Component {
     return (
       <div className="container">
         <form onSubmit={this.onSubmit}>
-          {/* <ErrorMsg /> */}
+          <ErrorMsg />
           <div className="input-field">
             <label>City Name</label>
             <input
