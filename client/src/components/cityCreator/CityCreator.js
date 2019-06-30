@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import ErrorMsg from '../common/ErrorMsg'
+import { setError } from '../../store/actions/errorActions'
 import { getCities, createCity } from '../../store/actions/cityActions'
 
 class CityCreator extends Component {
@@ -54,6 +56,7 @@ class CityCreator extends Component {
     return (
       <div className="container">
         <form onSubmit={this.onSubmit}>
+          {/* <ErrorMsg /> */}
           <div className="input-field">
             <label>City Name</label>
             <input
@@ -95,7 +98,8 @@ class CityCreator extends Component {
 const mapStateToProps = state => ({
   cities: state.cities.cities
 })
+
 export default connect(
   mapStateToProps,
-  { getCities, createCity }
+  { getCities, createCity, setError }
 )(CityCreator)

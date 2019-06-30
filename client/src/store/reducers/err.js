@@ -8,7 +8,7 @@ export default function(state = initialState, action) {
     case SET_ERROR:
       return [...state, payload]
     case REMOVE_ERROR:
-      return state.filter(err => err.id !== payload)
+      return state.filter(error => error.id !== payload)
     default:
       return state
   }

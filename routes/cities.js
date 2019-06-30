@@ -1,10 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const City = require('../models/City')
+const cityValidation = require('../validation/city')
+const { validationResult } = require('express-validator/check')
 
 // POST
 // Creates new city in database
-router.post('/', async (req, res) => {
+router.post('/', cityValidation, async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
   try {
     const city = await new City(req.body)
     city.save()

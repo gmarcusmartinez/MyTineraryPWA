@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { GET_CITIES, CREATE_CITY } from './types'
+import { setError } from './errorActions'
+import { GET_CITIES, CREATE_CITY, CREATE_CITY_ERROR } from './types'
 
 export const getCities = () => async dispatch => {
   try {
@@ -25,6 +26,12 @@ export const createCity = formData => async dispatch => {
       payload: res.data
     })
   } catch (err) {
-    console.log(err.message)
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+    dispatch({
+      type: CREATE_CITY_ERROR
+    })
   }
 }
