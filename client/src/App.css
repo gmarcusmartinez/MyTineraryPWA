@@ -2,5 +2,14 @@
   font-family: 'Caveat', cursive;
   font-size: 30px;
   font-weight: 300;
-  padding: 20px;
+  padding-left: 30px;
+  color: #e57373;
+}
+
+.city-creator-btn {
+  font-size: 0.5em;
+  margin: 6px;
+  border: 1px solid #e57373;
+  border-radius: 50%;
+  padding: 8px;
 }

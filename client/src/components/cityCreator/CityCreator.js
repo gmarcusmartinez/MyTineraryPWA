@@ -45,7 +45,7 @@ class CityCreator extends Component {
     const { cities } = this.props
     if (cities) {
       cityList = cities.map(({ name, img, _id }) => {
-        return <CityCreatorCard key={_id} name={name} img={img} />
+        return <CityCreatorCard key={_id} name={name} _id={_id} img={img} />
       })
     } else {
       cityList = <p>Loading</p>

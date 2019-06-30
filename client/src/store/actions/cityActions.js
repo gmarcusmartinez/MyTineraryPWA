@@ -1,18 +1,11 @@
 import axios from 'axios'
 import { setError } from './errorActions'
-import { GET_CITIES, CREATE_CITY, CREATE_CITY_ERROR } from './types'
-
-export const getCities = () => async dispatch => {
-  try {
-    const res = await axios.get('/cities')
-    dispatch({
-      type: GET_CITIES,
-      payload: res.data
-    })
-  } catch (err) {
-    console.log(err.message)
-  }
-}
+import {
+  GET_CITIES,
+  CREATE_CITY,
+  DELETE_CITY,
+  CREATE_CITY_ERROR
+} from './types'
 export const createCity = formData => async dispatch => {
   const config = {
     headers: {
@@ -34,4 +27,25 @@ export const createCity = formData => async dispatch => {
       type: CREATE_CITY_ERROR
     })
   }
+}
+
+export const getCities = () => async dispatch => {
+  try {
+    const res = await axios.get('/cities')
+    dispatch({
+      type: GET_CITIES,
+      payload: res.data
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+export const deleteCity = _id => async dispatch => {
+  try {
+    await axios.delete(`/cities/${_id}`)
+    dispatch({
+      type: DELETE_CITY,
+      payload: _id
+    })
+  } catch (err) {}
 }
