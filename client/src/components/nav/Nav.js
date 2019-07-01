@@ -1,24 +1,16 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
+import GuestNav from './GuestNav'
+import M from 'materialize-css/dist/js/materialize.min.js'
 
-const Nav = () => {
-  return (
-    <nav>
-      <div className="nav-wrapper">
-        <Link to="/" className="brand-logo">
-          MyTinerary
-        </Link>
-        <ul id="nav-mobile" className="right">
-          <li>
-            <Link to="/cities">Cities</Link>
-          </li>
-          <li>
-            <Link to="/city-creator">City Creator</Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  )
+export default class Nav extends Component {
+  componentDidMount() {
+    let elem = document.querySelector('.sidenav')
+    M.Sidenav.init(elem, {
+      edge: 'left',
+      inDuration: 250
+    })
+  }
+  render() {
+    return <GuestNav />
+  }
 }
-
-export default Nav
