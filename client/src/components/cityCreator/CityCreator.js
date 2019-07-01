@@ -3,7 +3,6 @@ import CityEdit from './CityEdit'
 import React, { Component } from 'react'
 import ErrorMsg from '../common/ErrorMsg'
 import CityCreatorCard from './CityCreatorCard'
-
 import { setError } from '../../store/actions/errorActions'
 import { getCities, createCity } from '../../store/actions/cityActions'
 
@@ -55,7 +54,7 @@ class CityCreator extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col s12">
+          <div className="col s12 l8 offset-l3">
             <div className="card form-card">
               <h4 className="red-text text-lighten-2 center city-creator-card-title">
                 City Creator

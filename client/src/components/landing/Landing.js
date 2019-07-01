@@ -10,7 +10,7 @@ const Landing = () => {
             <div className="col s12 landing-col">
               <h4 className="white-text center common-title">MyTinerary</h4>
               <p className="white-text center common-sub-title">
-                Explore new cites and connect with other travelers.
+                Explore new cities and connect with other travelers.
               </p>
               <hr className="landing-hr" />
               <br />

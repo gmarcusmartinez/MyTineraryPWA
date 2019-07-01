@@ -65,7 +65,15 @@ export const updateCity = (formData, _id) => async dispatch => {
       type: UPDATE_CITY,
       payload: res.data
     })
-  } catch (err) {}
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+    dispatch({
+      type: CREATE_CITY_ERROR
+    })
+  }
 }
 export const deleteCity = _id => async dispatch => {
   try {

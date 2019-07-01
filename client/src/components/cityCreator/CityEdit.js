@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import ErrorMsg from '../common/ErrorMsg'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import { updateCity } from '../../store/actions/cityActions'
+import { setError } from '../../store/actions/errorActions'
 
 class CityEdit extends Component {
   constructor(props) {
@@ -43,7 +45,9 @@ class CityEdit extends Component {
     this.props.updateCity(formData, this.props.city._id)
     let elem = document.querySelector('#city-edit')
     const instance = M.Modal.getInstance(elem)
-    instance.close()
+    if (this.props.errors.length !== 0) {
+      instance.close()
+    }
   }
   render() {
     return (
@@ -54,6 +58,7 @@ class CityEdit extends Component {
               Edit City
             </h4>
             <form onSubmit={this.onSubmit}>
+              <ErrorMsg />
               <div className="input-field">
                 <input
                   type="text"
@@ -93,9 +98,10 @@ class CityEdit extends Component {
   }
 }
 const mapStateToProps = state => ({
-  city: state.cities.city
+  city: state.cities.city,
+  errors: state.err
 })
 export default connect(
   mapStateToProps,
-  { updateCity }
+  { updateCity, setError }
 )(CityEdit)
