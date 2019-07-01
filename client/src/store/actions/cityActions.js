@@ -5,6 +5,7 @@ import {
   GET_CITIES,
   CREATE_CITY,
   DELETE_CITY,
+  UPDATE_CITY,
   CREATE_CITY_ERROR
 } from './types'
 export const createCity = formData => async dispatch => {
@@ -52,6 +53,20 @@ export const getCity = _id => async dispatch => {
     console.log(err)
   }
 }
+export const updateCity = (formData, _id) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const res = await axios.patch(`/cities/${_id}`, formData, config)
+    dispatch({
+      type: UPDATE_CITY,
+      payload: res.data
+    })
+  } catch (err) {}
+}
 export const deleteCity = _id => async dispatch => {
   try {
     await axios.delete(`/cities/${_id}`)
@@ -59,5 +74,13 @@ export const deleteCity = _id => async dispatch => {
       type: DELETE_CITY,
       payload: _id
     })
-  } catch (err) {}
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+    dispatch({
+      type: CREATE_CITY_ERROR
+    })
+  }
 }

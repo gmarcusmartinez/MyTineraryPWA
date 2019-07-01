@@ -50,7 +50,11 @@ router.get('/:id', async (req, res) => {
 
 // UPDATE
 // Delete individual City from database
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', cityValidation, async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
   try {
     const city = await City.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

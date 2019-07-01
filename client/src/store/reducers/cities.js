@@ -1,8 +1,9 @@
 import {
+  GET_CITY,
   GET_CITIES,
   CREATE_CITY,
   DELETE_CITY,
-  GET_CITY
+  UPDATE_CITY
 } from '../actions/types'
 
 const initialState = {
@@ -29,6 +30,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cities: [payload, ...state.cities],
+        loading: false
+      }
+    case UPDATE_CITY:
+      return {
+        ...state,
+        cities: [
+          payload,
+          ...state.cities.filter(city => city._id !== payload._id)
+        ],
         loading: false
       }
     case DELETE_CITY:

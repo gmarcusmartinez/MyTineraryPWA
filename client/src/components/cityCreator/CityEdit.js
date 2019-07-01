@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
+import { updateCity } from '../../store/actions/cityActions'
 
 class CityEdit extends Component {
   constructor(props) {
@@ -34,6 +35,15 @@ class CityEdit extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
+    const formData = {
+      img: this.state.img,
+      name: this.state.name,
+      country: this.state.country
+    }
+    this.props.updateCity(formData, this.props.city._id)
+    let elem = document.querySelector('#city-edit')
+    const instance = M.Modal.getInstance(elem)
+    instance.close()
   }
   render() {
     return (
@@ -87,5 +97,5 @@ const mapStateToProps = state => ({
 })
 export default connect(
   mapStateToProps,
-  {}
+  { updateCity }
 )(CityEdit)
