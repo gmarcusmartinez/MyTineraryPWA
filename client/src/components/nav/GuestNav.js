@@ -24,11 +24,6 @@ const GuestNav = () => {
               </Link>
             </li>
             <li className="right">
-              <Link to="/city-creator" className="nav-link">
-                City-Creator
-              </Link>
-            </li>
-            <li className="right">
               <Link to="/register" className="nav-link">
                 Signup
               </Link>
@@ -53,14 +48,6 @@ const GuestNav = () => {
         <li className="sidenav-close">
           <Link className="nav-link " to="/cities">
             Cities
-          </Link>
-        </li>
-        <li>
-          <div className="divider nav-divider" />
-        </li>
-        <li className="sidenav-close">
-          <Link className="nav-link " to="/city-creator">
-            City-Creator
           </Link>
         </li>
         <li>

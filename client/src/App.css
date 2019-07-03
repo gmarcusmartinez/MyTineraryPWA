@@ -79,3 +79,8 @@
   width: 90%;
   margin-left: 5%;
 }
+
+/* Cities Card */
+.city-img {
+  filter: brightness(60%);
+}

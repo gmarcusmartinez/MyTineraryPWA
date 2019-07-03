@@ -7,7 +7,7 @@ const Landing = () => {
       <div className="dark-overlay">
         <div className="container">
           <div className="row">
-            <div className="col s12 landing-col">
+            <div className="col s12 landing-col" style={{ marginTop: '125px' }}>
               <h4 className="white-text center common-title">MyTinerary</h4>
               <p className="white-text center common-sub-title">
                 Explore new cities and connect with other travelers.

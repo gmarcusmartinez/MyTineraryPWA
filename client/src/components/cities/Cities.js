@@ -1,6 +1,7 @@
+import CityCard from './CityCard'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import CityCard from './CityCard'
+import { Link } from 'react-router-dom'
 import { getCities } from '../../store/actions/cityActions'
 
 class Cities extends Component {
@@ -13,12 +14,20 @@ class Cities extends Component {
     const { cities } = this.props
     if (cities) {
       cityList = cities.map(({ name, img, _id }) => {
-        return <CityCard key={_id} name={name} img={img} />
+        return (
+          <Link to={`/cities/${name}`} key={_id}>
+            <CityCard name={name} img={img} />
+          </Link>
+        )
       })
     } else {
       cityList = <p>Loading</p>
     }
-    return <div className="container">{cityList}</div>
+    return (
+      <div className="container" style={{ marginTop: '74px' }}>
+        {cityList}
+      </div>
+    )
   }
 }
 

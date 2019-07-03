@@ -1,9 +1,12 @@
 import React from 'react'
 
-const CityCard = ({ name }) => {
+const CityCard = ({ name, img }) => {
   return (
     <div className="card">
-      <p className="card-title red-text text-lighten-2">{name}</p>
+      <div className="card-image ">
+        <img src={img} alt="" className="city-img" />
+        <span className="card-title">{name}</span>
+      </div>
     </div>
   )
 }

@@ -45,11 +45,14 @@ class CityEdit extends Component {
     this.props.updateCity(formData, this.props.city._id)
     let elem = document.querySelector('#city-edit')
     const instance = M.Modal.getInstance(elem)
-    if (this.props.errors.length !== 0) {
-      instance.close()
-    }
+    setTimeout(() => {
+      if (this.props.errors.length === 0) {
+        instance.close()
+      }
+    }, 1000)
   }
   render() {
+    console.log(this.props.errors.length)
     return (
       <div className="modal" id="city-edit">
         <div className="modal-content">

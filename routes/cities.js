@@ -4,8 +4,6 @@ const City = require('../models/City')
 const cityValidation = require('../validation/city')
 const { validationResult } = require('express-validator/check')
 
-// POST
-// Creates new city in database
 router.post('/', cityValidation, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
