@@ -4,6 +4,7 @@ const City = require('../models/City')
 const cityValidation = require('../validation/city')
 const { validationResult } = require('express-validator/check')
 
+// Create city
 router.post('/', cityValidation, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -18,7 +19,6 @@ router.post('/', cityValidation, async (req, res) => {
   }
 })
 
-// GET
 // Fetch all cities from database
 router.get('/', async (req, res) => {
   try {
@@ -32,7 +32,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-// GET
 // Fetch individual City from database
 router.get('/:id', async (req, res) => {
   try {
@@ -46,8 +45,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// UPDATE
-// Delete individual City from database
+// Update individual City in database
 router.patch('/:id', cityValidation, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -67,7 +65,6 @@ router.patch('/:id', cityValidation, async (req, res) => {
   }
 })
 
-// DELETE
 // Delete individual City from database
 router.delete('/:id', async (req, res) => {
   try {

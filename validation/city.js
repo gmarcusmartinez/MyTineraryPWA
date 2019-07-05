@@ -1,4 +1,5 @@
 const { check } = require('express-validator/check')
+
 const cityValidation = [
   check('name', 'Name field can not be empty.')
     .not()

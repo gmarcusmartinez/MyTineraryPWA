@@ -24,7 +24,7 @@ const GuestNav = () => {
               </Link>
             </li>
             <li className="right">
-              <Link to="/register" className="nav-link">
+              <Link to="/sign-up" className="nav-link">
                 Signup
               </Link>
             </li>
@@ -54,7 +54,7 @@ const GuestNav = () => {
           <div className="divider nav-divider" />
         </li>
         <li className="sidenav-close">
-          <Link className="nav-link " to="/register">
+          <Link className="nav-link " to="/sign-up">
             Signup
           </Link>
         </li>
