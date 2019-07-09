@@ -12,8 +12,7 @@ const ItinerarySchema = new Schema({
   },
   city: {
     type: String,
-    required: true,
-    lowercase: true
+    required: true
   },
   img: {
     type: String
@@ -22,14 +21,6 @@ const ItinerarySchema = new Schema({
     type: Boolean,
     default: false
   },
-  likes: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-      }
-    }
-  ],
   date: {
     type: Date,
     default: Date.now

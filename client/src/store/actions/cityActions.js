@@ -5,8 +5,7 @@ import {
   GET_CITIES,
   CREATE_CITY,
   DELETE_CITY,
-  UPDATE_CITY,
-  CREATE_CITY_ERROR
+  UPDATE_CITY
 } from './types'
 export const createCity = formData => async dispatch => {
   const config = {
@@ -25,9 +24,6 @@ export const createCity = formData => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setError(error.msg)))
     }
-    dispatch({
-      type: CREATE_CITY_ERROR
-    })
   }
 }
 
@@ -70,9 +66,6 @@ export const updateCity = (formData, _id) => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setError(error.msg)))
     }
-    dispatch({
-      type: CREATE_CITY_ERROR
-    })
   }
 }
 export const deleteCity = _id => async dispatch => {
@@ -87,8 +80,5 @@ export const deleteCity = _id => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setError(error.msg)))
     }
-    dispatch({
-      type: CREATE_CITY_ERROR
-    })
   }
 }

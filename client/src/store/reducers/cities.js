@@ -5,7 +5,6 @@ import {
   DELETE_CITY,
   UPDATE_CITY
 } from '../actions/types'
-
 const initialState = {
   cities: [],
   city: null,

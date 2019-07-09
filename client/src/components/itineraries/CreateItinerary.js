@@ -1,4 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import ItineraryEdit from './ItineraryEdit'
+import ErrorMsg from '../common/ErrorMsg'
+import ItineraryCreatorCard from './ItineraryCreatorCard'
+
+import {
+  createItinerary,
+  getItineraries
+} from '../../store/actions/itineraryActions'
 
 class CreateItinerary extends Component {
   constructor(props) {
@@ -11,7 +20,9 @@ class CreateItinerary extends Component {
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
-
+  componentDidMount() {
+    this.props.getItineraries()
+  }
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -24,7 +35,7 @@ class CreateItinerary extends Component {
       city: this.state.city,
       img: this.state.img
     }
-    console.log(formData)
+    this.props.createItinerary(formData)
     this.setState({
       title: '',
       city: '',
@@ -32,6 +43,15 @@ class CreateItinerary extends Component {
     })
   }
   render() {
+    let itineraryList
+    const { itineraries } = this.props
+    if (itineraries) {
+      itineraryList = itineraries.map(({ title, _id }) => {
+        return <ItineraryCreatorCard key={_id} title={title} _id={_id} />
+      })
+    } else {
+      itineraryList = <p>Loading</p>
+    }
     return (
       <div className="container">
         <div className="row">
@@ -41,6 +61,7 @@ class CreateItinerary extends Component {
                 Create Itinerary
               </h4>
               <form onSubmit={this.onSubmit}>
+                <ErrorMsg />
                 <div className="input-field">
                   <label>Title</label>
                   <input
@@ -76,8 +97,16 @@ class CreateItinerary extends Component {
             </div>
           </div>
         </div>
+        {itineraryList}
+        <ItineraryEdit />
       </div>
     )
   }
 }
-export default CreateItinerary
+const mapStateToProps = state => ({
+  itineraries: state.itineraries.itineraries
+})
+export default connect(
+  mapStateToProps,
+  { createItinerary, getItineraries }
+)(CreateItinerary)

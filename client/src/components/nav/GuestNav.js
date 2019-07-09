@@ -23,6 +23,11 @@ const GuestNav = () => {
                 Cities
               </Link>
             </li>
+            <li className="sidenav-close">
+              <Link className="nav-link " to="/create-itinerary">
+                MyTineraries
+              </Link>
+            </li>
             <li className="right">
               <Link to="/sign-up" className="nav-link">
                 Signup
@@ -48,6 +53,14 @@ const GuestNav = () => {
         <li className="sidenav-close">
           <Link className="nav-link " to="/cities">
             Cities
+          </Link>
+        </li>
+        <li>
+          <div className="divider nav-divider" />
+        </li>
+        <li className="sidenav-close">
+          <Link className="nav-link " to="/create-itinerary">
+            MyTineraries
           </Link>
         </li>
         <li>

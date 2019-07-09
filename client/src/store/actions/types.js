@@ -3,10 +3,16 @@ export const SET_ERROR = 'SET_ERROR'
 export const REMOVE_ERROR = 'REMOVE_ERROR'
 
 // Cities
-
 export const GET_CITY = 'GET_CITY'
 export const GET_CITIES = 'GET_CITIES'
 export const CREATE_CITY = 'CREATE_CITY'
 export const DELETE_CITY = 'DELETE_CITY'
 export const UPDATE_CITY = 'UPDATE_CITY'
-export const CREATE_CITY_ERROR = 'CREATE_CITY_ERROR'
+
+// Itineraries
+export const GET_ITINERARY = 'GET_ITINERARY'
+export const GET_ITINERARIES = 'GET_ITINERARIES'
+export const CREATE_ITINERARY = 'CREATE_ITINERARY'
+export const DELETE_ITINERARY = 'DELETE_ITINERARY'
+export const UPDATE_ITINERARY = 'UPDATE_ITINERARY'
+export const GET_ITINERARIES_BY_CITY = 'GET_ITINERARIES_BY_CITY'

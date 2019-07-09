@@ -18,6 +18,18 @@ router.post('/', itineraryValidation, async (req, res) => {
     res.status(500).send(err.message)
   }
 })
+// Get Itineraries
+router.get('/', async (req, res) => {
+  try {
+    const itineraries = await Itinerary.find()
+    if (!itineraries) {
+      return res.send({ msg: 'No itineraries found.' })
+    }
+    res.json(itineraries)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+})
 // Get Itinerary by id
 router.get('/:id', async (req, res) => {
   try {

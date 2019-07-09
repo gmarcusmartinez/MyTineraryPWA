@@ -2,31 +2,29 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import ErrorMsg from '../common/ErrorMsg'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import { updateCity } from '../../store/actions/cityActions'
-import { setError } from '../../store/actions/errorActions'
+import { updateItinerary } from '../../store/actions/itineraryActions'
 
-class CityEdit extends Component {
+class ItineraryEdit extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
-      name: '',
-      country: '',
+      title: '',
+      city: '',
       img: ''
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
   componentDidMount() {
-    let elem = document.querySelector('#city-edit')
+    let elem = document.querySelector('#itinerary-edit')
     M.Modal.init(elem)
   }
   componentDidUpdate(prevProps) {
-    if (this.props.city !== prevProps.city) {
+    if (this.props.itinerary !== prevProps.itinerary) {
       this.setState({
-        name: this.props.city.name,
-        country: this.props.city.country,
-        img: this.props.city.img
+        title: this.props.itinerary.title,
+        city: this.props.itinerary.city,
+        img: this.props.itinerary.img
       })
     }
   }
@@ -38,12 +36,12 @@ class CityEdit extends Component {
   onSubmit(e) {
     e.preventDefault()
     const formData = {
-      img: this.state.img,
-      name: this.state.name,
-      country: this.state.country
+      title: this.state.title,
+      city: this.state.city,
+      img: this.state.img
     }
-    this.props.updateCity(formData, this.props.city._id)
-    let elem = document.querySelector('#city-edit')
+    this.props.updateItinerary(formData, this.props.itinerary._id)
+    let elem = document.querySelector('#itinerary-edit')
     const instance = M.Modal.getInstance(elem)
     setTimeout(() => {
       if (this.props.errors.length === 0) {
@@ -53,32 +51,32 @@ class CityEdit extends Component {
   }
   render() {
     return (
-      <div className="modal" id="city-edit">
+      <div className="modal" id="itinerary-edit">
         <div className="modal-content">
           <div className="card city-edit-card z-depth-0">
-            <h4 className="red-text text-lighten-2 center city-creator-card-title">
-              Edit City
+            <h4 className="red-text text-lighten-2 center card-title">
+              Edit Itinerary
             </h4>
             <form onSubmit={this.onSubmit}>
               <ErrorMsg />
               <div className="input-field">
                 <input
                   type="text"
-                  name="name"
-                  value={this.state.name}
+                  name="title"
+                  value={this.state.title}
                   onChange={this.onChange}
                 />
-                <small>City Name</small>
+                <small>Title</small>
               </div>
 
               <div className="input-field">
                 <input
                   type="text"
-                  name="country"
-                  value={this.state.country}
+                  name="city"
+                  value={this.state.city}
                   onChange={this.onChange}
                 />
-                <small>Country Code</small>
+                <small>City</small>
               </div>
               <div className="input-field">
                 <input
@@ -87,7 +85,7 @@ class CityEdit extends Component {
                   value={this.state.img}
                   onChange={this.onChange}
                 />
-                <small>Image</small>
+                <small>Img</small>
               </div>
               <button className="waves-effect waves-light btn red lighten-2 wide-btn">
                 Submit
@@ -100,10 +98,10 @@ class CityEdit extends Component {
   }
 }
 const mapStateToProps = state => ({
-  city: state.cities.city,
+  itinerary: state.itineraries.itinerary,
   errors: state.err
 })
 export default connect(
   mapStateToProps,
-  { updateCity, setError }
-)(CityEdit)
+  { updateItinerary }
+)(ItineraryEdit)
