@@ -23,7 +23,7 @@ const GuestNav = () => {
                 Cities
               </Link>
             </li>
-            <li className="sidenav-close">
+            <li className="right">
               <Link className="nav-link " to="/create-itinerary">
                 MyTineraries
               </Link>
