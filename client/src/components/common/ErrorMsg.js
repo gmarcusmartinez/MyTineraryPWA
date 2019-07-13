@@ -1,5 +1,4 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 const ErrorMsg = ({ errors }) =>
@@ -10,9 +9,7 @@ const ErrorMsg = ({ errors }) =>
       {err.text}
     </p>
   ))
-// ErrorMsg.propTypes = {
-//   errors: PropTypes.array.isRequired
-// }
+
 const mapStateToProps = state => ({
   errors: state.err
 })

@@ -3,6 +3,7 @@ import React from 'react'
 import store from './store/store'
 import { Provider } from 'react-redux'
 import Nav from './components/nav/Nav'
+import Login from './components/auth/Login'
 import City from './components/cities/City'
 import Cities from './components/cities/Cities'
 import Signup from './components/auth/Signup'
@@ -24,6 +25,7 @@ const App = () => {
             <Route exact path="/cities/:cityName" component={City} />
             <Route exact path="/city-creator" component={CityCreator} />
             <Route exact path="/create-itinerary" component={CreateItinerary} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/sign-up" component={Signup} />
           </Switch>
         </div>

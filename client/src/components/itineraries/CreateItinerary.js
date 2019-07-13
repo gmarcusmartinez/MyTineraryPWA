@@ -55,7 +55,7 @@ class CreateItinerary extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col s12 l8 offset-l3">
+          <div className="col s12 l8 offset-l2">
             <div className="card form-card">
               <h4 className="red-text text-lighten-2 center card-title">
                 Create Itinerary
@@ -96,8 +96,9 @@ class CreateItinerary extends Component {
               </form>
             </div>
           </div>
+          {itineraryList}
         </div>
-        {itineraryList}
+
         <ItineraryEdit />
       </div>
     )

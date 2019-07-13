@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Signup = () => {
+const Login = () => {
   return (
     <div className="landing">
       <div className="dark-overlay">
@@ -11,7 +11,7 @@ const Signup = () => {
               style={{ marginTop: '75px' }}>
               <div className="card form-card">
                 <h4 className="red-text text-lighten-2 center card-title">
-                  Signup
+                  Login
                 </h4>
                 <form>
                   <div className="input-field">
@@ -21,10 +21,6 @@ const Signup = () => {
                   <div className="input-field">
                     <label>Password</label>
                     <input type="password" name="password" />
-                  </div>
-                  <div className="input-field">
-                    <label>Confirm Password</label>
-                    <input type="password" name="confirm" />
                   </div>
                   <button className="waves-effect waves-light btn red lighten-2 wide-btn z-depth-0 ">
                     Submit
@@ -39,4 +35,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Login

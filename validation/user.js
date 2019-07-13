@@ -1,16 +1,12 @@
 const { check } = require('express-validator/check')
 
 const userValidation = [
-  check('email', 'Email field can not be empty')
+  check('email', 'Email  must be provided.')
     .not()
     .isEmpty(),
-  check('email', 'Must be a valid Email').isEmail(),
-  check('password', 'Password field can not be empty')
-    .not()
-    .isEmpty(),
-  check(
-    'password',
-    'Password must be at least 8 charachters ins length.'
-  ).isLength({ min: 8 })
+  check('email', 'A valid email must be required.').isEmail(),
+  check('password', 'Password must be at least 6 charachters.').isLength({
+    min: 8
+  })
 ]
 module.exports = userValidation

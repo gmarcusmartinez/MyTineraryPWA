@@ -5,6 +5,7 @@ const app = express()
 connectDB()
 
 app.use(express.json({ extended: false }))
+app.use('/users', require('./routes/users'))
 app.use('/cities', require('./routes/cities'))
 app.use('/itineraries', require('./routes/itineraries'))
 
