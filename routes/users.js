@@ -33,7 +33,7 @@ router.post('/', userValidation, async (req, res) => {
     await user.save()
 
     const token = await createToken(user)
-    res.send({ user, token })
+    res.send({ token })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server Error')
