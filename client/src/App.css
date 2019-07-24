@@ -1,105 +1,33 @@
-/* Landing */
-.landing {
-  position: relative;
-  background: url('http://wallpapersdsc.net/wp-content/uploads/2016/09/Budapest-Desktop.jpg')
-    no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-.dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.App {
+  text-align: center;
 }
 
-.city-creator-btn {
-  font-size: 1.2em;
-  margin: 6px;
-  border: 1px solid #e57373;
-  border-radius: 50%;
-  padding: 10px;
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.city-edit-card {
-  padding: 25px;
-  background-color: #fafafa;
-}
-.modal .modal-content {
-  padding: 0px;
-}
-.modal {
-  width: 90%;
-}
-
-/* Common */
-.wide-btn {
-  width: 100%;
-  margin-top: 10px;
-}
-.form-card {
-  padding: 25px;
-  margin-top: 25px;
-}
-.common-title {
-  font-family: 'Caveat', cursive;
-}
-.common-sub-title {
-  font-family: 'Caveat', cursive;
-  font-size: 1.4em;
-}
-.card .card-title {
-  font-family: 'Caveat', cursive;
-  font-size: 30px;
-  font-weight: 300;
-  color: #e57373;
-}
-.input-field > label {
-  color: #e57373;
-  font-family: 'Caveat', cursive;
-  font-size: 1.25rem;
-}
-.input-field input[type='text']:focus {
-  border-bottom: 1px #e57373 !important;
-  box-shadow: 0 1px 0 0 #e57373 !important;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.input-field input[type='email']:focus {
-  border-bottom: 1px #e57373 !important;
-  box-shadow: 0 1px 0 0 #e57373 !important;
+.App-link {
+  color: #61dafb;
 }
 
-.input-field input[type='password']:focus {
-  border-bottom: 1px #e57373 !important;
-  box-shadow: 0 1px 0 0 #e57373 !important;
-}
-
-.input-field textarea:focus {
-  border-bottom: 1px #e57373 !important;
-  box-shadow: 0 1px 0 0 #e57373 !important;
-}
-/* Navigation */
-.nav-link {
-  font-family: 'Caveat', cursive;
-  font-size: 25px !important;
-}
-.nav-divider {
-  height: 2px;
-  width: 80%;
-  margin-inline-start: 30px !important;
-}
-.sidenav-close {
-  margin-bottom: 25px;
-}
-.nav-container {
-  width: 90%;
-  margin-left: 5%;
-}
-
-/* Cities Card */
-.city-img {
-  filter: brightness(60%);
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

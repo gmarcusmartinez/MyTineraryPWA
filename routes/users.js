@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const User = require('../models/User')
-const auth = require('../middleware/auth')
+const auth = require('../utils/auth')
 const { createToken } = require('../utils/index')
 const userValidation = require('../validation/user')
+const loginValidation = require('../validation/login')
 const { validationResult } = require('express-validator/check')
 
 /**
@@ -16,18 +17,13 @@ router.post('/', userValidation, async (req, res) => {
     return res.status(400).json({ errors: errors.array() })
   }
   try {
-    const { email, password, img } = req.body
-    let user = await User.findOne({ email })
+    let user = await User.findOne({ email: req.body.email })
 
     if (user) {
       return res.status(400).json({ errors: [{ msg: 'Email not available.' }] })
     }
 
-    user = new User({
-      email,
-      password,
-      img
-    })
+    user = new User(req.body)
 
     user.password = await bcrypt.hash(user.password, 8)
     await user.save()
@@ -42,7 +38,11 @@ router.post('/', userValidation, async (req, res) => {
 /**
  * Login user
  */
-router.post('/login', async (req, res) => {
+router.post('/login', loginValidation, async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
   try {
     const { email, password } = req.body
     const user = await User.findOne({ email })
@@ -54,7 +54,18 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ errors: [{ msg: 'Unable to login.' }] })
     }
     const token = await createToken(user)
-    res.send({ user, token })
+    res.send({ token })
+  } catch (err) {
+    console.error(err.message)
+  }
+})
+/**
+ * Fetch all users
+ */
+router.get('/all', async (req, res) => {
+  try {
+    const users = await User.find().select('-password')
+    res.send(users)
   } catch (err) {
     console.error(err.message)
   }
@@ -65,7 +76,7 @@ router.post('/login', async (req, res) => {
  */
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id)
+    const user = await User.findByIdAndRemove(req.params.id)
     if (!user) {
       return res.send({ msg: 'User not found' })
     }
@@ -80,7 +91,12 @@ router.delete('/:id', auth, async (req, res) => {
  */
 
 router.get('/', auth, async (req, res) => {
-  res.send(req.user)
+  try {
+    const user = await User.findOne({ _id: req.user._id }).select('-password')
+    res.send(user)
+  } catch (err) {
+    res.status(500).send(err)
+  }
 })
 
 module.exports = router
