@@ -1,10 +1,11 @@
 import React from 'react'
 import './App.css'
-import { Route, Switch } from 'react-router-dom'
 import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
-import Landing from './components/Landing/Landing'
+import { Route, Switch } from 'react-router-dom'
 import GuestNav from './components/Nav/GuestNav'
+import Landing from './components/Landing/Landing'
+
 function App() {
   return (
     <div className="App">

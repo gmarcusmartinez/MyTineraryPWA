@@ -53,7 +53,7 @@ const GuestNav = ({ classes }) => {
             MyTinerary
           </Link>
         </header>
-        <li className={classes.sidenavClose} style={{ marginTop: '25px' }}>
+        <li className={classes.sidenavClose} style={{ marginTop: '75px' }}>
           <Link className={classes.navLink} to="/">
             Home
           </Link>
@@ -81,6 +81,9 @@ const GuestNav = ({ classes }) => {
           <Link className={classes.navLink} to="/login">
             Login
           </Link>
+        </li>
+        <li>
+          <div className={`divider ${classes.navDivider}`} />
         </li>
       </ul>
     </div>

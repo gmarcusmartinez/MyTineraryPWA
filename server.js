@@ -7,6 +7,7 @@ connectDB()
 app.use(express.json({ extended: false }))
 app.use('/users', require('./routes/users'))
 app.use('/cities', require('./routes/cities'))
+app.use('/activities', require('./routes/activities'))
 app.use('/itineraries', require('./routes/itineraries'))
 
 const PORT = process.env.PORT || 5000

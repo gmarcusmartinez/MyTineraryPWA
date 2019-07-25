@@ -6,21 +6,20 @@ const { validationResult } = require('express-validator/check')
 
 const router = express.Router()
 
-// Create Itinerary
+/**
+ * Create Itinerary
+ */
 router.post('/', [auth, itineraryValidation], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
   try {
-    const user = await User.findById(req.user.id)
-    if (!user) {
-      return res.status(400).json({
-        errors: [{ msg: 'You must be authenticated to perform this action' }]
-      })
-    }
+    const user = req.user.id
+
     const itinerary = await new Itinerary(req.body)
     itinerary.user = user
+
     itinerary.save()
     res.send(itinerary)
   } catch (err) {
