@@ -1,93 +1,90 @@
-import React from 'react'
-import clsx from 'clsx'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Drawer from '@material-ui/core/Drawer'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import styles from '../../styles/NavStyles'
+import { withStyles } from '@material-ui/core/styles'
+import M from 'materialize-css/dist/js/materialize.min.js'
 
-import useStyles from '../../styles/NavbarStyles'
-
-const GuestNav = () => {
-  const classes = useStyles()
-
-  const [open, setOpen] = React.useState(false)
-
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
-  const GuestLinks = [
-    { to: '/', text: 'Home' },
-    { to: '/cities', text: 'Cities' },
-    { to: '/login', text: 'Login' },
-    { to: '/signup', text: 'Signup' }
-  ]
-
+const GuestNav = ({ classes }) => {
+  useEffect(() => {
+    let elem = document.querySelector('.sidenav')
+    M.Sidenav.init(elem, {
+      edge: 'left',
+      inDuration: 250
+    })
+  }, [])
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}>
-        <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            style={{ fontFamily: 'Caveat', fontSize: '1.5rem' }}>
-            MyTinerary
-          </Typography>
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}>
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper
-        }}>
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <ul
-          style={{ listStyle: 'none', paddingInlineStart: '0px', margin: '0' }}>
-          {GuestLinks.map(({ to, text, index }) => (
-            <li button key={index} style={{ marginLeft: '-25px' }}>
-              <p className={classes.navLink}>{text}</p>
-              <Divider />
+    <div>
+      <nav className="nav wrapper red lighten-2 z-depth-0 ">
+        <div className={classes.navContainer}>
+          <a
+            href="!#"
+            className="button-collapse sidenav-trigger right"
+            data-target="slide-out">
+            <i className="fas fa-plane white-text" />
+          </a>
+          <ul>
+            <li className="left ">
+              <Link to="/" className={classes.navLink}>
+                MyTinerary
+              </Link>
             </li>
-          ))}
-        </ul>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}>
-        <div className={classes.drawerHeader} />
-      </main>
+
+            <li className="right hide-on-med-and-down">
+              <Link to="/sign-up" className={classes.navLink}>
+                Signup
+              </Link>
+            </li>
+            <li className="right hide-on-med-and-down">
+              <Link to="/login" className={classes.navLink}>
+                Login
+              </Link>
+            </li>
+            <li className="right hide-on-med-and-down">
+              <Link to="/cities" className={classes.navLink}>
+                Cities
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <ul className="sidenav" id="slide-out">
+        <header className={classes.sideHeader}>
+          <Link to="/" className={classes.sideTitle}>
+            MyTinerary
+          </Link>
+        </header>
+        <li className={classes.sidenavClose} style={{ marginTop: '25px' }}>
+          <Link className={classes.navLink} to="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <div className={`divider ${classes.navDivider}`} />
+        </li>
+        <li className={classes.sidenavClose}>
+          <Link className={classes.navLink} to="/cities">
+            Cities
+          </Link>
+        </li>
+        <li>
+          <div className={`divider ${classes.navDivider}`} />
+        </li>
+        <li className={classes.sidenavClose}>
+          <Link className={classes.navLink} to="/sign-up">
+            Signup
+          </Link>
+        </li>
+        <li>
+          <div className={`divider ${classes.navDivider}`} />
+        </li>
+        <li className={classes.sidenavClose}>
+          <Link className={classes.navLink} to="/login">
+            Login
+          </Link>
+        </li>
+      </ul>
     </div>
   )
 }
-export default GuestNav
+
+export default withStyles(styles)(GuestNav)
