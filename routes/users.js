@@ -1,13 +1,13 @@
 const express = require('express')
-const router = express.Router()
 const bcrypt = require('bcryptjs')
-const User = require('../models/User')
 const auth = require('../utils/auth')
-const { createToken } = require('../utils/index')
+const User = require('../models/User')
 const userValidation = require('../validation/user')
 const loginValidation = require('../validation/login')
+const { createToken, hash } = require('../utils/index')
 const { validationResult } = require('express-validator/check')
 
+const router = express.Router()
 /**
  * Register user
  */
@@ -25,9 +25,9 @@ router.post('/', userValidation, async (req, res) => {
 
     user = new User(req.body)
 
-    user.password = await bcrypt.hash(user.password, 8)
-    await user.save()
+    user.password = await hash(user.password)
 
+    await user.save()
     const token = await createToken(user)
     res.send({ token })
   } catch (err) {
@@ -64,7 +64,7 @@ router.post('/login', loginValidation, async (req, res) => {
  */
 router.get('/all', async (req, res) => {
   try {
-    const users = await User.find().select('-password')
+    const users = await User.find()
     res.send(users)
   } catch (err) {
     console.error(err.message)
@@ -76,10 +76,20 @@ router.get('/all', async (req, res) => {
  */
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const user = await User.findByIdAndRemove(req.params.id)
+    const user = await User.findById(req.params.id)
     if (!user) {
-      return res.send({ msg: 'User not found' })
+      return res.status(400).json({
+        errors: [{ msg: 'You must be authenticated to perform this action' }]
+      })
     }
+    if (req.user.id !== req.params.id) {
+      return res
+        .status(400)
+        .json({
+          errors: [{ msg: 'You are not authorized to perform this action' }]
+        })
+    }
+    await user.remove()
     res.send({ msg: 'User Removed' })
   } catch (err) {
     res.status(500).send(err.message)

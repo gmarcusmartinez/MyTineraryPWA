@@ -15,7 +15,10 @@ const ItinerarySchema = new Schema({
     required: true
   },
   img: {
-    type: String
+    type: String,
+    required: true,
+    default:
+      'https://www.steigenberger.com/cache/images/berlin_fotolia_93887_2306ae4113b62425b112e36-1-1.jpg'
   },
   published: {
     type: Boolean,

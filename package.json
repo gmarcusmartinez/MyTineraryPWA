@@ -13,6 +13,7 @@
   "author": "Marcus Martinez",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/icons": "^4.2.1",
     "bcryptjs": "^2.4.3",
     "concurrently": "^4.1.0",
     "config": "^3.1.0",
@@ -23,7 +24,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
-    "react-google-login": "^5.0.4"
+    "react-google-login": "^5.0.4",
+    "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.0"
