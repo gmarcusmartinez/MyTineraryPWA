@@ -6,6 +6,10 @@ const ReviewSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  itinerary: {
+    type: Schema.Types.ObjectId,
+    ref: 'itinerary'
+  },
   text: {
     type: String,
     required: true

@@ -8,7 +8,7 @@ const { validationResult } = require('express-validator/check')
 
 const router = express.Router()
 /**
- *@function CREATE Activity
+ *@function CREATE Activity for specific Itinerary
  * @param :id
  */
 router.post('/:id', [auth, activityValidation], async (req, res) => {
@@ -31,8 +31,8 @@ router.post('/:id', [auth, activityValidation], async (req, res) => {
 
     const response = await axios.get(url)
     const coords = response.data.features[0].center
-    activity.lat = coords[0]
-    activity.lng = coords[1]
+    activity.coords.lat = coords[0]
+    activity.coords.lng = coords[1]
 
     activity.save()
     res.send(activity)
@@ -50,6 +50,17 @@ router.get('/:id', async (req, res) => {
     return res.send({ msg: 'This Itinerary currently has no activities.' })
   }
   res.json(activities)
+})
+/**
+ * @function  GET Activities by  ID
+ * @param /edit/:id
+ */
+router.get('/edit/:id', async (req, res) => {
+  const activity = await Activity.findById(req.params.id)
+  if (!activity) {
+    return res.send({ msg: 'Activity not found.' })
+  }
+  res.json(activity)
 })
 /**
  * @function  DELETE Activity by ID

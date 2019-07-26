@@ -21,7 +21,7 @@ const Landing = ({ classes }) => {
               <div className="center">
                 <Link
                   style={{ margin: '5px' }}
-                  to="/register"
+                  to="/sign-up"
                   className="btn white red-text text-lighten-2 text-lighten-2"
                   data-target="signup-modal">
                   Get Started

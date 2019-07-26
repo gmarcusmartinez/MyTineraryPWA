@@ -18,11 +18,13 @@ const ActivitySchema = new Schema({
     type: String,
     required: true
   },
-  lat: {
-    type: Number
-  },
-  lng: {
-    type: Number
+  coords: {
+    lat: {
+      type: Number
+    },
+    lng: {
+      type: Number
+    }
   },
   img: {
     type: String
