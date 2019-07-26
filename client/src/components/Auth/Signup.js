@@ -1,14 +1,14 @@
 // import PropTypes from 'prop-types'
-// import ErrorMsg from '../error/ErrorMsg'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
+import ErrorMsg from '../Common/ErrorMsg'
 // import { Redirect } from 'react-router-dom'
-// import { setError } from '../../actions/error'
 // import { register } from '../../actions/authActions'
-import styles from '../../styles/LandingStyles'
+import styles from '../../styles/AuthStyles'
 import React, { Fragment, useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { setError } from '../../store/actions/errActions'
 
-const Signup = ({ setError, register, isAuthenticated, classes }) => {
+const Signup = ({ setError, classes }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,9 +21,9 @@ const Signup = ({ setError, register, isAuthenticated, classes }) => {
 
   const onSubmit = async e => {
     e.preventDefault()
-    // if (password !== password2) {
-    //   setError('Passwords do not match', 'red-text')
-    // }
+    if (password !== password2) {
+      setError('Passwords do not match')
+    }
     console.log(formData)
     // register({ name, email, password })
   }
@@ -36,13 +36,18 @@ const Signup = ({ setError, register, isAuthenticated, classes }) => {
         <div className={classes.darkOverlay}>
           <div className="container">
             <div className="row">
-              <div className="col s12 landing-col">
-                <div className="card auth-card">
+              <div className="col s12 m8 offset-m2 l6 offset-l3 landing-col">
+                <div className={`card ${classes.formCard}`}>
                   <form onSubmit={e => onSubmit(e)}>
-                    <h4 className="center red-text text-lighten-2 landing-title">
+                    <h4
+                      className={`center red-text text-lighten-2 ${
+                        classes.cardTitle
+                      }`}>
                       Signup
                     </h4>
-                    <div className="center-align">{/* <ErrorMsg /> */}</div>
+                    <div className="center-align">
+                      <ErrorMsg />
+                    </div>
                     <div className="input-field">
                       <label>Email</label>
                       <input
@@ -71,7 +76,10 @@ const Signup = ({ setError, register, isAuthenticated, classes }) => {
                       />
                     </div>
 
-                    <button className="waves-effect waves-light btn red lighten-2 signup-button">
+                    <button
+                      className={`waves-effect waves-light btn red lighten-2 ${
+                        classes.wideBtn
+                      }`}>
                       Submit
                     </button>
                   </form>
@@ -98,4 +106,7 @@ const Signup = ({ setError, register, isAuthenticated, classes }) => {
 //   { setError, register }
 // )(Signup)
 
-export default withStyles(styles)(Signup)
+export default connect(
+  null,
+  { setError }
+)(withStyles(styles)(Signup))
