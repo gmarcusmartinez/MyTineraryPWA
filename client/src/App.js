@@ -12,6 +12,7 @@ import Landing from './components/Landing/Landing'
 import { setUser } from './store/actions/authActions'
 import Dashboard from './components/Dashboard/Dashboard'
 import PrivateRoute from './components/Common/PrivateRoute'
+import MyTineraries from './components/Itineraries/MyTineraries'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={Signup} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/mytineraries" component={MyTineraries} />
         </Switch>
       </div>
     </Provider>

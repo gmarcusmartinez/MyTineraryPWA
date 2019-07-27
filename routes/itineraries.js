@@ -26,10 +26,12 @@ router.post('/', [auth, itineraryValidation], async (req, res) => {
     res.status(500).send(err.message)
   }
 })
-// Get Itineraries
-router.get('/', async (req, res) => {
+/**
+ * GET Itineraries by authenticated user
+ */
+router.get('/', auth, async (req, res) => {
   try {
-    const itineraries = await Itinerary.find()
+    const itineraries = await Itinerary.find({ user: req.user.id })
     if (!itineraries) {
       return res.send({ msg: 'No itineraries found.' })
     }
