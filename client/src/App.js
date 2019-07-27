@@ -6,7 +6,7 @@ import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
 import setAuthToken from './utils/setAuthToken'
 import { Route, Switch } from 'react-router-dom'
-import GuestNav from './components/Nav/GuestNav'
+import Nav from './components/Nav/Nav'
 import Landing from './components/Landing/Landing'
 import { setUser } from './store/actions/authActions'
 
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className="App">
-        <GuestNav />
+        <Nav />
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />

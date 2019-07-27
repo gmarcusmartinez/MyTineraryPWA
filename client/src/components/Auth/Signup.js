@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ErrorMsg from '../Common/ErrorMsg'
-// import { Redirect } from 'react-router-dom'
-import { signup } from '../../store/actions/authActions'
+import { Redirect } from 'react-router-dom'
 import styles from '../../styles/AuthStyles'
 import React, { Fragment, useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { signup } from '../../store/actions/authActions'
 import { setError } from '../../store/actions/errActions'
 
-const Signup = ({ setError, signup, classes }) => {
+const Signup = ({ setError, signup, classes, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -26,9 +26,9 @@ const Signup = ({ setError, signup, classes }) => {
     }
     signup(formData)
   }
-  //   if (isAuthenticated) {
-  //     return <Redirect to="/dashboard" />
-  //   }
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />
+  }
   return (
     <Fragment>
       <div className={classes.landing}>
@@ -92,20 +92,16 @@ const Signup = ({ setError, signup, classes }) => {
   )
 }
 
-// const mapStateToProps = state => ({
-//   isAuthenticated: state.auth.isAuthenticated
-// })
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
 Signup.propTypes = {
   setError: PropTypes.func.isRequired,
-  signup: PropTypes.func.isRequired
-  // isAuthenticated: PropTypes.bool
+  signup: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 }
-// export default connect(
-//   mapStateToProps,
-//   { setError, register }
-// )(Signup)
 
 export default connect(
-  null,
+  mapStateToProps,
   { setError, signup }
 )(withStyles(styles)(Signup))

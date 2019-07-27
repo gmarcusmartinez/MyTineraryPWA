@@ -23,12 +23,6 @@ const GuestNav = ({ classes }) => {
             <i className="fas fa-plane white-text" />
           </a>
           <ul>
-            <li className="left ">
-              <Link to="/" className={classes.navLink}>
-                MyTinerary
-              </Link>
-            </li>
-
             <li className="right hide-on-med-and-down">
               <Link to="/sign-up" className={classes.navLink}>
                 Signup

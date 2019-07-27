@@ -1,4 +1,4 @@
-import { SIGNUP, AUTH_ERROR, SET_USER } from '../actions/types'
+import { SIGNUP, AUTH_ERROR, SET_USER, LOGIN, LOGOUT } from '../actions/types'
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -17,6 +17,7 @@ export default function(state = initialState, action) {
         user: payload
       }
     case SIGNUP:
+    case LOGIN:
       localStorage.setItem('token', payload.token)
       return {
         ...state,
@@ -25,6 +26,7 @@ export default function(state = initialState, action) {
         loading: false
       }
     case AUTH_ERROR:
+    case LOGOUT:
       localStorage.removeItem('token')
       return {
         ...state,
