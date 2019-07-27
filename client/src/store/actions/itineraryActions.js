@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
   CREATE_ITINERARY,
   GET_AUTH_USER_ITINERARIES,
-  GET_ITINERARIES
+  GET_ITINERARIES,
+  GET_ITINERARY
 } from './types'
 import { setError } from './errActions'
 
@@ -27,6 +28,21 @@ export const getItinerariesByCity = cityName => async dispatch => {
     dispatch({
       GET_ITINERARIES,
       paylod: res.data
+    })
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+  }
+}
+
+export const getItinerary = id => async dispatch => {
+  try {
+    const res = await axios.get(`/itineraries/${id}`)
+    dispatch({
+      type: GET_ITINERARY,
+      payload: res.data
     })
   } catch (err) {
     const errors = err.response.data.errors

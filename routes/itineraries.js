@@ -45,8 +45,9 @@ router.get('/:id', async (req, res) => {
   try {
     const itinerary = await Itinerary.findById(req.params.id)
     if (!itinerary) {
-      return res.send({ msg: 'Itinerary not found.' })
+      return res.status(400).json({ errors: [{ msg: 'Itinerary not found.' }] })
     }
+
     res.json(itinerary)
   } catch (err) {
     res.status(500).send(err.message)

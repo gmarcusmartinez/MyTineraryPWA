@@ -10,14 +10,13 @@ const CreateItinerary = ({ createItinerary, classes }) => {
   const [formData, setFormData] = useState({
     img: '',
     city: '',
-    title: '',
-    description: ''
+    title: ''
   })
   useEffect(() => {
     let sel = document.querySelectorAll('select')
     M.FormSelect.init(sel)
   }, [])
-  const { img, city, title, description } = formData
+  const { img, city, title } = formData
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -28,8 +27,7 @@ const CreateItinerary = ({ createItinerary, classes }) => {
     setFormData({
       img: '',
       city: '',
-      title: '',
-      description: ''
+      title: ''
     })
   }
 
@@ -67,15 +65,6 @@ const CreateItinerary = ({ createItinerary, classes }) => {
               type="text"
               name="img"
               value={img}
-              onChange={e => onChange(e)}
-            />
-          </div>
-          <div className="input-field">
-            <label>Description</label>
-            <input
-              type="text"
-              name="description"
-              value={description}
               onChange={e => onChange(e)}
             />
           </div>

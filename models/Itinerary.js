@@ -20,6 +20,18 @@ const ItinerarySchema = new Schema({
     default:
       'https://www.steigenberger.com/cache/images/berlin_fotolia_93887_2306ae4113b62425b112e36-1-1.jpg'
   },
+  description: {
+    type: String,
+    default: ''
+  },
+  price: {
+    type: String,
+    default: ''
+  },
+  duration: {
+    type: String,
+    default: ''
+  },
   reviews: [
     {
       user: {

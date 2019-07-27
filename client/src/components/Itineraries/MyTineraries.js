@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
 import ItineraryCard from './ItineraryCard'
 import CreateItinerary from './CreateItinerary'
+import EditItinerary from './EditItinerary'
 import { getAuthUserItineraries } from '../../store/actions/itineraryActions'
-
 const MyTineraries = ({
   getAuthUserItineraries,
   itineraries: { itineraries, loading }
@@ -18,8 +18,8 @@ const MyTineraries = ({
   if (itineraries === null || loading) {
     itinerariesList = <Spinner />
   } else {
-    itinerariesList = itineraries.map(({ img, title }) => {
-      return <ItineraryCard img={img} title={title} />
+    itinerariesList = itineraries.map(itinerary => {
+      return <ItineraryCard itinerary={itinerary} key={itinerary._id} />
     })
   }
   return (

@@ -1,4 +1,5 @@
 import {
+  GET_ITINERARY,
   GET_ITINERARIES,
   GET_AUTH_USER_ITINERARIES,
   CREATE_ITINERARY
@@ -24,6 +25,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         itineraries: [payload, ...state.itineraries],
+        loading: false
+      }
+    case GET_ITINERARY:
+      return {
+        ...state,
+        itinerary: payload,
         loading: false
       }
     default:
