@@ -53,7 +53,7 @@ const GuestNav = ({ classes }) => {
           </Link>
         </li>
         <li>
-          <div className={`divider ${classes.navDivider}`} />
+          <div className="divider nav-divider" />
         </li>
         <li className={classes.sidenavClose}>
           <Link className={classes.navLink} to="/cities">
@@ -61,7 +61,7 @@ const GuestNav = ({ classes }) => {
           </Link>
         </li>
         <li>
-          <div className={`divider ${classes.navDivider}`} />
+          <div className="divider nav-divider" />
         </li>
         <li className={classes.sidenavClose}>
           <Link className={classes.navLink} to="/sign-up">
@@ -69,7 +69,7 @@ const GuestNav = ({ classes }) => {
           </Link>
         </li>
         <li>
-          <div className={`divider ${classes.navDivider}`} />
+          <div className="divider nav-divider" />
         </li>
         <li className={classes.sidenavClose}>
           <Link className={classes.navLink} to="/login">
@@ -77,7 +77,7 @@ const GuestNav = ({ classes }) => {
           </Link>
         </li>
         <li>
-          <div className={`divider ${classes.navDivider}`} />
+          <div className="divider nav-divider" />
         </li>
       </ul>
     </div>

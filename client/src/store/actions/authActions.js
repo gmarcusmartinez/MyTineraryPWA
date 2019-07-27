@@ -71,14 +71,7 @@ export const setUser = () => async dispatch => {
 }
 
 export const logout = () => dispatch => {
-  try {
-    dispatch({
-      type: LOGOUT
-    })
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    })
-    console.log(err.message)
-  }
+  dispatch({
+    type: LOGOUT
+  })
 }

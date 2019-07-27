@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react'
 import './App.css'
 import store from './store/store'
+import Nav from './components/Nav/Nav'
 import { Provider } from 'react-redux'
 import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
 import setAuthToken from './utils/setAuthToken'
+import Cities from './components/Cities/Cities'
 import { Route, Switch } from 'react-router-dom'
-import Nav from './components/Nav/Nav'
 import Landing from './components/Landing/Landing'
 import { setUser } from './store/actions/authActions'
+import Dashboard from './components/Dashboard/Dashboard'
+import PrivateRoute from './components/Common/PrivateRoute'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -22,9 +25,11 @@ const App = () => {
       <div className="App">
         <Nav />
         <Switch>
+          <Route exact path="/cities" component={Cities} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={Signup} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
       </div>
     </Provider>
