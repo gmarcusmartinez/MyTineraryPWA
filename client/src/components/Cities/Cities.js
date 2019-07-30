@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Spinner from '../Common/Spinner'
+import CitySearch from '../Common/CitySearch'
 import React, { Fragment, useEffect } from 'react'
 import { getCities } from '../../store/actions/cityActions'
 
@@ -27,6 +28,7 @@ const Cities = ({ getCities, cities: { cities, loading } }) => {
   }
   return (
     <Fragment>
+      <CitySearch />
       <div className="container cities-page">
         <div className="row">
           <div className="col s12">{cityList}</div>

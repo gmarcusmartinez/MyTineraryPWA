@@ -14,16 +14,20 @@ const ItineraryCard = ({ itinerary, classes, getItinerary }) => {
             alt=""
             style={{ filter: 'brightness(60%)' }}
           />
-          <span className="card-title">{itinerary.title}</span>
-        </div>
-        <div className="center">
-          <i
-            className={`fas fa-pencil-alt ${classes.commonIcon} modal-trigger`}
-            onClick={() => getItinerary(itinerary._id)}
-            data-target="edit-itinerary-modal"
-          />
-          <i className={`fas fa-list ${classes.commonIcon}`} />
-          <i className={`fas fa-plus ${classes.commonIcon}`} />
+          <span className="card-title">
+            {itinerary.title}
+            <div className="center">
+              <i
+                className={`modal-trigger fas fa-pencil-alt ${
+                  classes.commonIcon
+                }`}
+                onClick={() => getItinerary(itinerary._id)}
+                data-target="edit-itinerary-modal"
+              />
+              <i className={`fas fa-list ${classes.commonIcon}`} />
+              <i className={`fas fa-plus ${classes.commonIcon}`} />
+            </div>
+          </span>
         </div>
       </div>
     </div>

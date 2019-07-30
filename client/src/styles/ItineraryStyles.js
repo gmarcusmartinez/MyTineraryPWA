@@ -18,9 +18,9 @@ const styles = {
     marginTop: '25px'
   },
   commonIcon: {
-    color: '#e57373',
+    color: 'white',
     borderRadius: '50%',
-    border: '1px solid #e57373',
+    border: '1px solid white',
     fontSize: '1.5rem',
     padding: '7px',
     margin: '10px'
