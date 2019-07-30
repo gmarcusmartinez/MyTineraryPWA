@@ -2,9 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
-import { getItinerary } from '../../store/actions/itineraryActions'
+import {
+  getItinerary,
+  deleteItinerary
+} from '../../store/actions/itineraryActions'
 
-const ItineraryCard = ({ itinerary, classes, getItinerary }) => {
+const ItineraryCard = ({
+  itinerary,
+  classes,
+  getItinerary,
+  deleteItinerary
+}) => {
   return (
     <div className="col s12 m6 l4">
       <div className={`card ${classes.itineraryCard}`}>
@@ -22,10 +30,13 @@ const ItineraryCard = ({ itinerary, classes, getItinerary }) => {
                   classes.commonIcon
                 }`}
                 onClick={() => getItinerary(itinerary._id)}
-                data-target="edit-itinerary-modal"
               />
               <i className={`fas fa-list ${classes.commonIcon}`} />
               <i className={`fas fa-plus ${classes.commonIcon}`} />
+              <i
+                className={`fas fa-trash-alt ${classes.commonIcon}`}
+                onClick={() => deleteItinerary(itinerary._id)}
+              />
             </div>
           </span>
         </div>
@@ -36,5 +47,5 @@ const ItineraryCard = ({ itinerary, classes, getItinerary }) => {
 
 export default connect(
   null,
-  { getItinerary }
+  { getItinerary, deleteItinerary }
 )(withStyles(styles)(ItineraryCard))

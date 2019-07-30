@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import ErrorMessage from '../Common/ErrorMsg'
 import styles from '../../styles/ItineraryStyles'
 import React, { useState, useEffect } from 'react'
 import { withStyles } from '@material-ui/core/styles'
@@ -35,6 +36,7 @@ const CreateItinerary = ({ createItinerary, classes }) => {
     <div className="col s12 m6 l4">
       <div className={`card ${classes.formCard}`}>
         <form onSubmit={e => onSubmit(e)}>
+          <ErrorMessage />
           <h4 className={`center red-text text-lighten-2 ${classes.cardTitle}`}>
             Create Itinerary
           </h4>

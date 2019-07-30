@@ -22,10 +22,11 @@ const MyTineraries = ({
       return <ItineraryCard itinerary={itinerary} key={itinerary._id} />
     })
   }
+
   return (
     <div className="custom-container">
       <div className="row">
-        <CreateItinerary />
+        <EditItinerary />
         {itinerariesList}
       </div>
     </div>

@@ -1,12 +1,21 @@
 import {
   GET_ITINERARY,
   GET_ITINERARIES,
-  GET_AUTH_USER_ITINERARIES,
-  CREATE_ITINERARY
+  CREATE_ITINERARY,
+  DELETE_ITINERARY,
+  UPDATE_ITINERARY,
+  GET_AUTH_USER_ITINERARIES
 } from '../actions/types'
 const initialState = {
   itineraries: [],
-  itinerary: null,
+  itinerary: {
+    img: '',
+    city: '',
+    title: '',
+    price: '',
+    duration: '',
+    description: ''
+  },
   loading: true
 }
 
@@ -27,10 +36,30 @@ export default function(state = initialState, action) {
         itineraries: [payload, ...state.itineraries],
         loading: false
       }
+    case UPDATE_ITINERARY:
+      return {
+        ...state,
+        itineraries: [
+          payload,
+          ...state.itineraries.filter(
+            itinerary => itinerary._id !== payload._id
+          )
+        ],
+
+        loading: false
+      }
     case GET_ITINERARY:
       return {
         ...state,
         itinerary: payload,
+        loading: false
+      }
+    case DELETE_ITINERARY:
+      return {
+        ...state,
+        itineraries: state.itineraries.filter(
+          itinerary => itinerary._id !== payload
+        ),
         loading: false
       }
     default:

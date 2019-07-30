@@ -1,9 +1,11 @@
 import axios from 'axios'
 import {
+  GET_ITINERARY,
   CREATE_ITINERARY,
-  GET_AUTH_USER_ITINERARIES,
   GET_ITINERARIES,
-  GET_ITINERARY
+  DELETE_ITINERARY,
+  UPDATE_ITINERARY,
+  GET_AUTH_USER_ITINERARIES
 } from './types'
 import { setError } from './errActions'
 
@@ -63,6 +65,39 @@ export const createItinerary = formData => async dispatch => {
     dispatch({
       type: CREATE_ITINERARY,
       payload: res.data
+    })
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+  }
+}
+export const updateItinerary = (formData, _id) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const res = await axios.patch(`/itineraries/${_id}`, formData, config)
+    dispatch({
+      type: UPDATE_ITINERARY,
+      payload: res.data
+    })
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+  }
+}
+export const deleteItinerary = id => async dispatch => {
+  try {
+    await axios.delete(`/itineraries/${id}`)
+    dispatch({
+      type: DELETE_ITINERARY,
+      payload: id
     })
   } catch (err) {
     const errors = err.response.data.errors

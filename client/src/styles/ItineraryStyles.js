@@ -24,6 +24,11 @@ const styles = {
     fontSize: '1.5rem',
     padding: '7px',
     margin: '10px'
+  },
+  small: {
+    fontFamily: 'Caveat',
+    color: '#e57373',
+    fontSize: '1.25rem'
   }
 }
 
