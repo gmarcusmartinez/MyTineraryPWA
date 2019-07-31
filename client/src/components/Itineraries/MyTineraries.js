@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
+import EditItinerary from './EditItinerary'
 import ItineraryCard from './ItineraryCard'
 import CreateItinerary from './CreateItinerary'
-// import EditItinerary from './EditItinerary'
+import React, { useEffect, useState } from 'react'
+import useToggleState from '../../hooks/useToggleState'
 import { getAuthUserItineraries } from '../../store/actions/itineraryActions'
 
 const MyTineraries = ({
   getAuthUserItineraries,
   itineraries: { itineraries, loading }
 }) => {
-  const [showCreate, setshowCreate] = useState(true)
-  const [showEdit, setshowEdit] = useState(false)
+  const [showCreate, setShowCreate] = useState(true)
+  const [showEdit, setShowEdit] = useState(false)
 
-  const toggleCreateEdit = () => {}
+  const displayEdit = () => {
+    setShowCreate(false)
+    setShowEdit(true)
+  }
+  const displayCreate = () => {
+    setShowCreate(true)
+    setShowEdit(false)
+  }
+
   useEffect(() => {
     getAuthUserItineraries()
   }, [getAuthUserItineraries])
@@ -24,14 +33,22 @@ const MyTineraries = ({
     itinerariesList = <Spinner />
   } else {
     itinerariesList = itineraries.map(itinerary => {
-      return <ItineraryCard itinerary={itinerary} key={itinerary._id} />
+      return (
+        <ItineraryCard
+          itinerary={itinerary}
+          key={itinerary._id}
+          displayEdit={displayEdit}
+        />
+      )
     })
   }
 
   return (
     <div className="custom-container">
       <div className="row">
-        <CreateItinerary />
+        {showCreate && <CreateItinerary />}
+        {showEdit && <EditItinerary displayCreate={displayCreate} />}
+
         {itinerariesList}
       </div>
     </div>

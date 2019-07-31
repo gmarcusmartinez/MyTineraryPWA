@@ -6,17 +6,15 @@ import AddActivity from '../Forms/AddActivity'
 import ActivitesList from '../Activities/ActivitiesList'
 import { getActivities } from '../../store/actions/activityActions'
 // import EditItinerary from './EditItinerary'
-import {
-  getItinerary,
-  deleteItinerary
-} from '../../store/actions/itineraryActions'
+import ConfirmDeleteItin from '../Common/ConfirmDeleteItin'
+import { getItinerary } from '../../store/actions/itineraryActions'
 
 const ItineraryCard = ({
   itinerary,
   classes,
   getItinerary,
   getActivities,
-  deleteItinerary
+  displayEdit
 }) => {
   const [showAddActivity, setShowAddActivity] = useState(false)
   const [showList, setShowList] = useState(false)
@@ -53,7 +51,11 @@ const ItineraryCard = ({
           <div className="center">
             <i
               className={`fas fa-pencil-alt ${classes.commonIcon}`}
-              onClick={() => getItinerary(itinerary._id)}
+              onClick={() =>
+                getItinerary(itinerary._id).then(() => {
+                  displayEdit()
+                })
+              }
             />
             <i
               className={`fas fa-list ${classes.commonIcon} activator`}
@@ -68,8 +70,8 @@ const ItineraryCard = ({
               onClick={displayAdd}
             />
             <i
-              className={`fas fa-trash-alt ${classes.commonIcon}`}
-              onClick={() => deleteItinerary(itinerary._id)}
+              className={`fas fa-trash-alt ${classes.commonIcon} activator`}
+              onClick={displayConfirmDelete}
             />
           </div>
         </div>
@@ -83,6 +85,9 @@ const ItineraryCard = ({
           </span>
           {showList && <ActivitesList itinerary_id={itinerary._id} />}
           {showAddActivity && <AddActivity itinerary_id={itinerary._id} />}
+          {showConfirmDelete && (
+            <ConfirmDeleteItin itinerary_id={itinerary._id} />
+          )}
         </div>
       </div>
     </div>
@@ -91,5 +96,5 @@ const ItineraryCard = ({
 
 export default connect(
   null,
-  { getItinerary, deleteItinerary, getActivities }
+  { getItinerary, getActivities }
 )(withStyles(styles)(ItineraryCard))

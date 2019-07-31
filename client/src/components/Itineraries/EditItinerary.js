@@ -6,8 +6,14 @@ import M from 'materialize-css/dist/js/materialize.min.js'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
 import { updateItinerary } from '../../store/actions/itineraryActions'
+import { display } from '@material-ui/system'
 
-const EditItinerary = ({ updateItinerary, itinerary, classes }) => {
+const EditItinerary = ({
+  updateItinerary,
+  itinerary,
+  classes,
+  displayCreate
+}) => {
   const [formData, setFormData] = useState({
     img: '',
     city: '',
@@ -123,7 +129,8 @@ const EditItinerary = ({ updateItinerary, itinerary, classes }) => {
 
           <button
             className="btn red lighten-2"
-            style={{ width: '100%', marginTop: '20px' }}>
+            style={{ width: '100%', marginTop: '20px' }}
+            onClick={displayCreate}>
             Update
           </button>
         </form>

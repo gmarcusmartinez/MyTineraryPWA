@@ -16,7 +16,8 @@ const styles = {
   },
   itineraryCard: {
     padding: 0,
-    marginTop: '25px'
+    marginTop: '25px',
+    height: '365px'
   },
   commonIcon: {
     color: '#e57373',

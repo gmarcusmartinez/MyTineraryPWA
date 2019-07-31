@@ -4,13 +4,8 @@ import Spinner from '../Common/Spinner'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
 import ActivityListItem from './ActvityListItem'
-import { log } from 'util'
 
-const ActivitiesList = ({
-  itinerary_id,
-  classes,
-  activities: { activities, loading }
-}) => {
+const ActivitiesList = ({ classes, activities: { activities, loading } }) => {
   let activitiesList
   if (activities === null || loading) {
     activitiesList = <Spinner />
