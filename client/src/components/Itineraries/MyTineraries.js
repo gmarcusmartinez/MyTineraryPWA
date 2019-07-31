@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
@@ -11,6 +11,10 @@ const MyTineraries = ({
   getAuthUserItineraries,
   itineraries: { itineraries, loading }
 }) => {
+  const [showCreate, setshowCreate] = useState(true)
+  const [showEdit, setshowEdit] = useState(false)
+
+  const toggleCreateEdit = () => {}
   useEffect(() => {
     getAuthUserItineraries()
   }, [getAuthUserItineraries])

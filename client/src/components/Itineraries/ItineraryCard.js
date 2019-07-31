@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
 import AddActivity from '../Forms/AddActivity'
+import ActivitesList from '../Activities/ActivitiesList'
+// import EditItinerary from './EditItinerary'
 import {
   getItinerary,
   deleteItinerary
@@ -12,8 +14,21 @@ const ItineraryCard = ({
   itinerary,
   classes,
   getItinerary,
+  getActivities,
   deleteItinerary
 }) => {
+  const [showAddActivity, setShowAddActivity] = useState(false)
+  const [showList, setShowList] = useState(false)
+
+  const displayAdd = () => {
+    setShowAddActivity(true)
+    setShowList(false)
+  }
+  const displayList = () => {
+    setShowAddActivity(false)
+    setShowList(true)
+  }
+
   return (
     <div className="col s12 m6 l4">
       <div className={`card ${classes.itineraryCard}`}>
@@ -28,13 +43,17 @@ const ItineraryCard = ({
         <div className="card-content">
           <div className="center">
             <i
-              className={`modal-trigger fas fa-pencil-alt ${
-                classes.commonIcon
-              }`}
+              className={`fas fa-pencil-alt ${classes.commonIcon}`}
               onClick={() => getItinerary(itinerary._id)}
             />
-            <i className={`fas fa-list ${classes.commonIcon}`} />
-            <i className={`fas fa-plus ${classes.commonIcon} activator`} />
+            <i
+              className={`fas fa-list ${classes.commonIcon} activator`}
+              onClick={displayList}
+            />
+            <i
+              className={`fas fa-plus ${classes.commonIcon} activator`}
+              onClick={displayAdd}
+            />
             <i
               className={`fas fa-trash-alt ${classes.commonIcon}`}
               onClick={() => deleteItinerary(itinerary._id)}
@@ -49,7 +68,8 @@ const ItineraryCard = ({
               style={{ fontSize: '1.5rem' }}
             />
           </span>
-          <AddActivity />
+          {showList && <ActivitesList itinerary_id={itinerary._id} />}
+          {showAddActivity && <AddActivity itinerary_id={itinerary._id} />}
         </div>
       </div>
     </div>

@@ -30,7 +30,8 @@ const ActivitySchema = new Schema({
     type: String
   },
   description: {
-    type: String
+    type: String,
+    default: ''
   },
   date: {
     type: Date,

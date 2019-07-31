@@ -11,18 +11,16 @@ const router = express.Router()
  *@function CREATE Activity for specific Itinerary
  * @param :id
  */
-router.post('/:id', [auth, activityValidation], async (req, res) => {
+router.post('/', [auth, activityValidation], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
   try {
     const user = req.user.id
-    const itinerary = req.params.id
 
     const activity = await new Activity(req.body)
     activity.user = user
-    activity.itinerary = itinerary
 
     const mapboxAPIKey = config.get('mapboxAPIKey')
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
@@ -37,7 +35,9 @@ router.post('/:id', [auth, activityValidation], async (req, res) => {
     activity.save()
     res.send(activity)
   } catch (err) {
-    res.status(500).send(err.message)
+    return res
+      .status(400)
+      .json({ errors: [{ msg: 'Unable to create Activity.' }] })
   }
 })
 /**
@@ -52,7 +52,7 @@ router.get('/:id', async (req, res) => {
   res.json(activities)
 })
 /**
- * @function  GET Activities by  ID
+ * @function  GET Activity by  ID
  * @param /edit/:id
  */
 router.get('/edit/:id', async (req, res) => {

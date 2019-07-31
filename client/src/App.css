@@ -57,3 +57,9 @@
   top: 30px;
   right: 15px;
 }
+
+.reveal-data .input-field input[type='text'] {
+  border-bottom: 1px white !important;
+  box-shadow: 0 1px 0 0 white !important;
+  color: white;
+}

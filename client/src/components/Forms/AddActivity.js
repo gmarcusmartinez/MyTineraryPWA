@@ -1,19 +1,17 @@
-// import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import React, { useState } from 'react'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
+import { createActivity } from '../../store/actions/activityActions'
 
-// import { createActivity } from '../../actions/activityActions'
-
-const AddActivity = ({ itinerary_id, classes }) => {
+const AddActivity = ({ itinerary_id, classes, createActivity }) => {
   const [formData, setFormData] = useState({
     img: '',
     title: '',
     location: '',
     itinerary: ''
   })
-
   const { img, title, location } = formData
 
   const onChange = e =>
@@ -25,7 +23,7 @@ const AddActivity = ({ itinerary_id, classes }) => {
 
   const onSubmit = async e => {
     e.preventDefault()
-    console.log(formData)
+    createActivity(formData)
     setFormData({
       img: '',
       title: '',
@@ -35,7 +33,7 @@ const AddActivity = ({ itinerary_id, classes }) => {
   return (
     <form onSubmit={e => onSubmit(e)}>
       <h4 className={`center white-text ${classes.cardTitle}`}>Add Activity</h4>
-      <div className="col s12">
+      <div className="col s12 reveal-data">
         <div className="input-field">
           <label className="white-text">Title</label>
           <input
@@ -73,8 +71,11 @@ const AddActivity = ({ itinerary_id, classes }) => {
   )
 }
 
-// AddActivity.propTypes = {
-//   createActivity: PropTypes.func.isRequired
-// }
+AddActivity.propTypes = {
+  createActivity: PropTypes.func.isRequired
+}
 
-export default withStyles(styles)(AddActivity)
+export default connect(
+  null,
+  { createActivity }
+)(withStyles(styles)(AddActivity))
