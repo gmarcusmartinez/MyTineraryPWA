@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
+import AddActivity from '../Forms/AddActivity'
 import {
   getItinerary,
   deleteItinerary
@@ -22,23 +23,33 @@ const ItineraryCard = ({
             alt=""
             style={{ filter: 'brightness(60%)' }}
           />
+          <span className="card-title">{itinerary.title}</span>
+        </div>
+        <div className="card-content">
+          <div className="center">
+            <i
+              className={`modal-trigger fas fa-pencil-alt ${
+                classes.commonIcon
+              }`}
+              onClick={() => getItinerary(itinerary._id)}
+            />
+            <i className={`fas fa-list ${classes.commonIcon}`} />
+            <i className={`fas fa-plus ${classes.commonIcon} activator`} />
+            <i
+              className={`fas fa-trash-alt ${classes.commonIcon}`}
+              onClick={() => deleteItinerary(itinerary._id)}
+            />
+          </div>
+        </div>
+
+        <div className="card-reveal" id="card-reveal">
           <span className="card-title">
-            {itinerary.title}
-            <div className="center">
-              <i
-                className={`modal-trigger fas fa-pencil-alt ${
-                  classes.commonIcon
-                }`}
-                onClick={() => getItinerary(itinerary._id)}
-              />
-              <i className={`fas fa-list ${classes.commonIcon}`} />
-              <i className={`fas fa-plus ${classes.commonIcon}`} />
-              <i
-                className={`fas fa-trash-alt ${classes.commonIcon}`}
-                onClick={() => deleteItinerary(itinerary._id)}
-              />
-            </div>
+            <i
+              className="fas fa-times white-text right"
+              style={{ fontSize: '1.5rem' }}
+            />
           </span>
+          <AddActivity />
         </div>
       </div>
     </div>

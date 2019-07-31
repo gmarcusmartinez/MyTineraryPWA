@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
 import ItineraryCard from './ItineraryCard'
 import CreateItinerary from './CreateItinerary'
-import EditItinerary from './EditItinerary'
+// import EditItinerary from './EditItinerary'
 import { getAuthUserItineraries } from '../../store/actions/itineraryActions'
+
 const MyTineraries = ({
   getAuthUserItineraries,
   itineraries: { itineraries, loading }
@@ -26,7 +27,7 @@ const MyTineraries = ({
   return (
     <div className="custom-container">
       <div className="row">
-        <EditItinerary />
+        <CreateItinerary />
         {itinerariesList}
       </div>
     </div>
