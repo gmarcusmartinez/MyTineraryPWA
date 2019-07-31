@@ -4,6 +4,7 @@ import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
 import AddActivity from '../Forms/AddActivity'
 import ActivitesList from '../Activities/ActivitiesList'
+import { getActivities } from '../../store/actions/activityActions'
 // import EditItinerary from './EditItinerary'
 import {
   getItinerary,
@@ -19,14 +20,22 @@ const ItineraryCard = ({
 }) => {
   const [showAddActivity, setShowAddActivity] = useState(false)
   const [showList, setShowList] = useState(false)
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
   const displayAdd = () => {
     setShowAddActivity(true)
     setShowList(false)
+    setShowConfirmDelete(false)
   }
   const displayList = () => {
     setShowAddActivity(false)
     setShowList(true)
+    setShowConfirmDelete(false)
+  }
+  const displayConfirmDelete = () => {
+    setShowAddActivity(false)
+    setShowList(false)
+    setShowConfirmDelete(true)
   }
 
   return (
@@ -48,7 +57,11 @@ const ItineraryCard = ({
             />
             <i
               className={`fas fa-list ${classes.commonIcon} activator`}
-              onClick={displayList}
+              onClick={() =>
+                getActivities(itinerary._id).then(() => {
+                  displayList()
+                })
+              }
             />
             <i
               className={`fas fa-plus ${classes.commonIcon} activator`}
@@ -78,5 +91,5 @@ const ItineraryCard = ({
 
 export default connect(
   null,
-  { getItinerary, deleteItinerary }
+  { getItinerary, deleteItinerary, getActivities }
 )(withStyles(styles)(ItineraryCard))

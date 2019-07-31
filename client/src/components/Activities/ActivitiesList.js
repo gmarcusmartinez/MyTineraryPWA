@@ -3,25 +3,21 @@ import React, { useEffect } from 'react'
 import Spinner from '../Common/Spinner'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
-import { getActivities } from '../../store/actions/activityActions'
+import ActivityListItem from './ActvityListItem'
+import { log } from 'util'
 
 const ActivitiesList = ({
   itinerary_id,
   classes,
-  getActivities,
   activities: { activities, loading }
 }) => {
-  useEffect(() => {
-    getActivities(itinerary_id)
-  }, [itinerary_id])
-
   let activitiesList
   if (activities === null || loading) {
     activitiesList = <Spinner />
   } else {
-    activitiesList = activities.map(activity => {
-      return <p className="white-text">{activity.title}</p>
-    })
+    activitiesList = activities.map(activity => (
+      <ActivityListItem title={activity.title} key={activity._id} />
+    ))
   }
   return (
     <div>
@@ -37,5 +33,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getActivities }
+  {}
 )(withStyles(styles)(ActivitiesList))
