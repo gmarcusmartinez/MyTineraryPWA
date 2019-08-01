@@ -10,6 +10,7 @@ const EditActivity = ({ classes, activity, updateActivity }) => {
     img: '',
     title: '',
     location: '',
+    description: '',
     itinerary: ''
   })
   useEffect(() => {
@@ -17,9 +18,16 @@ const EditActivity = ({ classes, activity, updateActivity }) => {
       img: activity.img,
       title: activity.title,
       location: activity.location,
+      description: activity.description,
       itinerary: activity.itinerary
     })
-  }, [activity.img, activity.title, activity.location, activity.itinerary])
+  }, [
+    activity.img,
+    activity.title,
+    activity.location,
+    activity.itinerary,
+    activity.description
+  ])
   const onChange = e =>
     setFormData({
       ...formData,
@@ -30,7 +38,7 @@ const EditActivity = ({ classes, activity, updateActivity }) => {
     e.preventDefault()
     updateActivity(formData, activity._id)
   }
-  const { img, title, location } = formData
+  const { img, title, location, description } = formData
 
   return (
     <form onSubmit={e => onSubmit(e)}>
@@ -63,6 +71,15 @@ const EditActivity = ({ classes, activity, updateActivity }) => {
             type="text"
             name="location"
             value={location}
+            onChange={e => onChange(e)}
+          />
+        </div>
+        <div className="input-field">
+          <small className={`${classes.small} white-text`}>Description</small>
+          <input
+            type="text"
+            name="description"
+            value={description}
             onChange={e => onChange(e)}
           />
         </div>
