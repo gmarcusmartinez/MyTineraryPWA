@@ -17,7 +17,11 @@ const ItineraryDisplay = ({ itinerary, classes }) => {
           <img
             src={itinerary.img}
             alt="brokenLink"
-            style={{ filter: 'brightness(60%)' }}
+            style={{
+              filter: 'brightness(70%)',
+              height: '250px',
+              objectFit: 'cover'
+            }}
           />
           <span className={'card-title'}>
             <Link

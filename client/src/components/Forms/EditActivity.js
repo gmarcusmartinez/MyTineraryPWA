@@ -19,7 +19,7 @@ const EditActivity = ({ classes, activity, updateActivity }) => {
       location: activity.location,
       itinerary: activity.itinerary
     })
-  }, [activity.img, activity.title, activity.location])
+  }, [activity.img, activity.title, activity.location, activity.itinerary])
   const onChange = e =>
     setFormData({
       ...formData,
