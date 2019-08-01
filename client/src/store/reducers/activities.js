@@ -2,7 +2,8 @@ import {
   GET_ACTIVITY,
   GET_ACTIVITIES,
   CREATE_ACTIVITY,
-  DELETE_ACTIVITY
+  DELETE_ACTIVITY,
+  UPDATE_ACTIVITY
 } from '../actions/types'
 
 const initialState = {
@@ -31,6 +32,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         activity: payload,
+        loading: false
+      }
+    case UPDATE_ACTIVITY:
+      return {
+        ...state,
+        activities: [
+          payload,
+          ...state.activities.filter(activity => activity._id !== payload._id)
+        ],
+
         loading: false
       }
     case DELETE_ACTIVITY:

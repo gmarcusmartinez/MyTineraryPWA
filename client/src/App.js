@@ -4,6 +4,7 @@ import store from './store/store'
 import Nav from './components/Nav/Nav'
 import { Provider } from 'react-redux'
 import Login from './components/Auth/Login'
+import City from './components/Cities/City'
 import Signup from './components/Auth/Signup'
 import setAuthToken from './utils/setAuthToken'
 import Cities from './components/Cities/Cities'
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/sign-up" component={Signup} />
+          <Route exact path="/cities/:cityName" component={City} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/mytineraries" component={MyTineraries} />
         </Switch>

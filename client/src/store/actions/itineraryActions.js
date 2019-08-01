@@ -29,10 +29,11 @@ export const getItinerariesByCity = cityName => async dispatch => {
   try {
     const res = await axios.get(`/itineraries/city/${cityName}`)
     dispatch({
-      GET_ITINERARIES,
-      paylod: res.data
+      type: GET_ITINERARIES,
+      payload: res.data
     })
   } catch (err) {
+    console.log(err.message)
     const errors = err.response.data.errors
     if (errors) {
       errors.forEach(error => dispatch(setError(error.msg)))

@@ -72,7 +72,7 @@ router.get('/edit/:id', async (req, res) => {
   }
 
   try {
-    let activity = await activity.findById(req.params.id)
+    let activity = await Activity.findById(req.params.id)
     if (!activity) {
       return res.status(404).json({
         errors: [{ msg: 'Activity not found' }]

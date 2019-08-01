@@ -54,7 +54,12 @@ const EditItinerary = ({
   return (
     <div className="col s12 m6 l4">
       <div className={`card ${classes.formCard}`}>
-        <form onSubmit={e => onSubmit(e)}>
+        <form
+          onSubmit={e =>
+            onSubmit(e).then(() => {
+              displayCreate()
+            })
+          }>
           <ErrorMessage />
           <h4 className={`center red-text text-lighten-2 ${classes.cardTitle}`}>
             Edit / Add Details
@@ -128,8 +133,7 @@ const EditItinerary = ({
 
           <button
             className="btn red lighten-2"
-            style={{ width: '100%', marginTop: '20px' }}
-            onClick={displayCreate}>
+            style={{ width: '100%', marginTop: '20px' }}>
             Update
           </button>
         </form>

@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react'
 import ErrorMsg from '../Common/ErrorMsg'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
+import { updateActivity } from '../../store/actions/activityActions'
 
-const EditActivity = ({ classes, activity }) => {
+const EditActivity = ({ classes, activity, updateActivity }) => {
   const [formData, setFormData] = useState({
     img: '',
     title: '',
@@ -27,7 +28,7 @@ const EditActivity = ({ classes, activity }) => {
 
   const onSubmit = async e => {
     e.preventDefault()
-    console.log(formData)
+    updateActivity(formData, activity._id)
   }
   const { img, title, location } = formData
 
@@ -79,5 +80,5 @@ const mapStateToProps = state => ({
 })
 export default connect(
   mapStateToProps,
-  {}
+  { updateActivity }
 )(withStyles(styles)(EditActivity))

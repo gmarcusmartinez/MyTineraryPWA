@@ -1,10 +1,10 @@
 import axios from 'axios'
 import {
   GET_ACTIVITY,
-  CREATE_ACTIVITY,
   GET_ACTIVITIES,
-  DELETE_ACTIVITY
-  // UPDATE_ACTIVITY
+  CREATE_ACTIVITY,
+  DELETE_ACTIVITY,
+  UPDATE_ACTIVITY
 } from './types'
 
 import { setError } from './errActions'
@@ -58,7 +58,25 @@ export const getActivity = id => async dispatch => {
     }
   }
 }
-
+export const updateActivity = (formData, _id) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  try {
+    const res = await axios.patch(`/activities/${_id}`, formData, config)
+    dispatch({
+      type: UPDATE_ACTIVITY,
+      payload: res.data
+    })
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+  }
+}
 export const deleteActivity = id => async dispatch => {
   try {
     await axios.delete(`/activities/${id}`)
