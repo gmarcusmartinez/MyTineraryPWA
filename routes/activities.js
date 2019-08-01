@@ -63,6 +63,37 @@ router.get('/edit/:id', async (req, res) => {
   res.json(activity)
 })
 /**
+ * @function  UPDATE Activity by ID
+ * @param :id
+ */ router.patch('/:id', [auth, activityValidation], async (req, res) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
+  try {
+    let activity = await activity.findById(req.params.id)
+    if (!activity) {
+      return res.status(404).json({
+        errors: [{ msg: 'Activity not found' }]
+      })
+    }
+    if (req.user.id !== activity.user.toString()) {
+      return res.status(400).json({
+        errors: [{ msg: 'You are not authorized to perform this action' }]
+      })
+    }
+    activity = await Activity.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    })
+
+    res.send(activity)
+  } catch (err) {
+    res.send(err.message)
+  }
+})
+/**
  * @function  DELETE Activity by ID
  * @param :id
  */

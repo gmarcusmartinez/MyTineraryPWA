@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import AddActivity from '../Forms/AddActivity'
+import EditActivity from '../Forms/EditActivity'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
-import AddActivity from '../Forms/AddActivity'
 import ActivitesList from '../Activities/ActivitiesList'
-import { getActivities } from '../../store/actions/activityActions'
-// import EditItinerary from './EditItinerary'
+import ConfirmDeleteAct from '../Common/ConfirmDeleteAct'
 import ConfirmDeleteItin from '../Common/ConfirmDeleteItin'
+import { getActivities } from '../../store/actions/activityActions'
 import { getItinerary } from '../../store/actions/itineraryActions'
 
 const ItineraryCard = ({
@@ -16,24 +17,46 @@ const ItineraryCard = ({
   getActivities,
   displayEdit
 }) => {
-  const [showAddActivity, setShowAddActivity] = useState(false)
   const [showList, setShowList] = useState(false)
+  const [showEditAct, setShowEditAct] = useState(false)
+  const [showAddActivity, setShowAddActivity] = useState(false)
   const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+  const [showConfirmDeleteAct, setShowConfirmDeleteAct] = useState(false)
 
   const displayAdd = () => {
-    setShowAddActivity(true)
     setShowList(false)
+    setShowEditAct(false)
+    setShowAddActivity(true)
     setShowConfirmDelete(false)
+    setShowConfirmDeleteAct(false)
   }
   const displayList = () => {
-    setShowAddActivity(false)
     setShowList(true)
+    setShowEditAct(false)
+    setShowAddActivity(false)
     setShowConfirmDelete(false)
+    setShowConfirmDeleteAct(false)
   }
   const displayConfirmDelete = () => {
-    setShowAddActivity(false)
     setShowList(false)
+    setShowEditAct(false)
+    setShowAddActivity(false)
     setShowConfirmDelete(true)
+    setShowConfirmDeleteAct(false)
+  }
+  const displayConfirmDeleteAct = () => {
+    setShowList(false)
+    setShowEditAct(false)
+    setShowAddActivity(false)
+    setShowConfirmDelete(false)
+    setShowConfirmDeleteAct(true)
+  }
+  const displayEditAct = () => {
+    setShowList(false)
+    setShowEditAct(true)
+    setShowAddActivity(false)
+    setShowConfirmDelete(false)
+    setShowConfirmDeleteAct(false)
   }
 
   return (
@@ -83,11 +106,19 @@ const ItineraryCard = ({
               style={{ fontSize: '1.5rem' }}
             />
           </span>
-          {showList && <ActivitesList itinerary_id={itinerary._id} />}
+          {showList && (
+            <ActivitesList
+              itinerary_id={itinerary._id}
+              displayConfirmDeleteAct={displayConfirmDeleteAct}
+              displayEditAct={displayEditAct}
+            />
+          )}
           {showAddActivity && <AddActivity itinerary_id={itinerary._id} />}
           {showConfirmDelete && (
             <ConfirmDeleteItin itinerary_id={itinerary._id} />
           )}
+          {showConfirmDeleteAct && <ConfirmDeleteAct />}
+          {showEditAct && <EditActivity />}
         </div>
       </div>
     </div>

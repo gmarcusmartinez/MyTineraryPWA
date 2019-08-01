@@ -1,5 +1,7 @@
+import { connect } from 'react-redux'
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { getActivity } from '../../store/actions/activityActions'
 
 const styles = {
   listItem: {
@@ -18,15 +20,39 @@ const styles = {
   }
 }
 
-const ActvityListItem = ({ title, classes }) => {
+const ActvityListItem = ({
+  id,
+  title,
+  classes,
+  displayConfirmDeleteAct,
+  getActivity,
+  displayEditAct
+}) => {
   return (
-    <div className="card-title">
+    <div>
       <p className={classes.listItem}>{title}</p>
-      <i className={`fas fa-trash-alt ${classes.commonIcon} right`} />
-      <i className={`fas fa-pencil-alt ${classes.commonIcon} right`} />
+      <i
+        className={`fas fa-trash-alt ${classes.commonIcon} right`}
+        onClick={() =>
+          getActivity(id).then(() => {
+            displayConfirmDeleteAct()
+          })
+        }
+      />
+      <i
+        className={`fas fa-pencil-alt ${classes.commonIcon} right`}
+        onClick={() =>
+          getActivity(id).then(() => {
+            displayEditAct()
+          })
+        }
+      />
       <div className="divider nav-divider" />
     </div>
   )
 }
 
-export default withStyles(styles)(ActvityListItem)
+export default connect(
+  null,
+  { getActivity }
+)(withStyles(styles)(ActvityListItem))

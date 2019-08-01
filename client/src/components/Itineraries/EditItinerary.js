@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ErrorMessage from '../Common/ErrorMsg'
-import React, { useState, useEffect } from 'react'
-import M from 'materialize-css/dist/js/materialize.min.js'
 import styles from '../../styles/ItineraryStyles'
+import React, { useState, useEffect } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import M from 'materialize-css/dist/js/materialize.min.js'
 import { updateItinerary } from '../../store/actions/itineraryActions'
-import { display } from '@material-ui/system'
 
 const EditItinerary = ({
   updateItinerary,

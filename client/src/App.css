@@ -68,3 +68,6 @@
 .card-reveal .card-content {
   margin-top: 30px;
 }
+#itinerary-card {
+  background-color: 'black' !important;
+}

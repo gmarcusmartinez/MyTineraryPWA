@@ -5,7 +5,6 @@ import EditItinerary from './EditItinerary'
 import ItineraryCard from './ItineraryCard'
 import CreateItinerary from './CreateItinerary'
 import React, { useEffect, useState } from 'react'
-import useToggleState from '../../hooks/useToggleState'
 import { getAuthUserItineraries } from '../../store/actions/itineraryActions'
 
 const MyTineraries = ({

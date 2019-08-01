@@ -1,43 +1,45 @@
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ErrorMsg from '../Common/ErrorMsg'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
-import { createActivity } from '../../store/actions/activityActions'
 
-const AddActivity = ({ itinerary_id, classes, createActivity }) => {
+const EditActivity = ({ classes, activity }) => {
   const [formData, setFormData] = useState({
     img: '',
     title: '',
     location: '',
     itinerary: ''
   })
-  const { img, title, location } = formData
-
+  useEffect(() => {
+    setFormData({
+      img: activity.img,
+      title: activity.title,
+      location: activity.location,
+      itinerary: activity.itinerary
+    })
+  }, [activity.img, activity.title, activity.location])
   const onChange = e =>
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
-      itinerary: itinerary_id
+      [e.target.name]: e.target.value
     })
 
   const onSubmit = async e => {
     e.preventDefault()
-    createActivity(formData)
-    setFormData({
-      img: '',
-      title: '',
-      location: ''
-    })
+    console.log(formData)
   }
+  const { img, title, location } = formData
+
   return (
     <form onSubmit={e => onSubmit(e)}>
       <ErrorMsg />
-      <h4 className={`center white-text ${classes.cardTitle}`}>Add Activity</h4>
+      <h4 className={`center white-text ${classes.cardTitle}`}>
+        Edit Activity
+      </h4>
       <div className="col s12 reveal-data">
         <div className="input-field">
-          <label className="white-text">Title</label>
+          <small className={`${classes.small} white-text`}>Title</small>
           <input
             type="text"
             name="title"
@@ -46,7 +48,7 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
           />
         </div>
         <div className="input-field">
-          <label className="white-text">Image</label>
+          <small className={`${classes.small} white-text`}>Image</small>
           <input
             type="text"
             name="img"
@@ -55,7 +57,7 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
           />
         </div>
         <div className="input-field">
-          <label className="white-text">Location</label>
+          <small className={`${classes.small} white-text`}>Location</small>
           <input
             type="text"
             name="location"
@@ -72,12 +74,10 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
     </form>
   )
 }
-
-AddActivity.propTypes = {
-  createActivity: PropTypes.func.isRequired
-}
-
+const mapStateToProps = state => ({
+  activity: state.activities.activity
+})
 export default connect(
-  null,
-  { createActivity }
-)(withStyles(styles)(AddActivity))
+  mapStateToProps,
+  {}
+)(withStyles(styles)(EditActivity))

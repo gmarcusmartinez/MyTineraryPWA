@@ -1,17 +1,28 @@
 import { connect } from 'react-redux'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Spinner from '../Common/Spinner'
 import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
 import ActivityListItem from './ActvityListItem'
 
-const ActivitiesList = ({ classes, activities: { activities, loading } }) => {
+const ActivitiesList = ({
+  classes,
+  activities: { activities, loading },
+  displayConfirmDeleteAct,
+  displayEditAct
+}) => {
   let activitiesList
   if (activities === null || loading) {
     activitiesList = <Spinner />
   } else {
     activitiesList = activities.map(activity => (
-      <ActivityListItem title={activity.title} key={activity._id} />
+      <ActivityListItem
+        id={activity._id}
+        title={activity.title}
+        key={activity._id}
+        displayConfirmDeleteAct={displayConfirmDeleteAct}
+        displayEditAct={displayEditAct}
+      />
     ))
   }
   return (
@@ -23,7 +34,7 @@ const ActivitiesList = ({ classes, activities: { activities, loading } }) => {
 }
 
 const mapStateToProps = state => ({
-  activities: state.activites
+  activities: state.activities
 })
 
 export default connect(
