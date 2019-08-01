@@ -14,6 +14,7 @@ import { setUser } from './store/actions/authActions'
 import Dashboard from './components/Dashboard/Dashboard'
 import PrivateRoute from './components/Common/PrivateRoute'
 import MyTineraries from './components/Itineraries/MyTineraries'
+import Itinerary from './components/Itineraries/Itinerary'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -27,11 +28,12 @@ const App = () => {
       <div className="App">
         <Nav />
         <Switch>
-          <Route exact path="/cities" component={Cities} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/cities" component={Cities} />
           <Route exact path="/sign-up" component={Signup} />
           <Route exact path="/cities/:cityName" component={City} />
+          <Route exact path="/itinerary/:id" component={Itinerary} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/mytineraries" component={MyTineraries} />
         </Switch>

@@ -7,7 +7,8 @@ const { validationResult } = require('express-validator/check')
 const router = express.Router()
 
 /**
- * Create Itinerary
+ *@function CREATE Itinerary
+ * @returns itinerary
  */
 router.post('/', [auth, itineraryValidation], async (req, res) => {
   const errors = validationResult(req)
@@ -26,8 +27,11 @@ router.post('/', [auth, itineraryValidation], async (req, res) => {
     res.status(500).send(err.message)
   }
 })
+
 /**
- * GET Itineraries by authenticated user
+ *@function GET Auth user Itineraries
+ * @param :id
+ * @returns Array of Itineraries
  */
 router.get('/', auth, async (req, res) => {
   try {
@@ -40,7 +44,11 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send(err.message)
   }
 })
-// Get Itinerary by id
+/**
+ *@function GET by id
+ * @param :id
+ * @returns single Itinerary
+ */
 router.get('/:id', async (req, res) => {
   try {
     const itinerary = await Itinerary.findById(req.params.id)
@@ -53,7 +61,11 @@ router.get('/:id', async (req, res) => {
     res.status(500).send(err.message)
   }
 })
-// Get Itinerary by city
+
+/**
+ *@function GET by City
+ * @returns Array of Itineraries
+ */
 router.get('/city/:cityName', async (req, res) => {
   try {
     const itineraries = await Itinerary.find({ city: req.params.cityName })
@@ -66,7 +78,11 @@ router.get('/city/:cityName', async (req, res) => {
   }
 })
 
-//Update Itinerary
+/**
+ *@function UPDATE by id
+ * @param :id
+ * @returns Updated Itinerary
+ */
 router.patch('/:id', [auth, itineraryValidation], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -95,7 +111,11 @@ router.patch('/:id', [auth, itineraryValidation], async (req, res) => {
   }
 })
 
-// Delete individual Itinerary from database
+/**
+ *@function DELETE by id
+ * @param :id
+ * @returns Success Message
+ */
 router.delete('/:id', auth, async (req, res) => {
   try {
     const itinerary = await Itinerary.findById(req.params.id)
