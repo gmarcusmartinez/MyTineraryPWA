@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
-import Slider from '../Common/Slider'
 import Spinner from '../Common/Spinner'
 import React, { useEffect, useContext } from 'react'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
 import { withStyles } from '@material-ui/core/styles'
+import ActivitySlider from '../Sliders/ActivitySlider'
+import useToggleState from '../../hooks/useToggleState'
+import { ThemeContext } from '../../context/ThemeContext'
 import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getReviews } from '../../store/actions/reviewActions'
-import useToggleState from '../../hooks/useToggleState'
 import { getActivities } from '../../store/actions/activityActions'
-import { ThemeContext } from '../../context/ThemeContext'
 
 const styles = {
   itineraryTitle: {
@@ -80,7 +80,7 @@ const Itinerary = ({
       </div>
 
       {displaySlider ? (
-        <Slider id={match.params.id} />
+        <ActivitySlider id={match.params.id} />
       ) : (
         <div className="row">{activitiesList}</div>
       )}

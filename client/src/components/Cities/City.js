@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
+import useToggleState from '../../hooks/useToggleState'
+import ItinerarySlider from '../Sliders/ItinerarySlider'
+import { ThemeContext } from '../../context/ThemeContext'
 import ItineraryDisplay from '../Itineraries/ItineraryDisplay'
 import { getItinerariesByCity } from '../../store/actions/itineraryActions'
 
@@ -10,6 +13,9 @@ const City = ({
   getItinerariesByCity,
   itineraries: { itineraries, loading }
 }) => {
+  const [displaySlider, toggle] = useToggleState(false)
+  const { isDarkMode } = useContext(ThemeContext)
+
   useEffect(() => {
     getItinerariesByCity(match.params.cityName)
   }, [getItinerariesByCity, match.params.cityName])
@@ -30,9 +36,27 @@ const City = ({
     <div
       className="container"
       style={{ marginTop: '25px', width: '90%', marginInlineStart: '5%' }}>
-      <div className="row">
-        <div className="col s12">{itinerariesList}</div>
+      <div className="hide-on-med-and-up">
+        <p
+          style={{
+            color: isDarkMode ? 'white' : 'black',
+            fontFamily: 'Caveat',
+            fontSize: '24px'
+          }}>
+          Slider{' '}
+        </p>
+        <div className="switch">
+          <label>
+            <input type="checkbox" onChange={toggle} />
+            <span className="lever" />
+          </label>
+        </div>
       </div>
+      {displaySlider ? (
+        <ItinerarySlider cityName={match.params.cityName} />
+      ) : (
+        <div className="row">{itinerariesList}</div>
+      )}{' '}
     </div>
   )
 }

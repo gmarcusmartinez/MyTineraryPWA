@@ -1,4 +1,4 @@
-import Spinner from './Spinner'
+import Spinner from '../Common/Spinner'
 import { connect } from 'react-redux'
 import React, { useEffect, useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
@@ -6,7 +6,11 @@ import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getActivities } from '../../store/actions/activityActions'
 
 const styles = {}
-const Slider = ({ id, getActivities, activities: { activities, loading } }) => {
+const ActivitySlider = ({
+  id,
+  getActivities,
+  activities: { activities, loading }
+}) => {
   useEffect(() => {
     getActivities(id)
   }, [getActivities, id])
@@ -70,4 +74,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getActivities }
-)(withStyles(styles)(Slider))
+)(withStyles(styles)(ActivitySlider))
