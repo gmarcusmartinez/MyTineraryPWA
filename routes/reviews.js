@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
  * @param :id
  * @returns single Review
  */
-router.get('/:id', async (req, res) => {
+router.get('/edit/:id', async (req, res) => {
   try {
     const review = await Review.findById(req.params.id)
     if (!review) {

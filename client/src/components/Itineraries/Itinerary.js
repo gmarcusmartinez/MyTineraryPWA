@@ -1,10 +1,12 @@
 import { connect } from 'react-redux'
+import Slider from '../Common/Slider'
 import Spinner from '../Common/Spinner'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
 import { withStyles } from '@material-ui/core/styles'
 import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getReviews } from '../../store/actions/reviewActions'
+import useToggleState from '../../hooks/useToggleState'
 import { getActivities } from '../../store/actions/activityActions'
 
 const styles = {
@@ -25,6 +27,9 @@ const Itinerary = ({
   activities: { activities, loading },
   reviews: { reviews, reviewsLoading }
 }) => {
+  // const [displayCreateReview, setDisplayCreateReview] = useState(false)
+  const [displaySlider, toggle] = useToggleState(false)
+
   useEffect(() => {
     getActivities(match.params.id)
     getReviews(match.params.id)
@@ -54,9 +59,16 @@ const Itinerary = ({
       <h3 className={`center ${classes.itineraryTitle}`}>
         {location.state.title}
       </h3>
-      <div className="row">{activitiesList}</div>
+      <div className="row">
+        {displaySlider ? (
+          <Slider id={match.params.id} />
+        ) : (
+          <>{activitiesList}</>
+        )}
+      </div>
       <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
       <hr style={{ width: '80%', marginInlineStart: '10%' }} />
+
       <div className="row">{reviewsList}</div>
     </div>
   )

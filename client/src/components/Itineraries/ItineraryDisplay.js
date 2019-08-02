@@ -18,7 +18,7 @@ const ItineraryDisplay = ({ itinerary, classes }) => {
             src={itinerary.img}
             alt="brokenLink"
             style={{
-              filter: 'brightness(70%)',
+              filter: 'brightness(60%)',
               height: '250px',
               objectFit: 'cover'
             }}
@@ -36,13 +36,41 @@ const ItineraryDisplay = ({ itinerary, classes }) => {
             </Link>
             <div>
               {itinerary.duration !== '' ? (
-                <div style={{ fontSize: '24px' }}>
+                <>
                   <i
                     className="far fa-clock white-text "
                     style={{ marginRight: '6px', fontSize: '24px' }}
                   />
-                  {itinerary.duration}
-                </div>
+                  <p
+                    style={{
+                      fontSize: '24px',
+                      color: 'white',
+                      display: 'inline'
+                    }}>
+                    {itinerary.duration}
+                  </p>
+                </>
+              ) : null}
+              {itinerary.price !== '' ? (
+                <>
+                  <i
+                    className="fas fa-euro-sign"
+                    style={{
+                      marginLeft: '12px',
+                      marginRight: '6px',
+                      fontSize: '24px',
+                      display: 'inline'
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontSize: '24px',
+                      color: 'white',
+                      display: 'inline'
+                    }}>
+                    {itinerary.price}
+                  </p>
+                </>
               ) : null}
             </div>
           </span>

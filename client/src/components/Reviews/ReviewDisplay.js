@@ -1,39 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import ErrorMsg from '../Common/ErrorMsg'
+import styles from '../../styles/ReviewDisplayStyles'
 import { withStyles } from '@material-ui/core/styles'
-import { deleteReview } from '../../store/actions/reviewActions'
+import {
+  deleteReview,
+  updateReview,
+  getReview
+} from '../../store/actions/reviewActions'
 
-const styles = {
-  reviewText: {
-    fontFamily: 'Caveat',
-    color: 'black',
-    fontSize: '20px'
-  },
-  reviewCard: {
-    height: '125px'
-  },
-  deleteReviewBtn: {
-    fontSize: '20px',
-    color: 'black',
-    position: 'absolute',
-    top: '-20px',
-    right: '-6px',
-    '&:hover': {
-      color: 'red'
-    }
-  }
-}
-
-const ReviewDisplay = ({ auth, review, classes, deleteReview }) => {
+const ReviewDisplay = ({
+  auth,
+  review,
+  classes,
+  getReview,
+  deleteReview,
+  updateReview
+}) => {
   return (
     <div className="col s12 m6 l6">
       <div className={`card ${classes.reviewCard}`}>
+        <ErrorMsg />
         {auth.isAuthenticated && review.user === auth.user._id ? (
-          <i
-            className={`fas fa-times ${classes.deleteReviewBtn}`}
-            onClick={e => deleteReview(review._id)}
-          />
+          <>
+            <i
+              className={`fas fa-times ${classes.deleteReviewBtn}`}
+              onClick={e => deleteReview(review._id)}
+            />
+            <i
+              className={`fas fa-pencil-alt ${classes.updateReviewBtn}`}
+              onClick={e => getReview(review._id)}
+            />
+          </>
         ) : null}
         <div className="col s3">Img</div>
 
@@ -46,10 +45,11 @@ const ReviewDisplay = ({ auth, review, classes, deleteReview }) => {
 }
 
 ReviewDisplay.propTypes = {
-  deleteReview: PropTypes.func.isRequired
+  deleteReview: PropTypes.func.isRequired,
+  getReview: PropTypes.func.isRequired
 }
 
 export default connect(
   null,
-  { deleteReview }
+  { getReview, deleteReview, updateReview }
 )(withStyles(styles)(ReviewDisplay))

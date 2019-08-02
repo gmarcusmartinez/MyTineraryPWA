@@ -52,6 +52,7 @@ export const getReview = id => async dispatch => {
       payload: res.data
     })
   } catch (err) {
+    console.log(err.message)
     const errors = err.response.data.errors
     if (errors) {
       errors.forEach(error => dispatch(setError(error.msg)))

@@ -68,7 +68,10 @@ router.get('/:id', async (req, res) => {
  */
 router.get('/city/:cityName', async (req, res) => {
   try {
-    const itineraries = await Itinerary.find({ city: req.params.cityName })
+    const itineraries = await Itinerary.find({
+      city: req.params.cityName,
+      published: false
+    })
     if (!itineraries) {
       return res.send({ msg: 'This city currently has no itineraries.' })
     }
