@@ -1,13 +1,24 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import words from '../../utils/languages'
 import styles from '../../styles/NavStyles'
 import { withStyles } from '@material-ui/core/styles'
 import Settings from '../Settings/Settings'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import { ThemeContext } from '../../context/ThemeContext'
+import { LanguageContext } from '../../context/LanguageContext'
 
 const GuestNav = ({ classes }) => {
   const { isDarkMode } = useContext(ThemeContext)
+  const { language } = useContext(LanguageContext)
+  const {
+    settingsDynamic,
+    homeDynamic,
+    citiesDynamic,
+    signupDynamic,
+    loginDynamic
+  } = words[language]
+
   const [displaySettings, setDisplaySettings] = useState(false)
   useEffect(() => {
     let elem = document.querySelector('.sidenav')
@@ -18,49 +29,38 @@ const GuestNav = ({ classes }) => {
   }, [])
   return (
     <div>
-      <nav className="nav wrapper z-depth-0 ">
-        <div className={classes.navContainer}>
-          <a
-            href="!#"
-            className="button-collapse sidenav-trigger right"
-            data-target="slide-out">
-            <i className="fas fa-plane white-text" />
-          </a>
-          <ul>
-            <li className="right hide-on-med-and-down">
-              <Link to="/sign-up" className={classes.navLink}>
-                Signup
-              </Link>
-            </li>
-            <li
-              className="right hide-on-med-and-down sidenav-trigger"
-              data-target="slide-out">
-              <a className={classes.navLink} onClick={setDisplaySettings}>
-                Settings
-              </a>
-            </li>
-            <li className="right hide-on-med-and-down">
-              <Link to="/login" className={classes.navLink}>
-                Login
-              </Link>
-            </li>
-            <li className="right hide-on-med-and-down">
-              <Link to="/cities" className={classes.navLink}>
-                Cities
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <ul>
+        <li className="right hide-on-med-and-down">
+          <Link to="/sign-up" className={classes.navLink}>
+            {signupDynamic}
+          </Link>
+        </li>
+        <li
+          className={`${
+            classes.navLink
+          } right hide-on-med-and-down sidenav-trigger`}
+          data-target="slide-out"
+          onClick={setDisplaySettings}>
+          {settingsDynamic}
+        </li>
+        <li className="right hide-on-med-and-down">
+          <Link to="/login" className={classes.navLink}>
+            {loginDynamic}
+          </Link>
+        </li>
+        <li className="right hide-on-med-and-down">
+          <Link to="/cities" className={classes.navLink}>
+            {citiesDynamic}
+          </Link>
+        </li>
+      </ul>
+
       <ul
         className="sidenav"
         id="slide-out"
         style={{ backgroundColor: isDarkMode ? 'black' : 'white' }}>
-        <header className={classes.sideHeader}>
-          <Link to="/" className={classes.sideTitle}>
-            MyTinerary
-          </Link>
-        </header>
+        <header className={classes.sideHeader} />
+
         {displaySettings ? (
           <Settings setDisplaySettings={setDisplaySettings} />
         ) : (
@@ -70,7 +70,7 @@ const GuestNav = ({ classes }) => {
                 className={classes.navLink}
                 to="/"
                 style={{ color: isDarkMode ? 'white' : 'black' }}>
-                Home
+                {homeDynamic}
               </Link>
             </li>
             <li>
@@ -84,7 +84,7 @@ const GuestNav = ({ classes }) => {
                 className={classes.navLink}
                 to="/cities"
                 style={{ color: isDarkMode ? 'white' : 'black' }}>
-                Cities
+                {citiesDynamic}
               </Link>
             </li>
             <li>
@@ -93,13 +93,11 @@ const GuestNav = ({ classes }) => {
                 style={{ width: '80%', marginInlineStart: '10%' }}
               />
             </li>
-            <li className={classes.sidenavClose}>
-              <a
-                className={classes.navLink}
-                onClick={() => setDisplaySettings(true)}
-                style={{ color: isDarkMode ? 'white' : 'black' }}>
-                Settings
-              </a>
+            <li
+              className={classes.settingsLink}
+              onClick={() => setDisplaySettings(true)}
+              style={{ color: isDarkMode ? 'white' : 'black' }}>
+              {settingsDynamic}
             </li>
             <li>
               <div
@@ -112,7 +110,7 @@ const GuestNav = ({ classes }) => {
                 className={classes.navLink}
                 to="/sign-up"
                 style={{ color: isDarkMode ? 'white' : 'black' }}>
-                Signup
+                {signupDynamic}
               </Link>
             </li>
             <li>
@@ -126,7 +124,7 @@ const GuestNav = ({ classes }) => {
                 className={classes.navLink}
                 to="/login"
                 style={{ color: isDarkMode ? 'white' : 'black' }}>
-                Login
+                {loginDynamic}
               </Link>
             </li>
           </>

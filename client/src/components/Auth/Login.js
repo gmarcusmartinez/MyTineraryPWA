@@ -1,13 +1,18 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import words from '../../utils/languages'
 import ErrorMsg from '../Common/ErrorMsg'
 import { Redirect } from 'react-router-dom'
-import React, { Fragment, useState } from 'react'
 import styles from '../../styles/AuthStyles'
+import React, { useContext, useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { login } from '../../store/actions/authActions'
+import { LanguageContext } from '../../context/LanguageContext'
 
 const Login = ({ login, isAuthenticated, classes }) => {
+  const { language } = useContext(LanguageContext)
+  const { loginDynamic, emailDynamic, passwordDynamic } = words[language]
+
   const [formData, setFormData] = useState({
     email: 'admin@gmail.com',
     password: 'password'
@@ -27,7 +32,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
   }
 
   return (
-    <Fragment>
+    <>
       <div className={classes.landing}>
         <div className={classes.darkOverlay}>
           <div className="container">
@@ -38,7 +43,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
                     className={`center red-text text-lighten-2 ${
                       classes.cardTitle
                     }`}>
-                    Login
+                    {loginDynamic}
                   </h4>
                   <div className="center">
                     <ErrorMsg />
@@ -46,7 +51,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
 
                   <form onSubmit={e => onSubmit(e)}>
                     <div className="input-field">
-                      <label>Email</label>
+                      <label>{emailDynamic}</label>
                       <input
                         type="text"
                         name="email"
@@ -56,7 +61,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
                     </div>
 
                     <div className="input-field">
-                      <label>Password</label>
+                      <label>{passwordDynamic}</label>
                       <input
                         type="password"
                         name="password"
@@ -77,7 +82,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 Login.propTypes = {

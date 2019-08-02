@@ -1,7 +1,9 @@
+import words from '../../utils/languages'
 import React, { useEffect, useContext } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import { ThemeContext } from '../../context/ThemeContext'
+import { LanguageContext } from '../../context/LanguageContext'
 
 const styles = {
   title: {
@@ -15,6 +17,11 @@ const styles = {
 
 const Settings = ({ classes, setDisplaySettings }) => {
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext)
+  const { language, changeLanguage } = useContext(LanguageContext)
+
+  const { settingsDynamic, languageDynamic, modeDynamic, light, dark } = words[
+    language
+  ]
 
   useEffect(() => {
     let sel = document.querySelectorAll('select')
@@ -38,36 +45,37 @@ const Settings = ({ classes, setDisplaySettings }) => {
           marginBottom: '35px',
           color: isDarkMode ? 'white' : 'black'
         }}>
-        Settings
+        {settingsDynamic}
       </h4>
       <p
         className={classes.subTitle}
         style={{ color: isDarkMode ? 'white' : 'black' }}>
-        Language
+        {languageDynamic}
       </p>
       <div className="input-field">
-        <select name="language">
-          <option value={'English'}>{'English'}</option>
-          <option value={'Spanish'}>{'Spanish'}</option>å
-          <option value={'French'}>{'French'}</option>å
-          <option value={'German'}>{'German'}</option>å
+        <select name="language" onChange={changeLanguage} value={language}>
+          <option value={'english'}>{'English'}</option>
+          <option value={'spanish'}>{'Spanish'}</option>å
+          <option value={'french'}>{'French'}</option>å
+          <option value={'german'}>{'German'}</option>å
         </select>
       </div>
       <p
         className={classes.subTitle}
         style={{
-          marginTop: '50px',
+          marginTop: '40px',
+          marginBottom: '0px',
           color: isDarkMode ? 'white' : 'black'
         }}>
-        Mode
+        {modeDynamic}
       </p>
 
       <div className="switch">
         <label>
-          Light
+          {light}
           <input type="checkbox" onChange={toggleDarkMode} />
           <span className="lever" />
-          Dark
+          {dark}
         </label>
       </div>
     </div>

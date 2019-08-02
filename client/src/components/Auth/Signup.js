@@ -1,20 +1,30 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import words from '../../utils/languages'
 import ErrorMsg from '../Common/ErrorMsg'
 import { Redirect } from 'react-router-dom'
 import styles from '../../styles/AuthStyles'
-import React, { Fragment, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { signup } from '../../store/actions/authActions'
 import { setError } from '../../store/actions/errActions'
+import { LanguageContext } from '../../context/LanguageContext'
 
 const Signup = ({ setError, signup, classes, isAuthenticated }) => {
+  const { language } = useContext(LanguageContext)
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     password2: ''
   })
   const { email, password, password2 } = formData
+  const {
+    signupDynamic,
+    emailDynamic,
+    passwordDynamic,
+    confirmDynamic
+  } = words[language]
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -30,7 +40,7 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
     return <Redirect to="/dashboard" />
   }
   return (
-    <Fragment>
+    <>
       <div className={classes.landing}>
         <div className={classes.darkOverlay}>
           <div className="container">
@@ -42,13 +52,13 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
                       className={`center red-text text-lighten-2 ${
                         classes.cardTitle
                       }`}>
-                      Signup
+                      {signupDynamic}
                     </h4>
                     <div className="center-align">
                       <ErrorMsg />
                     </div>
                     <div className="input-field">
-                      <label>Email</label>
+                      <label>{emailDynamic}</label>
                       <input
                         type="text"
                         name="email"
@@ -57,7 +67,7 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
                       />
                     </div>
                     <div className="input-field">
-                      <label>Password</label>
+                      <label>{passwordDynamic}</label>
                       <input
                         type="password"
                         name="password"
@@ -66,7 +76,7 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
                       />
                     </div>
                     <div className="input-field">
-                      <label>Confirm Password</label>
+                      <label>{confirmDynamic}</label>
                       <input
                         type="password"
                         name="password2"
@@ -88,7 +98,7 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 

@@ -19,6 +19,7 @@ import PrivateRoute from './components/Common/PrivateRoute'
 import MyTineraries from './components/Itineraries/MyTineraries'
 
 import { ThemeProvider } from './context/ThemeContext'
+import { LanguageProvider } from './context/LanguageContext'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token)
@@ -29,7 +30,7 @@ const App = () => {
   }, [])
   return (
     <Provider store={store}>
-      <div className="App">
+      <LanguageProvider>
         <ThemeProvider>
           <PageContent>
             <Nav />
@@ -50,7 +51,7 @@ const App = () => {
             <Footer />
           </PageContent>
         </ThemeProvider>
-      </div>
+      </LanguageProvider>
     </Provider>
   )
 }

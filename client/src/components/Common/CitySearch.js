@@ -18,7 +18,7 @@ const CitySearch = () => {
             onChange={handleChange}
           />
           <Link
-            className="btn white red-text text-lighten-2 btn-flat"
+            className="btn red lighten-2"
             style={{
               width: '100%',
               marginTop: '10px',

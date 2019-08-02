@@ -1,0 +1,72 @@
+const words = {
+  english: {
+    signupDynamic: 'Signup',
+    emailDynamic: 'Email',
+    passwordDynamic: 'Password',
+    confirmDynamic: 'Confirm Password',
+    submitDynamic: 'Submit',
+    settingsDynamic: 'Settings',
+    languageDynamic: 'Language',
+    modeDynamic: 'Mode',
+    light: 'Light',
+    dark: 'Dark',
+    loginDynamic: `Login`,
+    homeDynamic: 'Home',
+    citiesDynamic: 'Cities',
+    dashboardDynamic: 'Dashboard',
+    logoutDynamic: 'Logout'
+  },
+  french: {
+    signupDynamic: `S'inscrire`,
+    emailDynamic: 'Email',
+    passwordDynamic: 'Mot de Passe',
+    confirmDynamic: 'Confirmez le Mot de Passe',
+    submitDynamic: 'Soumettre',
+    settingsDynamic: 'Réglages',
+    languageDynamic: 'La langue',
+    modeDynamic: 'Mode',
+    light: 'Lumière',
+    dark: 'Foncé',
+    loginDynamic: `S'identifier`,
+    homeDynamic: 'Home',
+    citiesDynamic: 'Villes',
+    dashboardDynamic: 'Dashboard',
+    logoutDynamic: 'Connectez -Out'
+  },
+  german: {
+    signupDynamic: `Anmelden`,
+    emailDynamic: 'Email',
+    passwordDynamic: 'Passwort',
+    confirmDynamic: 'Passwort Bestätigen',
+    submitDynamic: 'Submit',
+    settingsDynamic: 'Einstellungen',
+    languageDynamic: 'Sorache',
+    modeDynamic: 'Modus',
+    light: 'Hell',
+    dark: 'Dunkel',
+    loginDynamic: `Anmeldung`,
+    homeDynamic: 'Startseite',
+    citiesDynamic: 'Städte',
+    dashboardDynamic: 'Übersichtsseite',
+    logoutDynamic: 'Ausloggen'
+  },
+  spanish: {
+    signupDynamic: `Regístrate`,
+    emailDynamic: 'Correo Electrónico',
+    passwordDynamic: 'Contraseña',
+    confirmDynamic: 'Confirmar Contraseña',
+    submitDynamic: 'Enviar',
+    settingsDynamic: 'Configuraciones',
+    languageDynamic: 'Idioma',
+    modeDynamic: 'Modo',
+    light: 'Ligero',
+    dark: 'Oscuro',
+    loginDynamic: `Iniciar sesión`,
+    homeDynamic: 'Página Principal',
+    citiesDynamic: 'Ciudades',
+    dashboardDynamic: 'Dashboard',
+    logoutDynamic: 'Cerrar Sesión'
+  }
+}
+
+export default words
