@@ -38,24 +38,28 @@ const Slider = ({ id, getActivities, activities: { activities, loading } }) => {
   return (
     <div>
       {activity}
-      <button
-        className={`btn-flat red-text text-lighten-2`}
-        onClick={previous}
-        style={{ marginLeft: '20px' }}>
+      <div className="center">
         <i
-          className={`far fa-arrow-alt-circle-left`}
-          style={{ fontSize: '36px' }}
+          className={`fas fa-chevron-left white-text left`}
+          style={{
+            fontSize: '36px',
+            position: 'relative',
+            bottom: '160px',
+            marginLeft: '20px'
+          }}
+          onClick={previous}
         />
-      </button>
-      <button
-        className={`btn-flat red-text text-lighten-2 right`}
-        onClick={next}
-        style={{ marginRight: '20px' }}>
         <i
-          className={`far fa-arrow-alt-circle-right`}
-          style={{ fontSize: '36px' }}
+          className={`fas fa-chevron-right white-text right`}
+          style={{
+            fontSize: '36px',
+            position: 'relative',
+            bottom: '160px',
+            marginRight: '20px'
+          }}
+          onClick={next}
         />
-      </button>
+      </div>
     </div>
   )
 }

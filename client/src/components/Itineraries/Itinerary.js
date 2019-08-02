@@ -1,17 +1,17 @@
 import { connect } from 'react-redux'
 import Slider from '../Common/Slider'
 import Spinner from '../Common/Spinner'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
 import { withStyles } from '@material-ui/core/styles'
 import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getReviews } from '../../store/actions/reviewActions'
 import useToggleState from '../../hooks/useToggleState'
 import { getActivities } from '../../store/actions/activityActions'
+import { ThemeContext } from '../../context/ThemeContext'
 
 const styles = {
   itineraryTitle: {
-    color: '#e57373',
     fontFamily: 'Caveat',
     width: '60%',
     marginInlineStart: '20%'
@@ -28,6 +28,7 @@ const Itinerary = ({
   reviews: { reviews, reviewsLoading }
 }) => {
   // const [displayCreateReview, setDisplayCreateReview] = useState(false)
+  const { isDarkMode } = useContext(ThemeContext)
   const [displaySlider, toggle] = useToggleState(false)
 
   useEffect(() => {
@@ -56,16 +57,34 @@ const Itinerary = ({
     <div
       className="container"
       style={{ marginTop: '25px', width: '90%', marginInlineStart: '5%' }}>
-      <h3 className={`center ${classes.itineraryTitle}`}>
+      <h3
+        className={`center ${classes.itineraryTitle}`}
+        style={{ color: isDarkMode ? 'white' : '#e57373' }}>
         {location.state.title}
       </h3>
-      <div className="row">
-        {displaySlider ? (
-          <Slider id={match.params.id} />
-        ) : (
-          <>{activitiesList}</>
-        )}
+      <div className="hide-on-med-and-up">
+        <p
+          style={{
+            color: isDarkMode ? 'white' : 'black',
+            fontFamily: 'Caveat',
+            fontSize: '24px'
+          }}>
+          Slider{' '}
+        </p>
+        <div className="switch">
+          <label>
+            <input type="checkbox" onChange={toggle} />
+            <span className="lever" />
+          </label>
+        </div>
       </div>
+
+      {displaySlider ? (
+        <Slider id={match.params.id} />
+      ) : (
+        <div className="row">{activitiesList}</div>
+      )}
+
       <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
       <hr style={{ width: '80%', marginInlineStart: '10%' }} />
 
