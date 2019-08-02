@@ -66,12 +66,16 @@ const ItineraryCard = ({
           <img
             src={itinerary.img}
             alt=""
-            style={{ filter: 'brightness(60%)' }}
+            style={{
+              filter: 'brightness(70%)',
+              height: '250px',
+              objectFit: 'cover'
+            }}
           />
           <span className="card-title">{itinerary.title}</span>
         </div>
-        <div className="card-content">
-          <div className="center">
+        <div className="card-content" style={{ padding: '0px' }}>
+          <div className={classes.flexContainer}>
             <i
               className={`fas fa-pencil-alt ${classes.commonIcon}`}
               onClick={() =>

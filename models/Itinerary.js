@@ -12,7 +12,8 @@ const ItinerarySchema = new Schema({
   },
   city: {
     type: String,
-    required: true
+    required: true,
+    lowercase: true
   },
   img: {
     type: String,

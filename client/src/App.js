@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import Login from './components/Auth/Login'
 import City from './components/Cities/City'
 import Signup from './components/Auth/Signup'
+import Footer from './components/Common/Footer'
 import setAuthToken from './utils/setAuthToken'
 import Cities from './components/Cities/Cities'
 import { Route, Switch } from 'react-router-dom'
@@ -46,6 +47,7 @@ const App = () => {
                 component={MyTineraries}
               />
             </Switch>
+            <Footer />
           </PageContent>
         </ThemeProvider>
       </div>

@@ -6,7 +6,7 @@ const PageContent = ({ children }) => {
 
   const styles = {
     backgroundColor: isDarkMode ? 'black' : 'white',
-    height: '100vh',
+    height: '100%',
     width: '100vw'
   }
   return <div style={styles}>{children}</div>

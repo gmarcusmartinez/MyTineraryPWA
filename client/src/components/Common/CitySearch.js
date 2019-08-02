@@ -7,11 +7,6 @@ const CitySearch = () => {
     setQuery(e.target.value)
   }
 
-  const capitalize = query => {
-    if (typeof query !== 'string') return ''
-    return query.charAt(0).toUpperCase() + query.slice(1).toLowerCase()
-  }
-
   return (
     <div className="col s12">
       <div className="row">
@@ -29,7 +24,7 @@ const CitySearch = () => {
               marginTop: '10px',
               border: '1px solid #e57373'
             }}
-            to={`/cities/${capitalize(query)}`}>
+            to={`/cities/${query.toLowerCase()}`}>
             Go
           </Link>
         </div>
