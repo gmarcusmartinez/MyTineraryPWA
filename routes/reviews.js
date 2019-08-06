@@ -1,5 +1,6 @@
 const express = require('express')
 const auth = require('../utils/auth')
+const User = require('../models/User')
 const Review = require('../models/Review')
 const reviewValidation = require('../validation/review')
 const { validationResult } = require('express-validator/check')
@@ -15,12 +16,14 @@ router.post('/:id', [auth, reviewValidation], async (req, res) => {
     return res.status(400).json({ errors: errors.array() })
   }
   try {
-    const user = req.user.id
+    const user = await User.findById(req.user.id)
     const itinerary = req.params.id
 
     const review = await new Review(req.body)
-    review.user = user
+
+    review.user = user._id
     review.itinerary = itinerary
+    review.img = user.img
 
     review.save()
     res.send(review)

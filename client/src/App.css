@@ -71,3 +71,6 @@
 #itinerary-card {
   background-color: 'black' !important;
 }
+.card.horizontal .card-image {
+  max-width: 25%;
+}

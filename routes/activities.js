@@ -3,6 +3,7 @@ const express = require('express')
 const auth = require('../utils/auth')
 const config = require('config')
 const Activity = require('../models/Activity')
+const Itinerary = require('../models/Itinerary')
 const activityValidation = require('../validation/activity')
 const { validationResult } = require('express-validator/check')
 
@@ -11,7 +12,7 @@ const router = express.Router()
  *@function CREATE Activity for specific Itinerary
  * @param :id
  */
-router.post('/', [auth, activityValidation], async (req, res) => {
+router.post('/:id', [auth, activityValidation], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
@@ -31,9 +32,13 @@ router.post('/', [auth, activityValidation], async (req, res) => {
     const coords = response.data.features[0].center
     activity.coords.lat = coords[0]
     activity.coords.lng = coords[1]
+    activity.location = response.data.features[0].place_name
 
-    activity.save()
-    res.send(activity)
+    await activity.save()
+    const itinerary = await Itinerary.findById(req.params.id)
+    itinerary.activities.push(activity._id)
+    await itinerary.save()
+    res.json(activity)
   } catch (err) {
     return res
       .status(400)
@@ -108,7 +113,9 @@ router.delete('/:id', auth, async (req, res) => {
         errors: [{ msg: 'You are not authorized to perform this action' }]
       })
     }
+
     await activity.remove()
+
     res.json({ msg: 'Activity removed.' })
   } catch (err) {
     res.status(500).send(err.message)

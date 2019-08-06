@@ -2,9 +2,27 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { useState } from 'react'
 import ErrorMsg from '../Common/ErrorMsg'
-import styles from '../../styles/ItineraryStyles'
 import { withStyles } from '@material-ui/core/styles'
 import { createActivity } from '../../store/actions/activityActions'
+import getCurrentLocation from '../../utils/getCurrentLocation'
+
+const styles = {
+  cardTitle: {
+    fontFamily: 'Caveat',
+    fontSize: '30px',
+    fontWeight: '300',
+    marginTop: '12px'
+  },
+  locationIcon: {
+    border: '1px solid white',
+    borderRadius: '5px',
+    fontSize: '20px',
+    padding: '7px',
+    backgroundColor: '#e57373',
+    position: 'absolute',
+    right: '2px'
+  }
+}
 
 const AddActivity = ({ itinerary_id, classes, createActivity }) => {
   const [formData, setFormData] = useState({
@@ -24,12 +42,15 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
 
   const onSubmit = async e => {
     e.preventDefault()
-    createActivity(formData)
+    createActivity(formData, itinerary_id)
     setFormData({
       img: '',
       title: '',
       location: ''
     })
+  }
+  const currentLocation = e => {
+    console.log(itinerary_id)
   }
   return (
     <form onSubmit={e => onSubmit(e)}>
@@ -61,6 +82,10 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
             name="location"
             value={location}
             onChange={e => onChange(e)}
+          />
+          <i
+            className={`fas fa-map-pin white-text ${classes.locationIcon}`}
+            onClick={() => getCurrentLocation()}
           />
         </div>
       </div>

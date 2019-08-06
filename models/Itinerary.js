@@ -33,14 +33,7 @@ const ItinerarySchema = new Schema({
     type: String,
     default: ''
   },
-  reviews: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-      }
-    }
-  ],
+  activities: [String],
   published: {
     type: Boolean,
     default: false

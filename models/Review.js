@@ -6,6 +6,9 @@ const ReviewSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  img: {
+    type: String
+  },
   itinerary: {
     type: Schema.Types.ObjectId,
     ref: 'itinerary'
@@ -14,6 +17,14 @@ const ReviewSchema = new Schema({
     type: String,
     required: true
   },
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+      }
+    }
+  ],
   date: {
     type: Date,
     default: Date.now

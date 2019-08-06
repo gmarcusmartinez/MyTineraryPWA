@@ -9,14 +9,14 @@ import {
 
 import { setError } from './errActions'
 
-export const createActivity = formData => async dispatch => {
+export const createActivity = (formData, id) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
   try {
-    const res = await axios.post(`/activities/`, formData, config)
+    const res = await axios.post(`/activities/${id}`, formData, config)
     dispatch({
       type: CREATE_ACTIVITY,
       payload: res.data

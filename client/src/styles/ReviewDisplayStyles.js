@@ -20,6 +20,13 @@ const styles = {
       color: 'red'
     }
   },
+  reviewImg: {
+    width: '80% !important',
+    borderRadius: '50% !important',
+    marginInlineStart: '10%',
+    marginTop: '25%',
+    marginBottom: '25%'
+  },
   updateReviewBtn: {
     fontSize: '16px',
     color: 'black',
