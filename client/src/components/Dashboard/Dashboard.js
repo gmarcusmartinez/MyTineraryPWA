@@ -27,7 +27,6 @@ const Dashboard = ({ auth: { user } }) => {
                 fontFamily: 'Caveat',
                 fontSize: '22px'
               }}>
-              {' '}
               Welcome Back!
             </p>
           </div>

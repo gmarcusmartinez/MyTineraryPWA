@@ -30,7 +30,7 @@ const GuestNav = ({ classes }) => {
   return (
     <div>
       <ul>
-        <li className="right hide-on-med-and-down">
+        <li className="right hide-on-med-and-down white-text">
           <Link to="/sign-up" className={classes.navLink}>
             {signupDynamic}
           </Link>
@@ -38,17 +38,17 @@ const GuestNav = ({ classes }) => {
         <li
           className={`${
             classes.navLink
-          } right hide-on-med-and-down sidenav-trigger`}
+          } right hide-on-med-and-down sidenav-trigger white-text`}
           data-target="slide-out"
           onClick={setDisplaySettings}>
           {settingsDynamic}
         </li>
-        <li className="right hide-on-med-and-down">
+        <li className="right hide-on-med-and-down white-text">
           <Link to="/login" className={classes.navLink}>
             {loginDynamic}
           </Link>
         </li>
-        <li className="right hide-on-med-and-down">
+        <li className="right hide-on-med-and-down white-text">
           <Link to="/cities" className={classes.navLink}>
             {citiesDynamic}
           </Link>
@@ -69,7 +69,9 @@ const GuestNav = ({ classes }) => {
               <Link
                 className={classes.navLink}
                 to="/"
-                style={{ color: isDarkMode ? 'white' : 'black' }}>
+                style={{
+                  color: isDarkMode ? 'white' : 'black'
+                }}>
                 {homeDynamic}
               </Link>
             </li>

@@ -14,7 +14,19 @@ const words = {
     homeDynamic: 'Home',
     citiesDynamic: 'Cities',
     dashboardDynamic: 'Dashboard',
-    logoutDynamic: 'Logout'
+    logoutDynamic: 'Logout',
+    createItineraryDynamic: 'Create Itinerary',
+    titleDynamic: 'Title',
+    imageDynamic: 'Image',
+    editItineraryDynamic: 'Edit / Add Details',
+    cityDynamic: 'City',
+    priceRangeDynamic: 'Price Range',
+    durationDynamic: 'Duration',
+    activitiesDyanmic: 'Activities',
+    addActivityDynamic: 'Add Activity',
+    locationDynamix: 'Location',
+    deleteMsg:
+      'Are you sure you want to do this? It will permanently delete the itinerary along with all activities you have added to it, as well as reviews others have left you.'
   },
   french: {
     signupDynamic: `S'inscrire`,
@@ -31,7 +43,19 @@ const words = {
     homeDynamic: 'Home',
     citiesDynamic: 'Villes',
     dashboardDynamic: 'Dashboard',
-    logoutDynamic: 'Connectez -Out'
+    logoutDynamic: 'Connectez -Out',
+    createItineraryDynamic: 'Create Itinerary',
+    titleDynamic: 'Title',
+    imageDynamic: 'Image',
+    editItineraryDynamic: 'Edit / Add Details',
+    cityDynamic: 'ciudad',
+    priceRangeDynamic: 'Price Range',
+    durationDynamic: 'Duration',
+    activitiesDyanmic: 'Activities',
+    addActivityDynamic: 'Add Activity',
+    locationDynamix: 'Location',
+    deleteMsg:
+      'Are you sure you want to do this? It will permanently delete the itinerary along with all activities you have added to it, as well as reviews others have left you.'
   },
   german: {
     signupDynamic: `Anmelden`,
@@ -48,7 +72,19 @@ const words = {
     homeDynamic: 'Startseite',
     citiesDynamic: 'Städte',
     dashboardDynamic: 'Übersichtsseite',
-    logoutDynamic: 'Ausloggen'
+    logoutDynamic: 'Ausloggen',
+    createItineraryDynamic: 'Create Itinerary',
+    titleDynamic: 'Title',
+    imageDynamic: 'Image',
+    editItineraryDynamic: 'Edit / Add Details',
+    cityDynamic: 'ciudad',
+    priceRangeDynamic: 'Price Range',
+    durationDynamic: 'Duration',
+    activitiesDyanmic: 'Activities',
+    addActivityDynamic: 'Add Activity',
+    locationDynamix: 'Location',
+    deleteMsg:
+      'Are you sure you want to do this? It will permanently delete the itinerary along with all activities you have added to it, as well as reviews others have left you.'
   },
   spanish: {
     signupDynamic: `Regístrate`,
@@ -65,7 +101,19 @@ const words = {
     homeDynamic: 'Página Principal',
     citiesDynamic: 'Ciudades',
     dashboardDynamic: 'Dashboard',
-    logoutDynamic: 'Cerrar Sesión'
+    logoutDynamic: 'Cerrar Sesión',
+    createItineraryDynamic: 'Crear Itinerario',
+    titleDynamic: 'Titulo',
+    imageDynamic: 'Imagen',
+    editItineraryDynamic: 'Edit / Add Details',
+    cityDynamic: 'Ciudad',
+    priceRangeDynamic: 'Rango de Precios',
+    durationDynamic: 'Duración',
+    activitiesDyanmic: 'Actividad',
+    addActivityDynamic: 'Agregar Actividad',
+    locationDynamix: 'Ubicación',
+    deleteMsg:
+      'Are you sure you want to do this? It will permanently delete the itinerary along with all activities you have added to it, as well as reviews others have left you.'
   }
 }
 

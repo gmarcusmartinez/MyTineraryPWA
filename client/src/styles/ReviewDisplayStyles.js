@@ -8,7 +8,8 @@ const styles = {
     height: '125px'
   },
   createReviewCard: {
-    height: '125px'
+    height: '125px',
+    padding: '24px'
   },
   deleteReviewBtn: {
     fontSize: '18px',

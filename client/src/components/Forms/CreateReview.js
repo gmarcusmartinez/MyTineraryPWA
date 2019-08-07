@@ -5,7 +5,7 @@ import styles from '../../styles/ReviewDisplayStyles'
 import { withStyles } from '@material-ui/core/styles'
 import { createReview } from '../../store/actions/reviewActions'
 
-const CreateReview = ({ itinerary_id, classes }) => {
+const CreateReview = ({ setDisplayCreateReview, itinerary_id, classes }) => {
   const [formData, setFormData] = useState({
     text: ''
   })
@@ -22,10 +22,14 @@ const CreateReview = ({ itinerary_id, classes }) => {
     })
   }
   return (
-    <div className="col s12 m6 l6">
-      <div className={`card ${classes.createReviewCard}`}>
-        <ErrorMsg />
-        <form onSubmit={e => onSubmit(e)} />
+    <div className={`card ${classes.createReviewCard}`}>
+      <i
+        className="fas fa-times"
+        onClick={() => setDisplayCreateReview(false)}
+        style={{ position: 'absolute', top: '-15px', right: '-5px' }}
+      />
+      <ErrorMsg />
+      <form onSubmit={e => onSubmit(e)}>
         <div className="input-field">
           <input
             type="text"
@@ -35,16 +39,17 @@ const CreateReview = ({ itinerary_id, classes }) => {
           />
         </div>
         <button
-          className="btn-flat white red-text text-lighten-2 "
+          className="btn btn-flat white red-text text-lighten-2 "
           style={{
-            fontSize: '14px',
-            fontFamily: 'Caveat',
-            padding: '0',
-            display: 'inline-block'
+            width: '40%',
+            position: 'absolute',
+            bottom: '5px',
+            left: '30%',
+            marginTop: '10px'
           }}>
           Submit
         </button>
-      </div>
+      </form>
     </div>
   )
 }

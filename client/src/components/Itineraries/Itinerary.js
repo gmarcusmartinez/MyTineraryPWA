@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
-import React, { useEffect, useContext } from 'react'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
 import { withStyles } from '@material-ui/core/styles'
 import ActivitySlider from '../Sliders/ActivitySlider'
@@ -8,6 +7,8 @@ import useToggleState from '../../hooks/useToggleState'
 import { ThemeContext } from '../../context/ThemeContext'
 import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getReviews } from '../../store/actions/reviewActions'
+import React, { useState, useEffect, useContext } from 'react'
+import CreateReview from '../Forms/CreateReview'
 import { getActivities } from '../../store/actions/activityActions'
 
 const styles = {
@@ -27,7 +28,7 @@ const Itinerary = ({
   activities: { activities, loading },
   reviews: { reviews, reviewsLoading }
 }) => {
-  // const [displayCreateReview, setDisplayCreateReview] = useState(false)
+  const [displayCreateReview, setDisplayCreateReview] = useState(false)
   const { isDarkMode } = useContext(ThemeContext)
   const [displaySlider, toggle] = useToggleState(false)
 
@@ -43,6 +44,10 @@ const Itinerary = ({
     activitiesList = activities.map(activity => (
       <ActivityDisplay key={activity._id} activity={activity} />
     ))
+  }
+  if (activities !== null || loading) {
+    const itinCoords = activities.map(activity => activity.coords)
+    console.log(itinCoords)
   }
 
   let reviewsList
@@ -88,6 +93,29 @@ const Itinerary = ({
       <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
       <hr style={{ width: '80%', marginInlineStart: '10%' }} />
 
+      {displayCreateReview && (
+        <div
+          className="container"
+          style={{ width: '90%', marginInlineStart: '5%' }}>
+          <div className="row">
+            <div className="col s12 m8 offset-m2">
+              <CreateReview setDisplayCreateReview={setDisplayCreateReview} />
+            </div>
+          </div>
+        </div>
+      )}
+      {auth.isAuthenticated && (
+        <button
+          className="btn white red-text text-lighten-2 btn-flat"
+          style={{
+            width: '40%',
+            marginLeft: '30%',
+            border: '1px solid #e57373'
+          }}
+          onClick={() => setDisplayCreateReview(true)}>
+          Leave a Review
+        </button>
+      )}
       <div className="row">{reviewsList}</div>
     </div>
   )

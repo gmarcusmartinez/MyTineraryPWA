@@ -1,7 +1,11 @@
 const styles = {
   navLink: {
     fontFamily: 'Caveat',
-    fontSize: '25px !important'
+    fontSize: '25px !important',
+    color: 'black',
+    '&:hover': {
+      color: '#e57373'
+    }
   },
   settingsLink: {
     fontFamily: 'Caveat',

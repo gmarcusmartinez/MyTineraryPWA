@@ -1,22 +1,29 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import words from '../../utils/languages'
 import ErrorMessage from '../Common/ErrorMsg'
 import styles from '../../styles/ItineraryStyles'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import M from 'materialize-css/dist/js/materialize.min.js'
+import { LanguageContext } from '../../context/LanguageContext'
 import { createItinerary } from '../../store/actions/itineraryActions'
 
 const CreateItinerary = ({ createItinerary, classes }) => {
+  const { language } = useContext(LanguageContext)
+  const {
+    createItineraryDynamic,
+    titleDynamic,
+    imageDynamic,
+    cityDynamic,
+    submitDynamic
+  } = words[language]
+
   const [formData, setFormData] = useState({
     img: '',
     city: '',
     title: ''
   })
-  useEffect(() => {
-    let sel = document.querySelectorAll('select')
-    M.FormSelect.init(sel)
-  }, [])
+
   const { img, city, title } = formData
 
   const onChange = e =>
@@ -38,10 +45,10 @@ const CreateItinerary = ({ createItinerary, classes }) => {
         <form onSubmit={e => onSubmit(e)}>
           <ErrorMessage />
           <h4 className={`center red-text text-lighten-2 ${classes.cardTitle}`}>
-            Create Itinerary
+            {createItineraryDynamic}
           </h4>
           <div className="input-field">
-            <label>Title</label>
+            <label>{titleDynamic}</label>
             <input
               type="text"
               name="title"
@@ -50,19 +57,17 @@ const CreateItinerary = ({ createItinerary, classes }) => {
             />
           </div>
           <div className="input-field">
-            <select name="city" value={city} onChange={e => onChange(e)}>
-              <option value="" disabled defaultValue>
-                {'Choose City'}
-              </option>
-              <option value={'Amsterdam'}>{'Amsterdam'}</option>
-              <option value={'Barcelona'}>{'Barcelona'}</option>
-              <option value={'Berlin'}>{'Berlin'}</option>{' '}
-              <option value={'Madrid'}>{'Madrid'}</option>{' '}
-            </select>
+            <label>{cityDynamic}</label>
+            <input
+              type="text"
+              name="city"
+              value={city}
+              onChange={e => onChange(e)}
+            />
           </div>
 
           <div className="input-field">
-            <label>Image</label>
+            <label>{imageDynamic}</label>
             <input
               type="text"
               name="img"
@@ -73,7 +78,7 @@ const CreateItinerary = ({ createItinerary, classes }) => {
           <button
             className="btn red lighten-2"
             style={{ width: '100%', marginTop: '20px' }}>
-            Submit
+            {submitDynamic}
           </button>
         </form>
       </div>

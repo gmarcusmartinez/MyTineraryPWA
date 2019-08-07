@@ -76,14 +76,17 @@ const ItineraryCard = ({
         </div>
         <div className="card-content" style={{ padding: '0px' }}>
           <div className={classes.flexContainer}>
-            <i
-              className={`fas fa-pencil-alt ${classes.commonIcon}`}
-              onClick={() =>
-                getItinerary(itinerary._id).then(() => {
-                  displayEdit()
-                })
-              }
-            />
+            <div>
+              <i
+                className={`fas fa-pencil-alt ${classes.commonIcon}`}
+                onClick={() =>
+                  getItinerary(itinerary._id).then(() => {
+                    displayEdit()
+                  })
+                }
+              />
+            </div>
+
             <i
               className={`fas fa-list ${classes.commonIcon} activator`}
               onClick={() =>
