@@ -1,3 +1,4 @@
+import Map from '../Map/Map'
 import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
@@ -7,15 +8,26 @@ import useToggleState from '../../hooks/useToggleState'
 import { ThemeContext } from '../../context/ThemeContext'
 import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getReviews } from '../../store/actions/reviewActions'
-import React, { useState, useEffect, useContext } from 'react'
-import CreateReview from '../Forms/CreateReview'
+import React, { useEffect, useContext } from 'react'
 import { getActivities } from '../../store/actions/activityActions'
 
 const styles = {
   itineraryTitle: {
     fontFamily: 'Caveat',
     width: '60%',
-    marginInlineStart: '20%'
+    marginInlineStart: '20%',
+    marginTop: '0px'
+  },
+  reviewBtn: {
+    width: '90%',
+    marginLeft: '5%',
+    backgroundColor: 'white',
+    color: '#e57373',
+    border: '1px solid #e57373',
+    '&:hover': {
+      backgroundColor: '#e57373',
+      color: 'white'
+    }
   }
 }
 const Itinerary = ({
@@ -28,7 +40,6 @@ const Itinerary = ({
   activities: { activities, loading },
   reviews: { reviews, reviewsLoading }
 }) => {
-  const [displayCreateReview, setDisplayCreateReview] = useState(false)
   const { isDarkMode } = useContext(ThemeContext)
   const [displaySlider, toggle] = useToggleState(false)
 
@@ -74,7 +85,7 @@ const Itinerary = ({
             fontFamily: 'Caveat',
             fontSize: '24px'
           }}>
-          Slider{' '}
+          Slider
         </p>
         <div className="switch">
           <label>
@@ -89,34 +100,22 @@ const Itinerary = ({
       ) : (
         <div className="row">{activitiesList}</div>
       )}
-
-      <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
-      <hr style={{ width: '80%', marginInlineStart: '10%' }} />
-
-      {displayCreateReview && (
-        <div
-          className="container"
-          style={{ width: '90%', marginInlineStart: '5%' }}>
-          <div className="row">
-            <div className="col s12 m8 offset-m2">
-              <CreateReview setDisplayCreateReview={setDisplayCreateReview} />
-            </div>
-          </div>
+      <div className="row">
+        <div className="col s12 m6">
+          <Map />
         </div>
-      )}
-      {auth.isAuthenticated && (
-        <button
-          className="btn white red-text text-lighten-2 btn-flat"
-          style={{
-            width: '40%',
-            marginLeft: '30%',
-            border: '1px solid #e57373'
-          }}
-          onClick={() => setDisplayCreateReview(true)}>
-          Leave a Review
-        </button>
-      )}
-      <div className="row">{reviewsList}</div>
+        <div className="col s12 m6">
+          <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
+          <hr style={{ width: '80%', marginInlineStart: '10%' }} />
+
+          {auth.isAuthenticated && (
+            <button className={`btn btn-flat ${classes.reviewBtn}`}>
+              Leave a Review
+            </button>
+          )}
+          {reviewsList}
+        </div>
+      </div>
     </div>
   )
 }

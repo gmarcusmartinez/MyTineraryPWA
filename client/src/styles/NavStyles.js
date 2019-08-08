@@ -1,11 +1,7 @@
 const styles = {
   navLink: {
     fontFamily: 'Caveat',
-    fontSize: '25px !important',
-    color: 'black',
-    '&:hover': {
-      color: '#e57373'
-    }
+    fontSize: '25px !important'
   },
   settingsLink: {
     fontFamily: 'Caveat',
@@ -30,16 +26,6 @@ const styles = {
   sideHeader: {
     backgroundColor: '#e57373',
     height: '64px'
-  },
-  sideTitle: {
-    color: 'white',
-    fontFamily: 'Caveat',
-    fontSize: '25px !important',
-    textDecoration: 'none',
-    display: 'flex',
-    position: 'absolute',
-    left: '45px',
-    top: '15px'
   }
 }
 

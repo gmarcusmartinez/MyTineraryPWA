@@ -63,15 +63,7 @@ const ItineraryCard = ({
     <div className="col s12 m6 l4">
       <div className={`card ${classes.itineraryCard}`}>
         <div className="card-image">
-          <img
-            src={itinerary.img}
-            alt=""
-            style={{
-              filter: 'brightness(70%)',
-              height: '250px',
-              objectFit: 'cover'
-            }}
-          />
+          <img src={itinerary.img} alt="" className={classes.itineraryImg} />
           <span className="card-title">{itinerary.title}</span>
         </div>
         <div className="card-content" style={{ padding: '0px' }}>

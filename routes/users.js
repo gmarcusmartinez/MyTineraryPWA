@@ -4,6 +4,7 @@ const auth = require('../utils/auth')
 const User = require('../models/User')
 const userValidation = require('../validation/user')
 const loginValidation = require('../validation/login')
+const { OAuth2Client } = require('google-auth-library')
 const { createToken, hash } = require('../utils/index')
 const { validationResult } = require('express-validator/check')
 
@@ -35,6 +36,21 @@ router.post('/', userValidation, async (req, res) => {
     res.status(500).send('Server Error')
   }
 })
+/**
+ * Google Signup
+ */
+// router.post('/googleAuth', async (req, res) => {
+//   const verifyGoogleToken = async token => {
+//     try {
+//       const ticket = await client.verifyIdToken({
+//         idToken: token,
+//         audience: process.env.OAUTH_CLIENT_ID
+//       })
+//     } catch (err) {
+//       throw new Error('Error verifying Google Token', err.message)
+//     }
+//   }
+// })
 /**
  * Login user
  */
@@ -83,11 +99,9 @@ router.delete('/:id', auth, async (req, res) => {
       })
     }
     if (req.user.id !== req.params.id) {
-      return res
-        .status(400)
-        .json({
-          errors: [{ msg: 'You are not authorized to perform this action' }]
-        })
+      return res.status(400).json({
+        errors: [{ msg: 'You are not authorized to perform this action' }]
+      })
     }
     await user.remove()
     res.send({ msg: 'User Removed' })

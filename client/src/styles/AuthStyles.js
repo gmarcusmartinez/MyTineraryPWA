@@ -1,4 +1,11 @@
 const styles = {
+  or: {
+    fontFamily: 'Caveat',
+    color: '#e57373',
+    fontSize: '1.75rem',
+    marginLeft: '47.5%',
+    width: '5%'
+  },
   landing: {
     position: 'relative',
     background: `url('http://wallpapersdsc.net/wp-content/uploads/2016/09/Budapest-Desktop.jpg')`,

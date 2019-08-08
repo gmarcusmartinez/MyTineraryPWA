@@ -4,6 +4,7 @@ import words from '../../utils/languages'
 import ErrorMsg from '../Common/ErrorMsg'
 import { Redirect } from 'react-router-dom'
 import styles from '../../styles/AuthStyles'
+import { GoogleLogin } from 'react-google-login'
 import React, { useContext, useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { login } from '../../store/actions/authActions'
@@ -26,6 +27,13 @@ const Login = ({ login, isAuthenticated, classes }) => {
   const onSubmit = e => {
     e.preventDefault()
     login(formData)
+  }
+  const onSuccess = async googleUser => {
+    const idToken = googleUser.getAuthResponse().id_token
+    console.log({ idToken })
+  }
+  const onFailure = async googleUser => {
+    console.log(googleUser)
   }
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />
@@ -76,6 +84,13 @@ const Login = ({ login, isAuthenticated, classes }) => {
                       Submit
                     </button>
                   </form>
+                  <p className={classes.or}>or</p>
+                  <GoogleLogin
+                    clientId=""
+                    onSuccess={onSuccess}
+                    onFailure={onFailure}
+                    isSignedIn={true}
+                  />
                 </div>
               </div>
             </div>

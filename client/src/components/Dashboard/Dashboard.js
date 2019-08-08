@@ -24,6 +24,7 @@ const Dashboard = ({ auth: { user } }) => {
               className="center-align"
               style={{
                 paddingTop: '30px',
+                paddingBottom: '350px',
                 fontFamily: 'Caveat',
                 fontSize: '22px'
               }}>

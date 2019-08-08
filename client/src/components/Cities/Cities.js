@@ -29,10 +29,10 @@ const Cities = ({ getCities, cities: { cities, loading } }) => {
   return (
     <Fragment>
       <CitySearch />
-      <div className="container cities-page">
-        <div className="row">
-          <div className="col s12">{cityList}</div>
-        </div>
+      <div
+        className="container"
+        style={{ width: '90%', marginInLineStart: '5%' }}>
+        <div className="row">{cityList}</div>
       </div>
     </Fragment>
   )

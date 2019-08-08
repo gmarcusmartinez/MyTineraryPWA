@@ -19,33 +19,30 @@ const ReviewDisplay = ({
   updateReview
 }) => {
   return (
-    <div className="col s12 m6 l6">
-      <div className={`card horizontal`}>
-        <ErrorMsg />
-        {auth.isAuthenticated && review.user === auth.user._id ? (
-          <>
-            <i
-              className={`fas fa-times ${classes.deleteReviewBtn}`}
-              onClick={e => deleteReview(review._id)}
-            />
-            <i
-              className={`fas fa-pencil-alt ${classes.updateReviewBtn}`}
-              onClick={e => getReview(review._id)}
-            />
-          </>
-        ) : null}
-        <div className="card-image" style={{ maxWidth: '25% !important' }}>
-          <img
-            src={review.img}
-            alt="brokenImgLink"
-            className={classes.reviewImg}
+    <div className={`card horizontal`}>
+      <ErrorMsg />
+      {auth.isAuthenticated && review.user === auth.user._id ? (
+        <>
+          <i
+            className={`fas fa-times ${classes.deleteReviewBtn}`}
+            onClick={e => deleteReview(review._id)}
           />
-        </div>
-
-        <div className="card-stacked">
-          <div className="card-content">
-            <p className={classes.reviewText}>{review.text}</p>
-          </div>
+          <i
+            className={`fas fa-pencil-alt ${classes.updateReviewBtn}`}
+            onClick={e => getReview(review._id)}
+          />
+        </>
+      ) : null}
+      <div className="card-image" style={{ maxWidth: '25% !important' }}>
+        <img
+          src={review.img}
+          alt="brokenImgLink"
+          className={classes.reviewImg}
+        />
+      </div>
+      <div className="card-stacked">
+        <div className="card-content">
+          <p className={classes.reviewText}>{review.text}</p>
         </div>
       </div>
     </div>

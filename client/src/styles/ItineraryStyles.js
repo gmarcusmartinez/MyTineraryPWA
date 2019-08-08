@@ -26,7 +26,19 @@ const styles = {
     fontSize: '1.5rem',
     padding: '8px',
     margin: '10px',
-    zIndex: '1'
+    position: 'relative',
+    boxShadow: '2px 6px #eeeeee',
+    '&:hover': {
+      color: 'white',
+      backgroundColor: '#e57373',
+      boxShadow: '1px 3px #eeeeee',
+      top: '3px'
+    },
+    '&:active': {
+      boxShadow: 'none',
+      top: '6px',
+      left: '2px'
+    }
   },
   flexContainer: {
     padding: '0',
@@ -39,6 +51,14 @@ const styles = {
     fontFamily: 'Caveat',
     color: '#e57373',
     fontSize: '1.25rem'
+  },
+  itineraryImg: {
+    filter: 'brightness(60%)',
+    height: '250px',
+    objectFit: 'cover',
+    '&:hover': {
+      filter: 'brightness(100%)'
+    }
   }
 }
 

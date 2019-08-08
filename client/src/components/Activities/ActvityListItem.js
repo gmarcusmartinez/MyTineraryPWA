@@ -16,7 +16,12 @@ const styles = {
     border: '1px solid white',
     fontSize: '1.25rem',
     padding: '7px',
-    marginTop: '20px'
+    marginTop: '20px',
+    '&:hover': {
+      color: '#e57373',
+      border: '1px solid #e57373',
+      backgroundColor: 'white'
+    }
   }
 }
 

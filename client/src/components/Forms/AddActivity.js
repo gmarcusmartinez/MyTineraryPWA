@@ -49,9 +49,7 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
       location: ''
     })
   }
-  const currentLocation = e => {
-    console.log(itinerary_id)
-  }
+
   return (
     <form onSubmit={e => onSubmit(e)}>
       <ErrorMsg />
