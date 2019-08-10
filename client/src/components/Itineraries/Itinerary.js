@@ -22,6 +22,8 @@ const styles = {
   reviewBtn: {
     width: '90%',
     marginLeft: '5%',
+    marginTop: '15px',
+    marginBottom: '15px',
     backgroundColor: 'white',
     color: '#e57373',
     border: '1px solid #e57373',
@@ -61,8 +63,8 @@ const Itinerary = ({
   if (reviews === null || reviewsLoading) {
     reviewsList = <Spinner />
   } else {
-    reviewsList = reviews.map(review => (
-      <ReviewDisplay key={review._id} review={review} auth={auth} />
+    reviewsList = reviews.map((review, i) => (
+      <ReviewDisplay key={review._id} review={review} auth={auth} index={i} />
     ))
   }
   return (
@@ -101,14 +103,13 @@ const Itinerary = ({
           <Map />
         </div>
         <div className="col s12 m6">
-          <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
-          <hr style={{ width: '80%', marginInlineStart: '10%' }} />
-
           {auth.isAuthenticated && (
             <button className={`btn btn-flat ${classes.reviewBtn}`}>
               Leave a Review
             </button>
           )}
+          <h3 className={`center ${classes.itineraryTitle}`}>Reviews</h3>
+          <hr style={{ width: '80%', marginInlineStart: '10%' }} />
           {reviewsList}
         </div>
       </div>

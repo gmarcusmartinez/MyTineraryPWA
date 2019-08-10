@@ -1,10 +1,10 @@
+import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { useState } from 'react'
 import ErrorMsg from '../Common/ErrorMsg'
 import { withStyles } from '@material-ui/core/styles'
 import { createActivity } from '../../store/actions/activityActions'
-import getCurrentLocation from '../../utils/getCurrentLocation'
 
 const styles = {
   cardTitle: {
@@ -13,14 +13,20 @@ const styles = {
     fontWeight: '300',
     marginTop: '12px'
   },
-  locationIcon: {
+  formIcon: {
     border: '1px solid white',
-    borderRadius: '5px',
+    borderRadius: '3px',
     fontSize: '20px',
     padding: '7px',
     backgroundColor: '#e57373',
+    color: 'white',
     position: 'absolute',
-    right: '2px'
+    right: '2px',
+    '&:hover': {
+      backgroundColor: 'white',
+      color: '#e57373',
+      border: '1px solid #e57373'
+    }
   }
 }
 
@@ -49,6 +55,22 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
       location: ''
     })
   }
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation)
+      setFormData({ location: 'Gelocation not supported by Browser' })
+
+    navigator.geolocation.getCurrentPosition(position => {
+      axios
+        .get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${
+            position.coords.longitude
+          },${position.coords.latitude}.json?access_token=`
+        )
+        .then(res => {
+          setFormData({ location: res.data.features[0].place_name })
+        })
+    })
+  }
 
   return (
     <form onSubmit={e => onSubmit(e)}>
@@ -72,6 +94,7 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
             value={img}
             onChange={e => onChange(e)}
           />
+          <i className={`fas fa-camera ${classes.formIcon}`} />
         </div>
         <div className="input-field">
           <label className="white-text">Location</label>
@@ -82,7 +105,7 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
             onChange={e => onChange(e)}
           />
           <i
-            className={`fas fa-map-pin white-text ${classes.locationIcon}`}
+            className={`fas fa-map-pin ${classes.formIcon}`}
             onClick={() => getCurrentLocation()}
           />
         </div>

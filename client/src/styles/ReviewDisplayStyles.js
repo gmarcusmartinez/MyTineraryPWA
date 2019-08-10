@@ -1,39 +1,36 @@
 const styles = {
-  reviewText: {
-    fontFamily: 'Caveat',
+  review: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  reviewImg: {
+    width: '20% !important',
+    borderRadius: '50% !important',
+    marginTop: '10px'
+  },
+  speechBubble: {
+    width: '80%',
+    padding: '5px',
     color: 'black',
-    fontSize: '20px'
-  },
-  reviewCard: {
-    height: '125px'
-  },
-  createReviewCard: {
-    height: '125px',
-    padding: '24px'
+    fontSize: '20px',
+    marginLeft: '10px',
+    marginRight: '10px',
+    marginTop: '10px',
+    borderRadius: '10px',
+    fontFamily: 'Caveat',
+    border: '2px solid black'
   },
   deleteReviewBtn: {
     fontSize: '18px',
     color: 'black',
-    position: 'absolute',
-    top: '-20px',
-    right: '-6px',
     '&:hover': {
       color: 'red'
     }
   },
-  reviewImg: {
-    width: '80% !important',
-    borderRadius: '50% !important',
-    marginInlineStart: '10%',
-    marginTop: '25%',
-    marginBottom: '25%'
-  },
+
   updateReviewBtn: {
     fontSize: '16px',
     color: 'black',
-    position: 'absolute',
-    top: '10px',
-    right: '38px',
     '&:hover': {
       color: '#e57373'
     }
