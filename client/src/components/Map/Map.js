@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import ReactMapGL, { NavigationControl } from 'react-map-gl'
+import { connect } from 'react-redux'
+import PinIcon from './PinIcon'
+import React, { useState, useEffect } from 'react'
+import ReactMapGL, { NavigationControl, Marker } from 'react-map-gl'
 import { withStyles } from '@material-ui/core/styles'
 
 const initialViewport = {
@@ -8,16 +10,23 @@ const initialViewport = {
   zoom: 13
 }
 
-const Map = ({ classes }) => {
+const Map = ({ classes, activities: { activities, loading } }) => {
   const [viewport, setViewport] = useState(initialViewport)
-
+  useEffect(() => {
+    if (activities.length !== 0) {
+      setViewport({
+        latitude: activities[0].coords.lng,
+        longitude: activities[0].coords.lat,
+        zoom: 13
+      })
+    }
+  }, [activities])
   return (
     <div className={classes.main}>
       <ReactMapGL
-        width="100%"
-        height="100vh"
+        width="100vw"
+        height="675px"
         mapStyle="mapbox://styles/mapbox/streets-v10"
-        mapboxApiAccessToken=""
         onViewportChange={viewport => setViewport(viewport)}
         {...viewport}>
         <div className={classes.navigationControl}>
@@ -25,6 +34,18 @@ const Map = ({ classes }) => {
             onViewportChange={viewport => setViewport(viewport)}
           />
         </div>
+        {activities &&
+          activities.map(activity => (
+            <div key={activity._id}>
+              <Marker
+                latitude={activity.coords.lng}
+                longitude={activity.coords.lat}
+                offsetLeft={-19}
+                offsetTop={-37}>
+                <PinIcon />
+              </Marker>
+            </div>
+          ))}
       </ReactMapGL>
     </div>
   )
@@ -41,5 +62,10 @@ const styles = {
     margin: '1em'
   }
 }
-
-export default withStyles(styles)(Map)
+const mapStateTotProps = state => ({
+  activities: state.activities
+})
+export default connect(
+  mapStateTotProps,
+  {}
+)(withStyles(styles)(Map))

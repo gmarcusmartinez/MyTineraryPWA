@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 const Nav = ({ auth: { isAuthenticated, loading, user } }) => {
   return (
     <div>
-      <nav className="nav wrapper red lighten-2 z-depth-0">
+      <nav className="nav wrapper red lighten-2">
         <div style={{ width: '90%', marginLeft: '5%' }} />
         <a
           href="!#"

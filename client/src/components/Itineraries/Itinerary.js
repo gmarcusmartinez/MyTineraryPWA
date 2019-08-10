@@ -1,6 +1,7 @@
 import Map from '../Map/Map'
 import { connect } from 'react-redux'
 import Spinner from '../Common/Spinner'
+import React, { useEffect, useContext } from 'react'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
 import { withStyles } from '@material-ui/core/styles'
 import ActivitySlider from '../Sliders/ActivitySlider'
@@ -8,7 +9,7 @@ import useToggleState from '../../hooks/useToggleState'
 import { ThemeContext } from '../../context/ThemeContext'
 import ActivityDisplay from '../Activities/ActivityDisplay'
 import { getReviews } from '../../store/actions/reviewActions'
-import React, { useEffect, useContext } from 'react'
+
 import { getActivities } from '../../store/actions/activityActions'
 
 const styles = {
@@ -56,11 +57,6 @@ const Itinerary = ({
       <ActivityDisplay key={activity._id} activity={activity} />
     ))
   }
-  if (activities !== null || loading) {
-    const itinCoords = activities.map(activity => activity.coords)
-    console.log(itinCoords)
-  }
-
   let reviewsList
   if (reviews === null || reviewsLoading) {
     reviewsList = <Spinner />
