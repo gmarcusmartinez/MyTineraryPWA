@@ -14,7 +14,6 @@ import Landing from './components/Landing/Landing'
 import { setUser } from './store/actions/authActions'
 import PageContent from './components/Common/PageContent'
 import Itinerary from './components/Itineraries/Itinerary'
-import Dashboard from './components/Dashboard/Dashboard'
 import PrivateRoute from './components/Common/PrivateRoute'
 import MyTineraries from './components/Itineraries/MyTineraries'
 
@@ -41,7 +40,6 @@ const App = () => {
               <Route exact path="/sign-up" component={Signup} />
               <Route exact path="/cities/:cityName" component={City} />
               <Route exact path="/itinerary/:id" component={Itinerary} />
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute
                 exact
                 path="/mytineraries"

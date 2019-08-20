@@ -1,6 +1,9 @@
 import Map from '../Map/Map'
 import { connect } from 'react-redux'
+import Switch from '../Common/Switch'
 import Spinner from '../Common/Spinner'
+import CreateReview from '../Forms/CreateReview'
+import styles from '../../styles/ItineraryStyles'
 import React, { useEffect, useContext } from 'react'
 import ReviewDisplay from '../Reviews/ReviewDisplay'
 import { withStyles } from '@material-ui/core/styles'
@@ -12,27 +15,6 @@ import { getReviews } from '../../store/actions/reviewActions'
 
 import { getActivities } from '../../store/actions/activityActions'
 
-const styles = {
-  itineraryTitle: {
-    fontFamily: 'Caveat',
-    width: '60%',
-    marginInlineStart: '20%',
-    marginTop: '0px'
-  },
-  reviewBtn: {
-    width: '90%',
-    marginLeft: '5%',
-    marginTop: '15px',
-    marginBottom: '15px',
-    backgroundColor: 'white',
-    color: '#e57373',
-    border: '1px solid #e57373',
-    '&:hover': {
-      backgroundColor: '#e57373',
-      color: 'white'
-    }
-  }
-}
 const Itinerary = ({
   auth,
   match,
@@ -59,6 +41,7 @@ const Itinerary = ({
       <ActivityDisplay key={activity._id} activity={activity} />
     ))
   }
+
   let reviewsList
   if (reviews === null || reviewsLoading) {
     reviewsList = <Spinner />
@@ -68,30 +51,14 @@ const Itinerary = ({
     ))
   }
   return (
-    <div
-      className="container"
-      style={{ marginTop: '25px', width: '90%', marginInlineStart: '5%' }}>
+    <div className="container">
       <h3
         className={`center ${classes.itineraryTitle}`}
         style={{ color: isDarkMode ? 'white' : '#e57373' }}>
         {location.state.title}
       </h3>
-      <div className="hide-on-med-and-up">
-        <p
-          style={{
-            color: isDarkMode ? 'white' : 'black',
-            fontFamily: 'Caveat',
-            fontSize: '24px'
-          }}>
-          Slider
-        </p>
-        <div className="switch">
-          <label>
-            <input type="checkbox" onChange={toggle} />
-            <span className="lever" />
-          </label>
-        </div>
-      </div>
+
+      <Switch toggle={toggle} />
 
       {displaySlider ? (
         <ActivitySlider id={match.params.id} />
@@ -104,7 +71,9 @@ const Itinerary = ({
         </div>
         <div className="col s12 m6">
           {auth.isAuthenticated && (
-            <button className={`btn btn-flat ${classes.reviewBtn}`}>
+            <button
+              className={`btn btn-flat modal-trigger ${classes.reviewBtn}`}
+              data-target="create-review">
               Leave a Review
             </button>
           )}
@@ -113,6 +82,7 @@ const Itinerary = ({
           {reviewsList}
         </div>
       </div>
+      <CreateReview itinerary_id={match.params.id} />
     </div>
   )
 }

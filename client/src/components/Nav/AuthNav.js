@@ -15,12 +15,7 @@ import { LanguageContext } from '../../context/LanguageContext'
 const AuthNav = ({ user, classes, logout }) => {
   const { isDarkMode } = useContext(ThemeContext)
   const { language } = useContext(LanguageContext)
-  const {
-    settingsDynamic,
-    logoutDynamic,
-    citiesDynamic,
-    dashboardDynamic
-  } = words[language]
+  const { settingsDynamic, logoutDynamic, citiesDynamic } = words[language].nav
 
   const [displaySettings, setDisplaySettings] = useState(false)
 
@@ -46,11 +41,6 @@ const AuthNav = ({ user, classes, logout }) => {
           </Link>
         </li>
         <li />
-        <li className="right hide-on-med-and-down">
-          <Link className={classes.navLink} to="/dashboard">
-            {dashboardDynamic}
-          </Link>
-        </li>
         <li />
         <li
           className={`${
@@ -98,20 +88,6 @@ const AuthNav = ({ user, classes, logout }) => {
                 to="/mytineraries"
                 style={{ color: isDarkMode ? 'white' : 'black' }}>
                 MyTineraries
-              </Link>
-            </li>
-            <li>
-              <div
-                className="divider nav-divider"
-                style={{ width: '80%', marginInlineStart: '10%' }}
-              />
-            </li>
-            <li className={classes.sidenavClose}>
-              <Link
-                className={classes.navLink}
-                to="/dashboard"
-                style={{ color: isDarkMode ? 'white' : 'black' }}>
-                {dashboardDynamic}
               </Link>
             </li>
             <li>

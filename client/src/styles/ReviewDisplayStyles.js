@@ -4,7 +4,7 @@ const styles = {
     flexDirection: 'row'
   },
   reviewImg: {
-    width: '20% !important',
+    width: '100px',
     borderRadius: '50% !important',
     marginTop: '10px'
   },
@@ -25,9 +25,14 @@ const styles = {
     color: 'black',
     '&:hover': {
       color: 'red'
-    }
-  },
+    },
 
+    paddingLeft: '0px'
+  },
+  actionIcons: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
   updateReviewBtn: {
     fontSize: '16px',
     color: 'black',

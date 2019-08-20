@@ -11,7 +11,7 @@ const ReviewSchema = new Schema({
   },
   itinerary: {
     type: Schema.Types.ObjectId,
-    ref: 'itinerary'
+    ref: 'itineraries'
   },
   text: {
     type: String,

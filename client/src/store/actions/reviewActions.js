@@ -59,14 +59,14 @@ export const getReview = id => async dispatch => {
     }
   }
 }
-export const updateReview = (formData, _id) => async dispatch => {
+export const updateReview = (formData, id) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
   try {
-    const res = await axios.patch(`/reviews/${_id}`, formData, config)
+    const res = await axios.patch(`/reviews/${id}`, formData, config)
     dispatch({
       type: UPDATE_REVIEW,
       payload: res.data

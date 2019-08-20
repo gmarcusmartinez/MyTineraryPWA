@@ -10,24 +10,26 @@ const router = express.Router()
  *@function CREATE Review for specific Itinerary
  * @param :id
  */
-router.post('/:id', [auth, reviewValidation], async (req, res) => {
+router.post('/', [auth, reviewValidation], async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
   try {
     const user = await User.findById(req.user.id)
-    const itinerary = req.params.id
 
     const review = await new Review(req.body)
 
     review.user = user._id
-    review.itinerary = itinerary
     review.img = user.img
 
     review.save()
     res.send(review)
-  } catch (err) {}
+  } catch (err) {
+    return res.status(400).json({
+      errors: [{ msg: 'Review post unsucessful.' }]
+    })
+  }
 })
 
 /**

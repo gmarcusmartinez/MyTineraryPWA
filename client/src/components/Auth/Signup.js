@@ -24,7 +24,7 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
     emailDynamic,
     passwordDynamic,
     confirmDynamic
-  } = words[language]
+  } = words[language].auth
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -37,7 +37,7 @@ const Signup = ({ setError, signup, classes, isAuthenticated }) => {
     signup(formData)
   }
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />
+    return <Redirect to="/mytineraries" />
   }
   return (
     <>

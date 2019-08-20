@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import AddActivity from '../Forms/AddActivity'
 import EditActivity from '../Forms/EditActivity'
 import styles from '../../styles/ItineraryStyles'
@@ -64,7 +65,22 @@ const ItineraryCard = ({
       <div className={`card ${classes.itineraryCard}`}>
         <div className="card-image">
           <img src={itinerary.img} alt="" className={classes.itineraryImg} />
-          <span className="card-title">{itinerary.title}</span>
+          <span className="card-title">
+            {itinerary.activities.length > 0 ? (
+              <Link
+                to={{
+                  pathname: `/itinerary/${itinerary._id}`,
+                  state: {
+                    title: itinerary.title
+                  }
+                }}
+                className={classes.itineraryLink}>
+                {itinerary.title}
+              </Link>
+            ) : (
+              itinerary.title
+            )}
+          </span>
         </div>
         <div className="card-content" style={{ padding: '0px' }}>
           <div className={classes.flexContainer}>
@@ -95,6 +111,9 @@ const ItineraryCard = ({
               className={`fas fa-trash-alt ${classes.commonIcon} activator`}
               onClick={displayConfirmDelete}
             />
+            {itinerary.activities.length > 0 ? (
+              <i className={`fas fa-cloud-upload-alt ${classes.uploadIcon}`} />
+            ) : null}
           </div>
         </div>
 

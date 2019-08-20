@@ -17,7 +17,7 @@ const GuestNav = ({ classes }) => {
     citiesDynamic,
     signupDynamic,
     loginDynamic
-  } = words[language]
+  } = words[language].nav
 
   const [displaySettings, setDisplaySettings] = useState(false)
   useEffect(() => {

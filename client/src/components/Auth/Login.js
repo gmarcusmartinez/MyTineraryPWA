@@ -12,7 +12,7 @@ import { LanguageContext } from '../../context/LanguageContext'
 
 const Login = ({ login, isAuthenticated, classes }) => {
   const { language } = useContext(LanguageContext)
-  const { loginDynamic, emailDynamic, passwordDynamic } = words[language]
+  const { loginDynamic, emailDynamic, passwordDynamic } = words[language].auth
 
   const [formData, setFormData] = useState({
     email: 'admin@gmail.com',
@@ -36,7 +36,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
     console.log(googleUser)
   }
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />
+    return <Redirect to="/mytineraries" />
   }
 
   return (

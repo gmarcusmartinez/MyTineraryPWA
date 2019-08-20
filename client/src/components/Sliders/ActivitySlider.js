@@ -40,7 +40,7 @@ const ActivitySlider = ({
   }
 
   return (
-    <div className="row">
+    <div>
       {activity}
       <div className="center">
         <i

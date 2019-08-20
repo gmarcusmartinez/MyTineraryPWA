@@ -4,9 +4,9 @@ const reviewValidation = [
   check('text', 'Text field can not be empty.')
     .not()
     .isEmpty(),
-  check('text', 'Review can not exceed 120 charachters.').isLength({
+  check('text', 'Review can not exceed 240 charachters.').isLength({
     min: 1,
-    max: 120
+    max: 240
   })
 ]
 
