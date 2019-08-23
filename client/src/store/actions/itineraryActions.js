@@ -94,6 +94,20 @@ export const updateItinerary = (formData, _id) => async dispatch => {
     }
   }
 }
+export const publishItinerary = _id => async dispatch => {
+  try {
+    const res = await axios.patch(`/itineraries/publish/${_id}`)
+    dispatch({
+      type: UPDATE_ITINERARY,
+      payload: res.data
+    })
+  } catch (err) {
+    const errors = err.response.data.errors
+    if (errors) {
+      errors.forEach(error => dispatch(setError(error.msg)))
+    }
+  }
+}
 export const deleteItinerary = id => async dispatch => {
   try {
     await axios.delete(`/itineraries/${id}`)

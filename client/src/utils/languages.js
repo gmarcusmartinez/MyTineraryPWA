@@ -24,9 +24,14 @@ const words = {
       loginDynamic: `Login`,
       signupDynamic: 'Signup'
     },
-    createItineraryDynamic: 'Create Itinerary',
-    titleDynamic: 'Title',
-    imageDynamic: 'Image',
+    createItinerary: {
+      createItineraryDynamic: 'Create Itinerary',
+      titleDynamic: 'Title',
+      cityDynamic: 'City',
+      imageDynamic: 'Image',
+      submitDynamic: 'Submit'
+    },
+
     editItineraryDynamic: 'Edit / Add Details',
     cityDynamic: 'City',
     priceRangeDynamic: 'Price Range',
@@ -62,9 +67,14 @@ const words = {
       loginDynamic: `S'identifier`,
       signupDynamic: `S'inscrire`
     },
-    createItineraryDynamic: 'Create Itinerary',
-    titleDynamic: 'Title',
-    imageDynamic: 'Image',
+    createItinerary: {
+      createItineraryDynamic: 'Create Itinerary',
+      cityDynamic: 'City',
+      titleDynamic: 'Title',
+      imageDynamic: 'Image',
+      submitDynamic: 'Submit'
+    },
+
     editItineraryDynamic: 'Edit / Add Details',
     cityDynamic: 'ciudad',
     priceRangeDynamic: 'Price Range',
@@ -100,9 +110,14 @@ const words = {
       signupDynamic: `Anmelden`,
       loginDynamic: `Anmeldung`
     },
-    createItineraryDynamic: 'Create Itinerary',
-    titleDynamic: 'Title',
-    imageDynamic: 'Image',
+    createItinerary: {
+      createItineraryDynamic: 'Create Itinerary',
+      titleDynamic: 'Title',
+      cityDynamic: 'Stadt',
+      imageDynamic: 'Image',
+      submitDynamic: 'Submit'
+    },
+
     editItineraryDynamic: 'Edit / Add Details',
     cityDynamic: 'ciudad',
     priceRangeDynamic: 'Price Range',
@@ -138,9 +153,13 @@ const words = {
       signupDynamic: `Regístrate`,
       loginDynamic: `Iniciar sesión`
     },
-    createItineraryDynamic: 'Crear Itinerario',
-    titleDynamic: 'Titulo',
-    imageDynamic: 'Imagen',
+    createItinerary: {
+      createItineraryDynamic: 'Crear Itinerario',
+      titleDynamic: 'Titulo',
+      cityDynamic: 'City',
+      imageDynamic: 'Imagen',
+      submitDynamic: 'Submit'
+    },
     editItineraryDynamic: 'Edit / Add Details',
     cityDynamic: 'Ciudad',
     priceRangeDynamic: 'Rango de Precios',

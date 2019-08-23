@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import HowTo from '../Common/HowTo'
 import Spinner from '../Common/Spinner'
 import EditItinerary from './EditItinerary'
 import ItineraryCard from './ItineraryCard'
@@ -45,6 +46,8 @@ const MyTineraries = ({
   return (
     <div className="custom-container">
       <div className="row">
+        {itineraries.length === 0 ? <HowTo /> : null}
+
         {showCreate && <CreateItinerary />}
         {showEdit && <EditItinerary displayCreate={displayCreate} />}
 

@@ -42,10 +42,10 @@ const styles = {
   },
   uploadIcon: {
     color: '#e57373',
-    borderRadius: '50%',
+    borderRadius: '50px',
     border: '1px solid #e57373',
     fontSize: '1.2rem',
-    padding: '8px',
+    padding: '12px',
     margin: '10px',
     position: 'relative',
     boxShadow: '2px 6px #eeeeee',
@@ -67,6 +67,10 @@ const styles = {
     listStyle: 'none',
     display: 'flex',
     justifyContent: 'space-evenly'
+  },
+  flexContainerCol: {
+    display: 'flex',
+    flexDirection: 'column'
   },
   small: {
     fontFamily: 'Caveat',
@@ -105,6 +109,21 @@ const styles = {
     '&:hover': {
       color: '#e57373'
     }
+  },
+  HowToTitle: {
+    fontFamily: 'Amatic SC',
+    fontSize: '30px',
+    color: '#e57373',
+    marginTop: '12px'
+  },
+  HowToCard: {
+    marginTop: '25px',
+    padding: '1rem'
+  },
+  HowToText: {
+    fontFamily: 'Amatic SC',
+    fontSize: '1.5rem',
+    display: 'inline'
   }
 }
 

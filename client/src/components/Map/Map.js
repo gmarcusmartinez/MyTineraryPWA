@@ -32,7 +32,6 @@ const Map = ({ classes, activities: { activities, loading } }) => {
         width="100vw"
         height="675px"
         mapStyle="mapbox://styles/mapbox/streets-v10"
-        mapboxApiAccessToken=""
         onViewportChange={viewport => setViewport(viewport)}
         {...viewport}>
         <div className={classes.navigationControl}>

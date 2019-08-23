@@ -88,3 +88,13 @@
   background-color: transparent;
   font-size: 1.5rem;
 }
+.carousel {
+  height: 500px;
+  margin-top: -75px;
+}
+.carousel .indicators .indicator-item {
+  background-color: black;
+}
+.carousel .indicators .indicator-item.active {
+  background-color: #e57373;
+}

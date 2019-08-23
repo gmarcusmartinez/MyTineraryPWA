@@ -70,7 +70,7 @@ router.get('/city/:cityName', async (req, res) => {
   try {
     const itineraries = await Itinerary.find({
       city: req.params.cityName,
-      published: false
+      published: true
     })
     if (!itineraries) {
       return res.send({ msg: 'This city currently has no itineraries.' })
@@ -113,7 +113,72 @@ router.patch('/:id', [auth, itineraryValidation], async (req, res) => {
     res.send(err.message)
   }
 })
+/**
+ *@function PATCH by id
+ * @param :id
+ * @returns Published Itinerary
+ */
+router.patch('/publish/:id', [auth, itineraryValidation], async (req, res) => {
+  try {
+    let itinerary = await Itinerary.findById(req.params.id)
+    if (!itinerary) {
+      return res.status(404).json({
+        errors: [{ msg: 'Itinerary not found' }]
+      })
+    }
+    if (req.user.id !== itinerary.user.toString()) {
+      return res.status(400).json({
+        errors: [{ msg: 'You are not authorized to perform this action' }]
+      })
+    }
 
+    itinerary = await Itinerary.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body, published: true },
+      {
+        new: true,
+        runValidators: true
+      }
+    )
+
+    res.send(itinerary)
+  } catch (err) {
+    res.send(err.message)
+  }
+})
+/**
+ *@function PATCH by id
+ * @param :id
+ * @returns Unpublished Itinerary
+ */
+router.patch('/publish/:id', [auth, itineraryValidation], async (req, res) => {
+  try {
+    let itinerary = await Itinerary.findById(req.params.id)
+    if (!itinerary) {
+      return res.status(404).json({
+        errors: [{ msg: 'Itinerary not found' }]
+      })
+    }
+    if (req.user.id !== itinerary.user.toString()) {
+      return res.status(400).json({
+        errors: [{ msg: 'You are not authorized to perform this action' }]
+      })
+    }
+
+    itinerary = await Itinerary.findByIdAndUpdate(
+      req.params.id,
+      { ...req.body, published: false },
+      {
+        new: true,
+        runValidators: true
+      }
+    )
+
+    res.send(itinerary)
+  } catch (err) {
+    res.send(err.message)
+  }
+})
 /**
  *@function DELETE by id
  * @param :id

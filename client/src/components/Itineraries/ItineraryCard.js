@@ -10,12 +10,14 @@ import ConfirmDeleteAct from '../Common/ConfirmDeleteAct'
 import ConfirmDeleteItin from '../Common/ConfirmDeleteItin'
 import { getActivities } from '../../store/actions/activityActions'
 import { getItinerary } from '../../store/actions/itineraryActions'
+import { publishItinerary } from '../../store/actions/itineraryActions'
 
 const ItineraryCard = ({
   itinerary,
   classes,
   getItinerary,
   getActivities,
+  publishItinerary,
   displayEdit
 }) => {
   const [showList, setShowList] = useState(false)
@@ -111,8 +113,12 @@ const ItineraryCard = ({
               className={`fas fa-trash-alt ${classes.commonIcon} activator`}
               onClick={displayConfirmDelete}
             />
-            {itinerary.activities.length > 0 ? (
-              <i className={`fas fa-cloud-upload-alt ${classes.uploadIcon}`} />
+            {itinerary.published === false &&
+            itinerary.activities.length > 0 ? (
+              <i
+                className={`fas fa-cloud-upload-alt ${classes.uploadIcon}`}
+                onClick={() => publishItinerary(itinerary._id)}
+              />
             ) : null}
           </div>
         </div>
@@ -145,5 +151,5 @@ const ItineraryCard = ({
 
 export default connect(
   null,
-  { getItinerary, getActivities }
+  { getItinerary, getActivities, publishItinerary }
 )(withStyles(styles)(ItineraryCard))

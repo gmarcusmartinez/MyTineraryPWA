@@ -3,13 +3,19 @@ import { connect } from 'react-redux'
 import React, { useEffect, useState } from 'react'
 import M from 'materialize-css/dist/js/materialize.min.js'
 import ErrorMsg from '../Common/ErrorMsg'
-import { updateReview } from '../../store/actions/reviewActions'
+import { getReview } from '../../store/actions/reviewActions'
 
-const EditReview = ({ itinerary_id, updateReview }) => {
+const EditReview = ({
+  id,
+  itinerary_id,
+  getReview,
+  reviews: { reviewsLoading, review }
+}) => {
   const [formData, setFormData] = useState({
     text: '',
     itinerary: ''
   })
+
   useEffect(() => {
     let elem = document.querySelector('.modal')
     M.Modal.init(elem)
@@ -31,7 +37,7 @@ const EditReview = ({ itinerary_id, updateReview }) => {
   return (
     <div
       className="modal"
-      id="create-review"
+      id="edit-review"
       style={{ backgroundColor: 'white' }}>
       <div className="modal-content" style={{ padding: '0' }}>
         <div className="card z-depth-0">
@@ -40,7 +46,6 @@ const EditReview = ({ itinerary_id, updateReview }) => {
             <form
               onSubmit={e => {
                 e.preventDefault()
-                updateReview(formData)
                 setFormData({ text: '' })
               }}>
               <div className="input-field">
@@ -70,9 +75,13 @@ const EditReview = ({ itinerary_id, updateReview }) => {
   )
 }
 EditReview.propTypes = {
-  updateReview: PropTypes.func.isRequired
+  getReview: PropTypes.func.isRequired
 }
+
+const mapStateToProps = state => ({
+  reviews: state.reviews
+})
 export default connect(
-  null,
-  { updateReview }
+  mapStateToProps,
+  { getReview }
 )(EditReview)

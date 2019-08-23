@@ -16,7 +16,7 @@ const CreateItinerary = ({ createItinerary, classes }) => {
     imageDynamic,
     cityDynamic,
     submitDynamic
-  } = words[language]
+  } = words[language].createItinerary
 
   const [formData, setFormData] = useState({
     img: '',

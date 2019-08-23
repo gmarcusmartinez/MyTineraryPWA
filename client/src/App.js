@@ -46,7 +46,7 @@ const App = () => {
                 component={MyTineraries}
               />
             </Switch>
-            <Footer />
+            {/* <Footer /> */}
           </PageContent>
         </ThemeProvider>
       </LanguageProvider>
