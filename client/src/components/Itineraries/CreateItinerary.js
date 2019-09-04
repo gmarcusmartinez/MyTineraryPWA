@@ -41,7 +41,7 @@ const CreateItinerary = ({ createItinerary, classes }) => {
 
   return (
     <div className="col s12 m6 l4">
-      <div className={`card ${classes.formCard}`}>
+      <div className={`card ${classes.formCard}`} style={{ height: '360px' }}>
         <form onSubmit={e => onSubmit(e)}>
           <ErrorMessage />
           <h4 className={`center red-text text-lighten-2 ${classes.cardTitle}`}>
@@ -65,7 +65,6 @@ const CreateItinerary = ({ createItinerary, classes }) => {
               onChange={e => onChange(e)}
             />
           </div>
-
           <div className="input-field">
             <label>{imageDynamic}</label>
             <input

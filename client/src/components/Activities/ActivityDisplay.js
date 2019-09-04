@@ -1,22 +1,6 @@
 import React, { useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 
-const styles = {
-  infoOverlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%'
-  },
-  infoP: {
-    fontFamily: 'Caveat',
-    color: 'white',
-    fontSize: '20px'
-  }
-}
-
 const ActivityDisplay = ({ activity, classes }) => {
   const [displayInfo, setDisplayInfo] = useState(false)
   return (
@@ -83,5 +67,19 @@ const ActivityDisplay = ({ activity, classes }) => {
     </div>
   )
 }
-
+const styles = {
+  infoOverlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%'
+  },
+  infoP: {
+    fontFamily: 'Caveat',
+    color: 'white',
+    fontSize: '20px'
+  }
+}
 export default withStyles(styles)(ActivityDisplay)

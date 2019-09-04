@@ -4,7 +4,6 @@ import words from '../../utils/languages'
 import ErrorMsg from '../Common/ErrorMsg'
 import { Redirect } from 'react-router-dom'
 import styles from '../../styles/AuthStyles'
-import { GoogleLogin } from 'react-google-login'
 import React, { useContext, useState } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { login } from '../../store/actions/authActions'
@@ -15,8 +14,8 @@ const Login = ({ login, isAuthenticated, classes }) => {
   const { loginDynamic, emailDynamic, passwordDynamic } = words[language].auth
 
   const [formData, setFormData] = useState({
-    email: 'admin@gmail.com',
-    password: 'password'
+    email: '',
+    password: ''
   })
 
   const { email, password } = formData
@@ -28,17 +27,9 @@ const Login = ({ login, isAuthenticated, classes }) => {
     e.preventDefault()
     login(formData)
   }
-  const onSuccess = async googleUser => {
-    const idToken = googleUser.getAuthResponse().id_token
-    console.log({ idToken })
-  }
-  const onFailure = async googleUser => {
-    console.log(googleUser)
-  }
   if (isAuthenticated) {
     return <Redirect to="/mytineraries" />
   }
-
   return (
     <>
       <div className={classes.landing}>
@@ -48,9 +39,7 @@ const Login = ({ login, isAuthenticated, classes }) => {
               <div className="col s12 m8 offset-m2 l6 offset-l3 landing-col">
                 <div className={`card ${classes.formCard}`}>
                   <h4
-                    className={`center red-text text-lighten-2 ${
-                      classes.cardTitle
-                    }`}>
+                    className={`center red-text text-lighten-2 ${classes.cardTitle}`}>
                     {loginDynamic}
                   </h4>
                   <div className="center">
@@ -78,19 +67,10 @@ const Login = ({ login, isAuthenticated, classes }) => {
                       />
                     </div>
                     <button
-                      className={`waves-effect waves-light btn red lighten-2 ${
-                        classes.wideBtn
-                      }`}>
+                      className={`waves-effect waves-light btn red lighten-2 ${classes.wideBtn}`}>
                       Submit
                     </button>
                   </form>
-                  <p className={classes.or}>or</p>
-                  <GoogleLogin
-                    clientId=""
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                    isSignedIn={true}
-                  />
                 </div>
               </div>
             </div>

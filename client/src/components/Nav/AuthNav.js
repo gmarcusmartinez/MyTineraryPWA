@@ -43,9 +43,7 @@ const AuthNav = ({ user, classes, logout }) => {
         <li />
         <li />
         <li
-          className={`${
-            classes.navLink
-          } right hide-on-med-and-down sidenav-trigger`}
+          className={`${classes.navLink} right hide-on-med-and-down sidenav-trigger`}
           data-target="slide-out"
           onClick={setDisplaySettings}>
           {settingsDynamic}

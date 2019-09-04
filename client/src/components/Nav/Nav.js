@@ -6,9 +6,8 @@ import { connect } from 'react-redux'
 
 const Nav = ({ auth: { isAuthenticated, loading, user } }) => {
   return (
-    <div>
-      <nav className="nav wrapper red lighten-2">
-        <div style={{ width: '90%', marginLeft: '5%' }} />
+    <nav className="red lighten-2">
+      <div className="nav-wrapper" style={{ marginRight: '5%' }}>
         <a
           href="!#"
           className="button-collapse sidenav-trigger right"
@@ -16,8 +15,8 @@ const Nav = ({ auth: { isAuthenticated, loading, user } }) => {
           <i className="fas fa-plane white-text" />
         </a>
         {isAuthenticated && !loading ? <AuthNav user={user} /> : <GuestNav />}
-      </nav>
-    </div>
+      </div>
+    </nav>
   )
 }
 Nav.propTypes = {

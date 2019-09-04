@@ -109,21 +109,6 @@ const styles = {
     '&:hover': {
       color: '#e57373'
     }
-  },
-  HowToTitle: {
-    fontFamily: 'Amatic SC',
-    fontSize: '30px',
-    color: '#e57373',
-    marginTop: '12px'
-  },
-  HowToCard: {
-    marginTop: '25px',
-    padding: '1rem'
-  },
-  HowToText: {
-    fontFamily: 'Amatic SC',
-    fontSize: '1.5rem',
-    display: 'inline'
   }
 }
 

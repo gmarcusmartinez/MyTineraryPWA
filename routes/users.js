@@ -1,10 +1,10 @@
+const multer = require('multer')
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const auth = require('../utils/auth')
 const User = require('../models/User')
 const userValidation = require('../validation/user')
 const loginValidation = require('../validation/login')
-const { OAuth2Client } = require('google-auth-library')
 const { createToken, hash } = require('../utils/index')
 const { validationResult } = require('express-validator/check')
 
@@ -36,24 +36,6 @@ router.post('/', userValidation, async (req, res) => {
     res.status(500).send('Server Error')
   }
 })
-/**
- * Google Signup
- */
-// router.post('/googleAuth', async (req, res) => {
-//   const verifyGoogleToken = async token => {
-//     try {
-//       const ticket = await client.verifyIdToken({
-//         idToken: token,
-//         audience: process.env.OAUTH_CLIENT_ID
-//       })
-//     } catch (err) {
-//       throw new Error('Error verifying Google Token', err.message)
-//     }
-//   }
-// })
-/**
- * Login user
- */
 router.post('/login', loginValidation, async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -122,5 +104,32 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send(err)
   }
 })
-
+/**
+ * Upload user Image
+ */
+const upload = multer({
+  limits: {
+    fileSize: 1000000
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      cb(new Error('File must be an image type jpg, jpeg, or png.'))
+    }
+    cb(undefined, true)
+  }
+})
+router.post(
+  '/img',
+  auth,
+  upload.single('img'),
+  async (req, res) => {
+    req.user.img = req.file.buffer
+    await req.user.save()
+  },
+  (error, req, res, next) => {
+    res.status(400).send({
+      error: error.message
+    })
+  }
+)
 module.exports = router

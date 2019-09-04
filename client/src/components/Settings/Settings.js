@@ -15,9 +15,7 @@ const Settings = ({
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext)
   const { language, changeLanguage } = useContext(LanguageContext)
 
-  const { settingsDynamic, languageDynamic, modeDynamic, light, dark } = words[
-    language
-  ].settings
+  const { languageDynamic, modeDynamic, light, dark } = words[language].settings
 
   useEffect(() => {
     let sel = document.querySelectorAll('select')
@@ -35,22 +33,16 @@ const Settings = ({
         }}
         onClick={() => setDisplaySettings(false)}
       />
-      <div style={{ display: 'flex' }}>
+      <div className="center">
         <i
           className="fas fa-cog"
           style={{
             color: isDarkMode ? 'white' : 'black',
-            marginLeft: '12px',
-            alignSelf: 'flex-end'
+            alignSelf: 'flex',
+            fontSize: '3rem',
+            marginTop: '50px'
           }}
         />
-        <h4
-          className={`${classes.title} center`}
-          style={{
-            color: isDarkMode ? 'white' : 'black'
-          }}>
-          {settingsDynamic}
-        </h4>
       </div>
 
       <p

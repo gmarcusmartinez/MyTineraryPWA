@@ -1,8 +1,9 @@
-import { connect } from 'react-redux'
 import PinIcon from './PinIcon'
+import { connect } from 'react-redux'
+import styles from '../../styles/MapStyles'
 import React, { useState, useEffect } from 'react'
-import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl'
 import { withStyles } from '@material-ui/core/styles'
+import ReactMapGL, { NavigationControl, Marker, Popup } from 'react-map-gl'
 
 const initialViewport = {
   latitude: 37.7577,
@@ -28,10 +29,12 @@ const Map = ({ classes, activities: { activities, loading } }) => {
   }
   return (
     <div className={classes.main}>
+      <p>{}</p>
       <ReactMapGL
         width="100vw"
         height="675px"
         mapStyle="mapbox://styles/mapbox/streets-v10"
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
         onViewportChange={viewport => setViewport(viewport)}
         {...viewport}>
         <div className={classes.navigationControl}>
@@ -69,29 +72,6 @@ const Map = ({ classes, activities: { activities, loading } }) => {
       </ReactMapGL>
     </div>
   )
-}
-
-const styles = {
-  main: {
-    display: 'flex'
-  },
-  navigationControl: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    margin: '1em'
-  },
-  popupImg: {
-    padding: '0.4em',
-    height: 200,
-    width: 200,
-    objectFit: 'cover'
-  },
-  popupTitle: {
-    margin: '0px',
-    fontFamily: 'Caveat',
-    fontSize: '1.25rem'
-  }
 }
 const mapStateTotProps = state => ({
   activities: state.activities

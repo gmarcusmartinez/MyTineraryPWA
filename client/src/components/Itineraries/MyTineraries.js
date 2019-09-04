@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import HowTo from '../Common/HowTo'
 import Spinner from '../Common/Spinner'
 import EditItinerary from './EditItinerary'
 import ItineraryCard from './ItineraryCard'
 import CreateItinerary from './CreateItinerary'
 import React, { useEffect, useState } from 'react'
 import { getAuthUserItineraries } from '../../store/actions/itineraryActions'
+import InstructionSlider from '../GettingStarted/InstructionSlider'
 
 const MyTineraries = ({
   getAuthUserItineraries,
@@ -46,11 +46,9 @@ const MyTineraries = ({
   return (
     <div className="custom-container">
       <div className="row">
-        {itineraries.length === 0 ? <HowTo /> : null}
-
         {showCreate && <CreateItinerary />}
         {showEdit && <EditItinerary displayCreate={displayCreate} />}
-
+        {itineraries.length <= 1 ? <InstructionSlider /> : null}
         {itinerariesList}
       </div>
     </div>

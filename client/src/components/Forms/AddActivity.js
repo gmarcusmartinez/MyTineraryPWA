@@ -55,6 +55,20 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
       location: ''
     })
   }
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation)
+      setFormData({ location: 'Gelocation not supported by Browser' })
+
+    navigator.geolocation.getCurrentPosition(position => {
+      axios
+        .get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${position.coords.longitude},${position.coords.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_KEY}`
+        )
+        .then(res => {
+          setFormData({ location: res.data.features[0].place_name })
+        })
+    })
+  }
 
   return (
     <form onSubmit={e => onSubmit(e)}>

@@ -42,7 +42,14 @@ router.post('/:id', [auth, activityValidation], async (req, res) => {
   } catch (err) {
     return res
       .status(400)
-      .json({ errors: [{ msg: 'Unable to create Activity.' }] })
+      .json({
+        errors: [
+          {
+            msg:
+              'Unable to create Activity. Make sure the location is a valid address.'
+          }
+        ]
+      })
   }
 })
 /**

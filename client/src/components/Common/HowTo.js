@@ -1,70 +1,91 @@
-import React, { useEffect } from 'react'
-import styles from '../../styles/ItineraryStyles'
+import React, { useContext } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { ThemeContext } from '../../context/ThemeContext'
 
-const HowTo = ({ classes }) => {
+const HowTo = ({ classes, instruction, next, previous }) => {
+  const { isDarkMode } = useContext(ThemeContext)
+
   return (
     <div className="col s12 m6 l4">
       <div className={`card ${classes.HowToCard}`}>
-        <div className="flexContainer">
-          <div>
-            <h4
-              className={`center red-text text-lighten-2 ${
-                classes.HowToTitle
-              }`}>
-              Getting Started
-            </h4>
-            <p className={classes.HowToText}>
-              Simply provide your itinerary a title, city and image to get
-              started. The image can be from a link or you can choose one from
-              your device.
-            </p>
+        <div className="center">
+          <h4
+            className={`center red-text text-lighten-2 ${classes.HowToTitle}`}>
+            {instruction.title}
+          </h4>
+          <div className="center">
+            {instruction.icon ? (
+              <i className={`${instruction.icon} ${classes.commonIcon}`} />
+            ) : null}
           </div>
-
-          <div>
-            <i className={`fas fa-plus ${classes.commonIcon}`} />
-            <p className={classes.HowToText}>
-              Once your itinerary is created you can add an activity by pressing
-              this button. An activity only needs a title, location and image.
-            </p>
-          </div>
-
-          <div>
-            <i className={`fas fa-pencil-alt ${classes.commonIcon}`} />
-            <p className={classes.HowToText}>
-              Click the pencil to edit your itinerary's details as well as add
-              more information.
-            </p>
-          </div>
-
-          <div>
-            <i className={`fas fa-list ${classes.commonIcon}`} />
-            <p className={classes.HowToText}>
-              Click the list to view , edit or delete activities from your
-              itinerary.
-            </p>
-          </div>
-
-          <div>
-            <i className={`fas fa-trash-alt ${classes.commonIcon}`} />
-            <p className={classes.HowToText}>
-              If you want to delete the itinerary simply click the trash can and
-              confirm.
-            </p>
-          </div>
-
-          <div>
-            <i className={`fas fa-cloud-upload-alt ${classes.uploadIcon}`} />
-            <p className={classes.HowToText}>
-              Once you have at least one activity you can publish your itinerary
-              for the world to see. You can always unpublish them again so that
-              you may edit them
-            </p>
-          </div>
+          <p
+            className={`${classes.HowToText}`}
+            style={{ color: isDarkMode ? 'black' : 'black' }}>
+            {instruction.text}
+          </p>
         </div>
       </div>
+      <i
+        className={`fas fa-chevron-left red-text text-lighten-2 left`}
+        style={{
+          fontSize: '36px',
+          position: 'relative',
+          bottom: '75px',
+          marginLeft: '25%'
+        }}
+        onClick={previous}
+      />
+      <i
+        className={`fas fa-chevron-right red-text text-lighten-2 right`}
+        style={{
+          fontSize: '36px',
+          position: 'relative',
+          bottom: '75px',
+          marginRight: '25%'
+        }}
+        onClick={next}
+      />
     </div>
   )
+}
+const styles = {
+  HowToCard: {
+    marginTop: '25px',
+    padding: '1rem',
+    height: '360px'
+  },
+  HowToTitle: {
+    fontFamily: 'Amatic SC',
+    fontSize: '30px',
+    color: '#e57373',
+    marginTop: '12px'
+  },
+  HowToText: {
+    fontFamily: 'Amatic SC',
+    fontSize: '1.5rem',
+    display: 'inline'
+  },
+  commonIcon: {
+    color: '#e57373',
+    borderRadius: '50%',
+    border: '1px solid #e57373',
+    fontSize: '1.5rem',
+    padding: '8px',
+    margin: '5px',
+    position: 'relative',
+    boxShadow: '2px 6px #eeeeee',
+    '&:hover': {
+      color: 'white',
+      backgroundColor: '#e57373',
+      boxShadow: '1px 3px #eeeeee',
+      top: '3px'
+    },
+    '&:active': {
+      boxShadow: 'none',
+      top: '6px',
+      left: '2px'
+    }
+  }
 }
 
 export default withStyles(styles)(HowTo)
