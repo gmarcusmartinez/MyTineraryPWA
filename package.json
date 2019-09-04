@@ -9,7 +9,7 @@
     "client": "npm start --prefix client env-cmd .env.development",
     "test": "npm test --prefix client",
     "dev": "concurrently \"npm run serve\" \"npm run client\" ",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
   },
   "author": "Marcus Martinez",
   "license": "ISC",
