@@ -62,7 +62,7 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
     navigator.geolocation.getCurrentPosition(position => {
       axios
         .get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${position.coords.longitude},${position.coords.latitude}.json?access_token=${process.env.REACT_APP_MAPBOX_KEY}`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${position.coords.longitude},${position.coords.latitude}.json?access_token=pk.eyJ1IjoiZ21hcmN1c21hcnRpbmV6IiwiYSI6ImNqdjI3OTM1aTBwcTA0M3A5dDVpYjRzdWoifQ.CTIRN-C7Fd_lhCLrGgjM1w`
         )
         .then(res => {
           setFormData({ location: res.data.features[0].place_name })
