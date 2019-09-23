@@ -92,7 +92,6 @@ const AddActivity = ({ itinerary_id, classes, createActivity }) => {
             value={img}
             onChange={e => onChange(e)}
           />
-          <i className={`fas fa-camera ${classes.formIcon}`} />
         </div>
         <div className="input-field">
           <label className="white-text">Location</label>

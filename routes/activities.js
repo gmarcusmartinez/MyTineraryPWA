@@ -40,16 +40,14 @@ router.post('/:id', [auth, activityValidation], async (req, res) => {
     await itinerary.save()
     res.json(activity)
   } catch (err) {
-    return res
-      .status(400)
-      .json({
-        errors: [
-          {
-            msg:
-              'Unable to create Activity. Make sure the location is a valid address.'
-          }
-        ]
-      })
+    return res.status(400).json({
+      errors: [
+        {
+          msg:
+            'Unable to create Activity. Make sure the location is a valid address.'
+        }
+      ]
+    })
   }
 })
 /**
@@ -99,7 +97,7 @@ router.get('/edit/:id', async (req, res) => {
       new: true,
       runValidators: true
     })
-
+    console.log(activity)
     res.send(activity)
   } catch (err) {
     res.send(err.message)

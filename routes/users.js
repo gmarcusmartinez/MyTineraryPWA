@@ -1,4 +1,3 @@
-const multer = require('multer')
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const auth = require('../utils/auth')
@@ -104,32 +103,5 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send(err)
   }
 })
-/**
- * Upload user Image
- */
-const upload = multer({
-  limits: {
-    fileSize: 1000000
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      cb(new Error('File must be an image type jpg, jpeg, or png.'))
-    }
-    cb(undefined, true)
-  }
-})
-router.post(
-  '/img',
-  auth,
-  upload.single('img'),
-  async (req, res) => {
-    req.user.img = req.file.buffer
-    await req.user.save()
-  },
-  (error, req, res, next) => {
-    res.status(400).send({
-      error: error.message
-    })
-  }
-)
+
 module.exports = router

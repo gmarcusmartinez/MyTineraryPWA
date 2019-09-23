@@ -1,29 +1,7 @@
-import { connect } from 'react-redux'
 import React from 'react'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import { getActivity } from '../../store/actions/activityActions'
-
-const styles = {
-  listItem: {
-    fontFamily: 'Caveat',
-    fontSize: '1.5rem',
-    color: 'white',
-    display: 'inline-block'
-  },
-  commonIcon: {
-    color: 'white',
-    borderRadius: '50%',
-    border: '1px solid white',
-    fontSize: '1.25rem',
-    padding: '7px',
-    marginTop: '20px',
-    '&:hover': {
-      color: '#e57373',
-      border: '1px solid #e57373',
-      backgroundColor: 'white'
-    }
-  }
-}
 
 const ActvityListItem = ({
   id,
@@ -55,6 +33,27 @@ const ActvityListItem = ({
       <div className="divider nav-divider" />
     </div>
   )
+}
+const styles = {
+  listItem: {
+    fontFamily: 'Caveat',
+    fontSize: '1.5rem',
+    color: 'white',
+    display: 'inline-block'
+  },
+  commonIcon: {
+    color: 'white',
+    borderRadius: '50%',
+    border: '1px solid white',
+    fontSize: '1.25rem',
+    padding: '7px',
+    marginTop: '20px',
+    '&:hover': {
+      color: '#e57373',
+      border: '1px solid #e57373',
+      backgroundColor: 'white'
+    }
+  }
 }
 
 export default connect(
