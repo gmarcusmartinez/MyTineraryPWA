@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const Schema = mongoose.Schema;
 
 const ItinerarySchema = new Schema({
@@ -25,28 +26,6 @@ const ItinerarySchema = new Schema({
     trim: true,
     maxlength: [200, "Description must be under 200 charachters"]
   },
-  // address: {
-  //   type: String,
-  //   required: [true, "Please add an address"]
-  // },
-  // location: {
-  //   type: {
-  //     type: String,
-  //     enum: ["Point"],
-  //     required: true
-  //   },
-  //   coordinates: {
-  //     type: [Number],
-  //     required: true,
-  //     index: "2dsphere"
-  //   },
-  //   formattedAddress: String,
-  //   street: String,
-  //   city: String,
-  //   state: String,
-  //   zipcode: String,
-  //   country: String
-  // },
   price: {
     type: String,
     default: "$",
@@ -70,4 +49,10 @@ const ItinerarySchema = new Schema({
     default: Date.now
   }
 });
+
+ItinerarySchema.pre("save", function(next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
+
 module.exports = Itinerary = mongoose.model("itinerary", ItinerarySchema);
