@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const geocoder = require("../utils/geocoder");
 
 const ActivitySchema = new Schema({
   //   user: {
@@ -21,12 +22,10 @@ const ActivitySchema = new Schema({
   location: {
     type: {
       type: String,
-      enum: ["Point"],
-      required: true
+      enum: ["Point"]
     },
     coordinates: {
       type: [Number],
-      required: true,
       index: "2dsphere"
     },
     formattedAddress: String,
@@ -47,6 +46,24 @@ const ActivitySchema = new Schema({
     type: Date,
     default: Date.now
   }
+});
+
+ActivitySchema.pre("save", async function(next) {
+  const loc = await geocoder.geocode(this.address);
+
+  this.location = {
+    type: "Point",
+    coordinates: [loc[0].longitude, loc[0].latitude],
+    formattedAddress: loc[0].formattedAddress,
+    street: loc[0].streetName,
+    city: loc[0].city,
+    state: loc[0].stateCode,
+    zipcode: loc[0].zipcode,
+    country: loc[0].countryCode
+  };
+
+  this.address = undefined;
+  next();
 });
 
 module.exports = Activity = mongoose.model("activity", ActivitySchema);

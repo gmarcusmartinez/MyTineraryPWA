@@ -8,6 +8,7 @@ const errorHanlder = require("./middleware/error");
 dotenv.config({ path: "./config/config.env" });
 
 const cities = require("./routes/cities");
+const activities = require("./routes/activities");
 const itineraries = require("./routes/itineraries");
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(morgan("dev"));
 
 // Mount Routers
 app.use("/api/cities", cities);
+app.use("/api/activities", activities);
 app.use("/api/itineraries", itineraries);
 
 const PORT = process.env.PORT || 5000;
