@@ -3,21 +3,17 @@ const Schema = mongoose.Schema;
 const geocoder = require("../utils/geocoder");
 
 const ActivitySchema = new Schema({
-  //   user: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "users"
-  //   },
-  //   itinerary: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "itinerary"
-  //   },
+  itinerary: {
+    type: Schema.Types.ObjectId,
+    ref: "itinerary"
+  },
   title: {
     type: String,
     required: true
   },
   address: {
     type: String,
-    required: [true, "Please add an address"]
+    required: [true, "Address is required."]
   },
   location: {
     type: {
@@ -35,8 +31,9 @@ const ActivitySchema = new Schema({
     zipcode: String,
     country: String
   },
-  img: {
-    type: String
+  photo: {
+    type: String,
+    required: [true, "Photo is required."]
   },
   description: {
     type: String,

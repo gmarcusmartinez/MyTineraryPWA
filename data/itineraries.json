@@ -1,6 +1,6 @@
 [
   {
-    "id": "5e4afcfb92d22faa4e9286d9",
+    "_id": "5e500697529035ec53fe5632",
     "title": "Berlin Dive Bar Crawl",
     "slug": "",
     "city": "berlin",
@@ -9,28 +9,10 @@
     "duration": "1-3 Hours"
   },
   {
-    "id": "5e4afcfb92d22faa4e9286d8",
-    "title": "Amsterdam Sweet Tooth Tour",
-    "slug": "",
-    "city": "amsterdam",
-    "description": "lorem ipsum",
-    "price": "$",
-    "duration": "1-3 Hours"
-  },
-  {
-    "id": "5e4afcfb92d22faa4e9286d7",
+    "_id": "5e500697529035ec53fe5631",
     "title": "Museum Island",
     "slug": "",
     "city": "berlin",
-    "description": "lorem ipsum",
-    "price": "$",
-    "duration": "1-3 Hours"
-  },
-  {
-    "id": "5e4afcfb92d22faa4e9286d6",
-    "title": "The Tenderloin",
-    "slug": "",
-    "city": "san francisco",
     "description": "lorem ipsum",
     "price": "$",
     "duration": "1-3 Hours"

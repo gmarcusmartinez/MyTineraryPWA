@@ -18,8 +18,7 @@ const ItinerarySchema = new Schema({
   img: {
     type: String,
     required: true,
-    default:
-      "https://www.steigenberger.com/cache/images/berlin_fotolia_93887_2306ae4113b62425b112e36-1-1.jpg"
+    default: ""
   },
   description: {
     type: String,
@@ -51,7 +50,7 @@ const ItinerarySchema = new Schema({
 });
 
 ItinerarySchema.pre("save", function(next) {
-  this.slug = slugify(this.title, { lower: true });
+  this.slug = slugify(`${this.city}-${this.title}`, { lower: true });
   next();
 });
 
