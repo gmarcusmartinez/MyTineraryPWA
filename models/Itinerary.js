@@ -15,7 +15,7 @@ const ItinerarySchema = new Schema({
     required: true,
     lowercase: true
   },
-  img: {
+  photo: {
     type: String,
     required: true,
     default: ""
@@ -23,7 +23,7 @@ const ItinerarySchema = new Schema({
   description: {
     type: String,
     trim: true,
-    maxlength: [200, "Description must be under 200 charachters"]
+    maxlength: [140, "Description must be under 140 charachters"]
   },
   price: {
     type: String,
