@@ -18,5 +18,15 @@
     "photo": "untitled.jog",
     "price": "$$",
     "duration": "3-5 Hours"
+  },
+  {
+    "_id": "5e500697529035ec53fe5630",
+    "title": "Tapa Tour",
+    "slug": "",
+    "city": "barcelona",
+    "description": "lorem ipsum",
+    "photo": "untitled.jog",
+    "price": "$$",
+    "duration": "1-3 Hours"
   }
 ]

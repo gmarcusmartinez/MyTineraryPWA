@@ -10,10 +10,8 @@ const {
 
 const router = Router();
 
-router
-  .route("/")
-  .get(getItineraries)
-  .post(createItinerary);
+router.route("/").post(createItinerary);
+router.route("/:city").get(getItineraries);
 
 router
   .route("/:id")
