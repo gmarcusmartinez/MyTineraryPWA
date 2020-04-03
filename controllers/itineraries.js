@@ -4,7 +4,12 @@ const ErrorResponse = require("../utils/errorResponse");
 
 exports.getItineraries = asyncHandler(async (req, res, next) => {
   let query;
+
   const reqQuery = { ...req.query };
+  const removeFields = ["select", "sort"];
+
+  removeFields.forEach((param) => delete reqQuery[param]);
+
   let queryStr = JSON.stringify(reqQuery);
   queryStr = queryStr.replace(
     /\b(gt|gte|lt|lte|in)\b/g,
@@ -13,6 +18,18 @@ exports.getItineraries = asyncHandler(async (req, res, next) => {
 
   query = Itinerary.find(JSON.parse(queryStr));
 
+  if (req.query.select) {
+    const fields = req.query.select.split(",").join(" ");
+    query = query.select(fields);
+  }
+
+  if (req.query.sort) {
+    const sortBy = req.query.sort.split(",").join(" ");
+    query = query.sort(sortBy);
+  } else {
+    query = query.sort("-createdAt");
+  }
+  console.log(req.query.sort);
   const itineraries = await query;
   res
     .status(200)
