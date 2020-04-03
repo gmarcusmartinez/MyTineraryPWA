@@ -27,7 +27,7 @@ exports.createActivity = asyncHandler(async (req, res, next) => {
 exports.updateActivity = asyncHandler(async (req, res, next) => {
   const activity = await Activity.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
   if (!activity) {
     return next(
@@ -38,7 +38,7 @@ exports.updateActivity = asyncHandler(async (req, res, next) => {
 });
 
 exports.deleteActivity = asyncHandler(async (req, res, next) => {
-  await Activity.findByIdAndDelete(req.params.id);
+  const activity = await Activity.findByIdAndDelete(req.params.id);
   if (!activity) {
     return next(
       new ErrorResponse(`Activity not found with id of ${req.params.id}`, 404)
