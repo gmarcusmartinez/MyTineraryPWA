@@ -8,7 +8,10 @@ exports.getActivities = asyncHandler(async (req, res, next) => {
   if (req.params.itineraryId) {
     query = Activity.find({ itinerary: req.params.itineraryId });
   } else {
-    query = Activity.find();
+    query = Activity.find().populate({
+      path: "itinerary",
+      select: "title",
+    });
   }
   const activities = await query;
   res

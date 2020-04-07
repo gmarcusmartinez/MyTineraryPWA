@@ -16,7 +16,10 @@ exports.getItineraries = asyncHandler(async (req, res, next) => {
     (match) => `$${match}`
   );
 
-  query = Itinerary.find(JSON.parse(queryStr));
+  query = Itinerary.find(JSON.parse(queryStr)).populate({
+    path: "activities",
+    select: "title",
+  });
 
   if (req.query.select) {
     const fields = req.query.select.split(",").join(" ");
@@ -37,6 +40,7 @@ exports.getItineraries = asyncHandler(async (req, res, next) => {
   const total = await Itinerary.countDocuments();
 
   query = query.skip(start).limit(limit);
+
   const itineraries = await query;
 
   const pagination = {};
@@ -90,11 +94,13 @@ exports.updateItinerary = asyncHandler(async (req, res, next) => {
 });
 
 exports.deleteItinerary = asyncHandler(async (req, res, next) => {
-  const itinerary = await Itinerary.findByIdAndDelete(req.params.id);
+  const itinerary = await Itinerary.findById(req.params.id);
+
   if (!itinerary) {
     return next(
       new ErrorResponse(`Itinerary not found with id of ${req.params.id}`, 404)
     );
   }
+  itinerary.remove();
   res.status(200).json({ success: true });
 });

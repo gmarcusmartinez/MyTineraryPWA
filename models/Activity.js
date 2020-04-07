@@ -6,6 +6,7 @@ const ActivitySchema = new Schema({
   itinerary: {
     type: Schema.Types.ObjectId,
     ref: "itinerary",
+    required: true,
   },
   title: {
     type: String,
