@@ -9,7 +9,10 @@ const {
   deleteItinerary,
 } = require("../controllers/itineraries");
 
+const activityRouter = require("./activities");
+
 const router = Router();
+router.use("/:itineraryId/activities", activityRouter);
 
 router
   .route("/")

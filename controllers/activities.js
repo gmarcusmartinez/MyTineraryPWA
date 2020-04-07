@@ -3,7 +3,14 @@ const asyncHandler = require("../middleware/async");
 const ErrorResponse = require("../utils/errorResponse");
 
 exports.getActivities = asyncHandler(async (req, res, next) => {
-  const activities = await Activity.find();
+  let query;
+
+  if (req.params.itineraryId) {
+    query = Activity.find({ itinerary: req.params.itineraryId });
+  } else {
+    query = Activity.find();
+  }
+  const activities = await query;
   res
     .status(200)
     .json({ success: true, count: activities.length, data: activities });

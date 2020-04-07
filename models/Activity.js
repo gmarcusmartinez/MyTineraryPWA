@@ -5,47 +5,48 @@ const geocoder = require("../utils/geocoder");
 const ActivitySchema = new Schema({
   itinerary: {
     type: Schema.Types.ObjectId,
-    ref: "itinerary"
+    ref: "itinerary",
   },
   title: {
     type: String,
-    required: true
+    required: [true, "Please add an Activity Title"],
+    trim: true,
   },
   address: {
     type: String,
-    required: [true, "Address is required."]
+    required: [true, "Address is required."],
   },
   location: {
     type: {
       type: String,
-      enum: ["Point"]
+      enum: ["Point"],
     },
     coordinates: {
       type: [Number],
-      index: "2dsphere"
+      index: "2dsphere",
     },
     formattedAddress: String,
     street: String,
     city: String,
     state: String,
     zipcode: String,
-    country: String
+    country: String,
   },
   photo: {
     type: String,
-    required: [true, "Photo is required."]
+    required: [true, "Photo is required."],
   },
   description: {
     type: String,
-    default: ""
+    default: "",
   },
-  date: {
+  createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-ActivitySchema.pre("save", async function(next) {
+ActivitySchema.pre("save", async function (next) {
   const loc = await geocoder.geocode(this.address);
 
   this.location = {
@@ -56,7 +57,7 @@ ActivitySchema.pre("save", async function(next) {
     city: loc[0].city,
     state: loc[0].stateCode,
     zipcode: loc[0].zipcode,
-    country: loc[0].countryCode
+    country: loc[0].countryCode,
   };
 
   this.address = undefined;
