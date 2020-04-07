@@ -6,7 +6,7 @@ exports.getItineraries = asyncHandler(async (req, res, next) => {
   let query;
 
   const reqQuery = { ...req.query };
-  const removeFields = ["select", "sort"];
+  const removeFields = ["select", "sort", "page", "limit"];
 
   removeFields.forEach((param) => delete reqQuery[param]);
 
@@ -29,11 +29,36 @@ exports.getItineraries = asyncHandler(async (req, res, next) => {
   } else {
     query = query.sort("-createdAt");
   }
-  console.log(req.query.sort);
+  // Pagination
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 20;
+  const start = (page - 1) * limit;
+  const end = page * limit;
+  const total = await Itinerary.countDocuments();
+
+  query = query.skip(start).limit(limit);
   const itineraries = await query;
-  res
-    .status(200)
-    .json({ success: true, count: itineraries.length, data: itineraries });
+
+  const pagination = {};
+  if (end < total) {
+    pagination.next = {
+      page: page + 1,
+      limit,
+    };
+  }
+  if (start > 0) {
+    pagination.prev = {
+      page: page - 1,
+      limit,
+    };
+  }
+
+  res.status(200).json({
+    success: true,
+    count: itineraries.length,
+    pagination,
+    data: itineraries,
+  });
 });
 
 exports.getItinerary = asyncHandler(async (req, res, next) => {
