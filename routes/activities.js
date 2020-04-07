@@ -9,15 +9,20 @@ const {
   deleteActivity,
 } = require("../controllers/activities");
 
+const Activity = require("../models/Activity");
+const advancedResults = require("../middleware/advancedResults");
+
 const router = Router({ mergeParams: true });
 
-router.route("/").get(getActivities);
-// .post(protect, authorize("publisher", "admin"), createActivity);
+router
+  .route("/")
+  .get(advancedResults(Activity), getActivities)
+  .post(protect, authorize("publisher", "admin"), createActivity);
 
-// router
-//   .route("/:id")
-//   .get(getActivity)
-//   .put(protect, authorize("publisher", "admin"), updateActivity)
-//   .delete(protect, authorize("publisher", "admin"), deleteActivity);
+router
+  .route("/:id")
+  .get(getActivity)
+  .put(protect, authorize("publisher", "admin"), updateActivity)
+  .delete(protect, authorize("publisher", "admin"), deleteActivity);
 
 module.exports = router;

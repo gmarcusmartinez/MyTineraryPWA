@@ -9,14 +9,17 @@ const {
   deleteItinerary,
 } = require("../controllers/itineraries");
 
-const activityRouter = require("./activities");
+const Itinerary = require("../models/Itinerary");
+const advancedResults = require("../middleware/advancedResults");
 
 const router = Router();
+// Router Redirect
+const activityRouter = require("./activities");
 router.use("/:itineraryId/activities", activityRouter);
 
 router
   .route("/")
-  .get(getItineraries)
+  .get(advancedResults(Itinerary), getItineraries)
   .post(protect, authorize("publisher", "admin"), createItinerary);
 
 router

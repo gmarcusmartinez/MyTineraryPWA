@@ -3,66 +3,7 @@ const asyncHandler = require("../middleware/async");
 const ErrorResponse = require("../utils/errorResponse");
 
 exports.getItineraries = asyncHandler(async (req, res, next) => {
-  let query;
-
-  const reqQuery = { ...req.query };
-  const removeFields = ["select", "sort", "page", "limit"];
-
-  removeFields.forEach((param) => delete reqQuery[param]);
-
-  let queryStr = JSON.stringify(reqQuery);
-  queryStr = queryStr.replace(
-    /\b(gt|gte|lt|lte|in)\b/g,
-    (match) => `$${match}`
-  );
-
-  query = Itinerary.find(JSON.parse(queryStr)).populate({
-    path: "activities",
-    select: "title",
-  });
-
-  if (req.query.select) {
-    const fields = req.query.select.split(",").join(" ");
-    query = query.select(fields);
-  }
-
-  if (req.query.sort) {
-    const sortBy = req.query.sort.split(",").join(" ");
-    query = query.sort(sortBy);
-  } else {
-    query = query.sort("-createdAt");
-  }
-  // Pagination
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 20;
-  const start = (page - 1) * limit;
-  const end = page * limit;
-  const total = await Itinerary.countDocuments();
-
-  query = query.skip(start).limit(limit);
-
-  const itineraries = await query;
-
-  const pagination = {};
-  if (end < total) {
-    pagination.next = {
-      page: page + 1,
-      limit,
-    };
-  }
-  if (start > 0) {
-    pagination.prev = {
-      page: page - 1,
-      limit,
-    };
-  }
-
-  res.status(200).json({
-    success: true,
-    count: itineraries.length,
-    pagination,
-    data: itineraries,
-  });
+  res.status(200).json(res.advancedResults);
 });
 
 exports.getItinerary = asyncHandler(async (req, res, next) => {
