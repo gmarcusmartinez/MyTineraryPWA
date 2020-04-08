@@ -1,6 +1,7 @@
 [
   {
     "_id": "5e500697529035ec53fe5632",
+    "publisher": "5e8e21d119362f18d81d8927",
     "title": "Berlin Dive Bar Crawl",
     "slug": "",
     "city": "berlin",
@@ -11,6 +12,7 @@
   },
   {
     "_id": "5e500697529035ec53fe5631",
+    "publisher": "5e8e21d119362f18d81d8927",
     "title": "Museum Island",
     "slug": "",
     "city": "berlin",
@@ -21,6 +23,7 @@
   },
   {
     "_id": "5e500697529035ec53fe5630",
+    "publisher": "5e8e21d119362f18d81d8927",
     "title": "Tapa Tour",
     "slug": "",
     "city": "barcelona",

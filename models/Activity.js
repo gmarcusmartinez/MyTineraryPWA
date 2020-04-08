@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 const geocoder = require("../utils/geocoder");
 
 const ActivitySchema = new Schema({
+  publisher: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true,
+  },
   itinerary: {
     type: Schema.Types.ObjectId,
     ref: "itinerary",

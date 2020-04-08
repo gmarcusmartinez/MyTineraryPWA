@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const ItinerarySchema = new Schema(
   {
+    publisher: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
     title: {
       type: String,
       required: [true, "Please add a name"],

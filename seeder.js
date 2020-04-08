@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: "./config/config.env" });
 
+const User = require("./models/User");
 const Activity = require("./models/Activity");
 const Itinerary = require("./models/Itinerary");
 
@@ -12,19 +13,21 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
 const activities = JSON.parse(
   fs.readFileSync(`${__dirname}/data/activities.json`)
 );
 
+const users = JSON.parse(fs.readFileSync(`${__dirname}/data/users.json`));
 const itineraries = JSON.parse(
   fs.readFileSync(`${__dirname}/data/itineraries.json`)
 );
 
 const importData = async () => {
   try {
+    await User.create(users);
     await Activity.create(activities);
     await Itinerary.create(itineraries);
     console.log("Data Imported.".green);
@@ -36,6 +39,7 @@ const importData = async () => {
 
 const deleteData = async () => {
   try {
+    await User.deleteMany();
     await Activity.deleteMany();
     await Itinerary.deleteMany();
     console.log("Data Destroyed.".red);

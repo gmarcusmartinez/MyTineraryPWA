@@ -19,6 +19,7 @@ exports.getActivity = asyncHandler(async (req, res, next) => {
 
 exports.createActivity = asyncHandler(async (req, res, next) => {
   req.body.itinerary = req.params.itineraryId;
+  req.body.publisher = req.user.id;
 
   const itinerary = await Itinerary.findById(req.params.itineraryId);
   if (!itinerary) {
