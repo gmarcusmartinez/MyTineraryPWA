@@ -22,8 +22,13 @@ exports.createActivity = asyncHandler(async (req, res, next) => {
   req.body.publisher = req.user.id;
 
   const itinerary = await Itinerary.findById(req.params.itineraryId);
+
   if (!itinerary) {
     return next(new ErrorResponse(`Itinerary not found`));
+  }
+  const publisher = itinerary.publisher.toString();
+  if (publisher !== req.user.id && req.user.role !== "admin") {
+    return next(new ErrorResponse(`Not Authorized`, 404));
   }
 
   const activity = await Activity.create(req.body);
@@ -34,6 +39,10 @@ exports.updateActivity = asyncHandler(async (req, res, next) => {
   let activity = await Activity.findById(req.params.id);
   if (!activity) {
     return next(new ErrorResponse(`Activity not found.`, 404));
+  }
+  const publisher = activity.publisher.toString();
+  if (publisher !== req.user.id && req.user.role !== "admin") {
+    return next(new ErrorResponse(`Not Authorized`, 404));
   }
 
   activity = await Activity.findByIdAndUpdate(req.params.id, req.body, {
@@ -46,10 +55,14 @@ exports.updateActivity = asyncHandler(async (req, res, next) => {
 exports.deleteActivity = asyncHandler(async (req, res, next) => {
   const activity = await Activity.findById(req.params.id);
   if (!activity) {
-    return next(
-      new ErrorResponse(`Activity not found with id of ${req.params.id}`, 404)
-    );
+    return next(new ErrorResponse(`Activity not found `, 404));
   }
+
+  const publisher = activity.publisher.toString();
+  if (publisher !== req.user.id && req.user.role !== "admin") {
+    return next(new ErrorResponse(`Not Authorized`, 404));
+  }
+
   await activity.remove();
   res.status(200).json({ success: true });
 });

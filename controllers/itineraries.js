@@ -30,6 +30,7 @@ exports.updateItinerary = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Itinerary not found with id of ${req.params.id}`, 404)
     );
   }
+
   if (
     itinerary.publisher.toString() !== req.user.id &&
     req.user.role !== "admin"
