@@ -1,6 +1,8 @@
+const crypto = require("crypto");
 const User = require("../models/User");
 const asyncHandler = require("../middleware/async");
 const ErrorResponse = require("../utils/errorResponse");
+const sendEmail = require("../utils/sendEmail");
 
 exports.me = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -37,19 +39,90 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-exports.passwordReset = asyncHandler(async (req, res, next) => {
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new ErrorResponse("User not found.", 404));
+    return next(new ErrorResponse("Account not found", 404));
   }
   const resetToken = user.getResetPasswordToken();
+
   await user.save({ validateBeforeSave: false });
+
+  const resetUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/api/v1/auth/resetpassword/${resetToken}`;
+
+  const message = `You are recieving this email because you have requested the reset of a pasword. Please make a Put request to \n\n ${resetUrl}`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Reset Password",
+      message,
+    });
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error(err.message);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save({ validateBeforeSave: false });
+    return next(new ErrorResponse("Email could not be sent", 500));
+  }
+});
+
+exports.resetPassword = asyncHandler(async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resettoken)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gte: Date.now() },
+  });
+
+  if (!user) {
+    return next(new ErrorResponse("Invalid Token", 400));
+  }
+
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+
+  await user.save();
+
+  sendTokenResponse(user, 200, res);
+});
+
+exports.updateDetails = asyncHandler(async (req, res, next) => {
+  const { name, email } = req.body;
+  const fieldsToUpdate = {
+    name,
+    email,
+  };
+  const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+    new: true,
+    runValidators: true,
+  });
   res.status(200).json({
     success: true,
-    user,
+    data: user,
   });
 });
+
+// exports.updatePassword = asyncHandler(async (req, res, next) => {
+//   const user = await findById(req.user.id).select("+password");
+
+//   if (!(await user.matchPassword(req.body.currentPassword))) {
+//     return next(new ErrorResponse("Invalid credentials", 401));
+//   }
+
+//   user.password = req.body.newPassword;
+//   await user.save();
+
+//   sendTokenResponse(user, 200, res);
+// });
 
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();
