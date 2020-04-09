@@ -1,0 +1,26 @@
+[
+  {
+    "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio doloribus rerum illo eaque saepe nemo, excepturi assumenda minus reprehenderit doloremque? ",
+    "user": "5e8e2c11efa8761cac1766a6",
+    "itinerary": "5e500697529035ec53fe5632",
+    "rating": 1
+  },
+  {
+    "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio doloribus rerum illo eaque saepe nemo, excepturi assumenda minus reprehenderit doloremque? ",
+    "user": "5e8e2c11efa8761cac1766a5",
+    "itinerary": "5e500697529035ec53fe5632",
+    "rating": 3
+  },
+  {
+    "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio doloribus rerum illo eaque saepe nemo, excepturi assumenda minus reprehenderit doloremque? ",
+    "user": "5e8e2c11efa8761cac1766a6",
+    "itinerary": "5e500697529035ec53fe5631",
+    "rating": 1
+  },
+  {
+    "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio doloribus rerum illo eaque saepe nemo, excepturi assumenda minus reprehenderit doloremque? ",
+    "user": "5e8e2c11efa8761cac1766a5",
+    "itinerary": "5e500697529035ec53fe5631",
+    "rating": 3
+  }
+]

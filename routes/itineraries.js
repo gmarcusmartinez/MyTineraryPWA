@@ -14,7 +14,9 @@ const advancedResults = require("../middleware/advancedResults");
 
 const router = Router();
 // Router Redirect
+const reviewRouter = require("./reviews");
 const activityRouter = require("./activities");
+router.use("/:itineraryId/reviews", reviewRouter);
 router.use("/:itineraryId/activities", activityRouter);
 
 router
