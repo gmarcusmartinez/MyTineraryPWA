@@ -9,6 +9,7 @@ const errorHanlder = require("./middleware/error");
 dotenv.config({ path: "./config/config.env" });
 
 const auth = require("./routes/auth");
+const users = require("./routes/users");
 const activities = require("./routes/activities");
 const itineraries = require("./routes/itineraries");
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 // Mount Routers
 app.use("/api/v1/auth", auth);
+app.use("/api/v1/users", users);
 app.use("/api/v1/activities", activities);
 app.use("/api/v1/itineraries", itineraries);
 
