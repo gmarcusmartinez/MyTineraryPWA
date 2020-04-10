@@ -9,7 +9,10 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   if (authorization && authorization.startsWith("Bearer")) {
     token = authorization.split(" ")[1];
+  } else if (req.cookies.token) {
+    token = req.cookies.token;
   }
+
   if (!token) {
     return next(new ErrorResponse("Not authorized.", 401));
   }
