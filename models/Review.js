@@ -25,4 +25,36 @@ const ReviewSchema = new mongoose.Schema({
   },
 });
 
+ReviewSchema.statics.calculateAverageRating = async function (itinerary_id) {
+  const obj = await this.aggregate([
+    {
+      $match: { itinerary: itinerary_id },
+    },
+    {
+      $group: {
+        _id: "$itinerary",
+        averageRating: {
+          $avg: "$rating",
+        },
+      },
+    },
+  ]);
+  try {
+    await this.model("itinerary").findByIdAndUpdate(itinerary_id, {
+      averageRating: obj[0].averageRating.toFixed(2),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+ReviewSchema.post("save", function () {
+  this.constructor.calculateAverageRating(this.itinerary);
+});
+ReviewSchema.pre("remove", function () {
+  this.constructor.calculateAverageRating(this.itinerary);
+});
+
+ReviewSchema.index({ itinerary: 1, user: 1 }, { unique: true });
+
 module.exports = Review = mongoose.model("review", ReviewSchema);

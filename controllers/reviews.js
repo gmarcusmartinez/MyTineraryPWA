@@ -27,3 +27,18 @@ exports.getReview = asyncHandler(async (req, res, next) => {
     data: review,
   });
 });
+exports.createReview = asyncHandler(async (req, res, next) => {
+  req.body.itinerary = req.params.itineraryId;
+  req.body.user = req.user.id;
+  console.log(req.params.itineraryId);
+  const itinerary = await Itinerary.findById(req.params.itineraryId);
+  if (!itinerary) {
+    return next(new ErrorResponse("Itinerary not found.", 404));
+  }
+
+  const review = await Review.create(req.body);
+  res.status(201).json({
+    success: true,
+    data: review,
+  });
+});

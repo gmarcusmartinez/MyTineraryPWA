@@ -46,8 +46,6 @@ const ItinerarySchema = new Schema(
     },
     averageRating: {
       type: Number,
-      min: [1, "Rating must be atleast 1"],
-      max: [5, "Rating cannot exceed 5"],
     },
     date: {
       type: Date,
