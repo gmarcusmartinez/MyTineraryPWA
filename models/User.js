@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema({
     match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/],
     unique: true,
   },
+  googleId: {
+    type: String,
+  },
   role: {
     type: String,
     enum: ["user", "publisher"],

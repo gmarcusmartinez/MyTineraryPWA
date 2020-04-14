@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const mongoSanitize = require("express-mongo-sanitize");
+
 const connectDB = require("./config/db");
 const errorHanlder = require("./middleware/error");
 
@@ -10,6 +12,7 @@ dotenv.config({ path: "./config/config.env" });
 
 const auth = require("./routes/auth");
 const users = require("./routes/users");
+const google = require("./routes/google");
 const reviews = require("./routes/reviews");
 const activities = require("./routes/activities");
 const itineraries = require("./routes/itineraries");
@@ -18,9 +21,11 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
+app.use(mongoSanitize());
 
 // Mount Routers
 app.use("/api/v1/auth", auth);
+app.use("/api/v1/google", google);
 app.use("/api/v1/users", users);
 app.use("/api/v1/reviews", reviews);
 app.use("/api/v1/activities", activities);
