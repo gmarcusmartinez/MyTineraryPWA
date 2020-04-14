@@ -10,14 +10,14 @@ const UserSchema = new mongoose.Schema({
     maxlength: [20, "Name should not exceed 20 characters."],
     trim: true,
   },
-  email: {
-    type: String,
-    required: [true, "Please add an email."],
-    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/],
-    unique: true,
-  },
   googleId: {
     type: String,
+  },
+  email: {
+    type: String,
+    required: false,
+    match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/],
+    unique: true,
   },
   role: {
     type: String,
@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Please add a password."],
+    required: false,
     minlength: 8,
     select: false,
   },

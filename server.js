@@ -2,6 +2,7 @@ const colors = require("colors");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const express = require("express");
+const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 
@@ -9,6 +10,7 @@ const connectDB = require("./config/db");
 const errorHanlder = require("./middleware/error");
 
 dotenv.config({ path: "./config/config.env" });
+require("./services/passport");
 
 const auth = require("./routes/auth");
 const users = require("./routes/users");
@@ -22,6 +24,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(mongoSanitize());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Mount Routers
 app.use("/api/v1/auth", auth);
