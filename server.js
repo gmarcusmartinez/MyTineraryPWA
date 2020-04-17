@@ -1,9 +1,13 @@
+const hpp = require("hpp");
 const colors = require("colors");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const helmet = require("helmet");
+const xss = require("xss-clean");
 const express = require("express");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 
 const connectDB = require("./config/db");
@@ -20,16 +24,28 @@ const activities = require("./routes/activities");
 const itineraries = require("./routes/itineraries");
 
 const app = express();
+
 app.use(express.json());
-app.use(morgan("dev"));
 app.use(cookieParser());
+app.use(helmet());
 app.use(mongoSanitize());
+app.use(morgan("dev"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(xss());
+
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
+app.use(hpp());
 
 // Mount Routers
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/google", google);
+
 app.use("/api/v1/users", users);
 app.use("/api/v1/reviews", reviews);
 app.use("/api/v1/activities", activities);

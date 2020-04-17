@@ -20,7 +20,6 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       let user;
-      console.log(profile._json.name);
       user = await User.findOne({ googleId: profile.id });
       if (user) {
         return done(null, user);
@@ -28,6 +27,7 @@ passport.use(
       user = await new User({
         googleId: profile.id,
         name: profile._json.name,
+        email: profile._json.email,
       }).save();
       done(null, user);
     }
